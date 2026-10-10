@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>НЕ СЕГОДНЯ — Замечай. Выбирай. Меняй.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ============ БАЗА ============ */
+:root{
+  --bg:#090A0C;
+  --card:#121418;
+  --surface:#191C21;
+  --text:#F2F3F5;
+  --muted:#9298A3;
+  --lime:#C6FF4D;
+  --violet:#8D7CFF;
+  --line:rgba(255,255,255,.08);
+  --line-strong:rgba(255,255,255,.14);
+  --radius:20px;
+  --radius-sm:14px;
+  --anim:1;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body.reduce-anim *,body.reduce-anim *::before,body.reduce-anim *::after{
+  animation-duration:.001ms !important;
+  transition-duration:.001ms !important;
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit;font-size:1rem;color:var(--text)}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--lime);color:#090A0C}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:6px}
+
+/* ============ ТИПОГРАФИКА ============ */
+h1{font-size:clamp(2.2rem,7vw,3.6rem);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+h2{font-size:clamp(1.5rem,4.5vw,2rem);font-weight:700;letter-spacing:-.02em}
+h3{font-size:1.15rem;font-weight:600;letter-spacing:-.01em}
+.mono{font-family:'JetBrains Mono',monospace}
+.eyebrow{
+  font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);
+}
+.muted{color:var(--muted)}
+.small{font-size:.85rem}
+
+/* ============ КАРКАС ============ */
+.app{display:flex;min-height:100vh}
+.sidebar{
+  display:none;flex-direction:column;width:250px;flex-shrink:0;
+  padding:28px 20px;border-right:1px solid var(--line);
+  position:sticky;top:0;height:100vh;
+}
+.sidebar .brand{margin-bottom:8px}
+.brand-logo{
+  font-weight:800;font-size:1.05rem;letter-spacing:.06em;
+  display:flex;align-items:center;gap:8px;
+}
+.brand-dot{
+  width:9px;height:9px;border-radius:50%;background:var(--lime);
+  box-shadow:0 0 12px var(--lime);
+}
+.brand-slogan{font-size:.72rem;color:var(--muted);letter-spacing:.05em;margin-top:2px}
+.nav{display:flex;flex-direction:column;gap:4px;margin-top:36px}
+.nav-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;border-radius:12px;
+  color:var(--muted);font-weight:500;font-size:.95rem;
+  transition:background .2s,color .2s;
+  text-align:left;width:100%;
+}
+.nav-item svg{width:20px;height:20px;flex-shrink:0}
+.nav-item:hover{background:var(--surface);color:var(--text)}
+.nav-item.active{background:var(--surface);color:var(--text);position:relative}
+.nav-item.active::before{
+  content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:3px;height:18px;background:var(--lime);border-radius:0 3px 3px 0;
+  box-shadow:0 0 10px var(--lime);
+}
+.sidebar-foot{margin-top:auto;padding-top:20px;border-top:1px solid var(--line)}
+
+.main{flex:1;min-width:0;padding-bottom:96px}
+.content{max-width:900px;margin:0 auto;padding:28px 20px}
+
+/* ============ НИЖНЯЯ НАВИГАЦИЯ (mobile) ============ */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:50;
+  background:rgba(9,10,12,.92);backdrop-filter:blur(16px);
+  border-top:1px solid var(--line);
+  display:flex;justify-content:space-around;
+  padding:8px 4px calc(8px + env(safe-area-inset-bottom));
+}
+.bottom-nav .nav-item{
+  flex-direction:column;gap:3px;padding:8px 6px;font-size:.68rem;
+  border-radius:10px;align-items:center;justify-content:center;
+}
+.bottom-nav .nav-item svg{width:22px;height:22px}
+.bottom-nav .nav-item.active::before{display:none}
+
+/* ============ КОМПОНЕНТЫ ============ */
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:20px;
+}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 22px;border-radius:100px;
+  font-weight:600;font-size:.95rem;
+  transition:transform .18s,background .18s,box-shadow .18s,opacity .18s;
+  white-space:nowrap;
+}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--lime);color:#090A0C}
+.btn-primary:hover{box-shadow:0 0 24px rgba(198,255,77,.35)}
+.btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--line-strong);background:#1e2228}
+.btn-text{color:var(--muted);padding:10px 8px;font-weight:500}
+.btn-text:hover{color:var(--text)}
+.btn-block{width:100%}
+.btn-sm{padding:9px 16px;font-size:.85rem}
+.btn svg{width:18px;height:18px}
+
+.input,.textarea,.select{
+  width:100%;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:13px 15px;transition:border-color .18s;
+}
+.input:focus,.textarea:focus,.select:focus{
+  outline:none;border-color:var(--lime);
+}
+.textarea{resize:vertical;min-height:90px}
+.select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239298A3' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:42px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:7px;font-weight:500}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  padding:9px 16px;border-radius:100px;
+  background:var(--surface);border:1px solid var(--line);
+  font-size:.88rem;font-weight:500;color:var(--muted);
+  transition:all .18s;
+}
+.chip:hover{border-color:var(--line-strong);color:var(--text)}
+.chip.selected{background:rgba(198,255,77,.12);border-color:var(--lime);color:var(--lime)}
+.divider{height:1px;background:var(--line);margin:20px 0}
+
+/* ============ СКРИНЫ ============ */
+.screen{display:none;animation:fade .3s ease}
+.screen.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* WELCOME */
+.welcome{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;padding:32px 24px;max-width:640px;margin:0 auto;
+  position:relative;
+}
+.welcome-glow{
+  position:absolute;top:8%;left:-10%;width:60%;height:340px;
+  background:radial-gradient(circle,rgba(198,255,77,.13),transparent 70%);
+  filter:blur(30px);pointer-events:none;
+}
+.welcome h1{margin-bottom:22px;position:relative}
+.welcome .lead{font-size:1.1rem;color:var(--muted);margin-bottom:36px;max-width:460px;position:relative}
+.welcome-actions{display:flex;flex-direction:column;gap:12px;position:relative}
+.welcome-note{margin-top:28px;font-size:.82rem;color:var(--muted);position:relative}
+
+/* ONBOARDING */
+.onboard{padding:32px 24px;max-width:680px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+.steps{display:flex;gap:6px;margin-bottom:40px}
+.step-bar{flex:1;height:3px;background:var(--surface);border-radius:3px;overflow:hidden}
+.step-bar span{display:block;height:100%;width:0;background:var(--lime);transition:width .4s ease;border-radius:3px}
+.step-bar.done span{width:100%}
+.step-bar.current span{width:50%}
+.onboard h2{margin-bottom:10px}
+.onboard .sub{color:var(--muted);margin-bottom:28px}
+.goal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:28px}
+.goal-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:16px;text-align:left;transition:all .18s;
+}
+.goal-card:hover{border-color:var(--line-strong);background:var(--surface)}
+.goal-card.selected{border-color:var(--lime);background:rgba(198,255,77,.06)}
+.goal-card .ic{font-size:1.2rem;margin-bottom:8px;display:block}
+.goal-card .t{font-weight:600;font-size:.95rem}
+.onboard-nav{margin-top:auto;display:flex;gap:10px;padding-top:28px}
+
+/* TODAY */
+.top-bar{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  margin-bottom:26px;gap:16px;
+}
+.greeting{font-size:.82rem;color:var(--muted);margin-bottom:4px}
+.date-display{font-size:1.4rem;font-weight:700;letter-spacing:-.02em}
+.icon-btn{
+  width:42px;height:42px;border-radius:12px;background:var(--card);
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+  transition:all .18s;flex-shrink:0;
+}
+.icon-btn:hover{border-color:var(--line-strong);background:var(--surface)}
+.icon-btn svg{width:20px;height:20px}
+
+.hero-q{
+  margin-bottom:24px;
+  font-size:clamp(1.6rem,5vw,2.2rem);font-weight:700;letter-spacing:-.025em;
+}
+.hero-q .accent{color:var(--lime)}
+
+.progress-card{
+  background:linear-gradient(160deg,#14171c 0%,#101216 100%);
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;margin-bottom:28px;position:relative;overflow:hidden;
+}
+.progress-card::after{
+  content:'';position:absolute;top:-40%;right:-10%;
+  width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(198,255,77,.14),transparent 70%);
+  pointer-events:none;
+}
+.progress-inner{display:flex;align-items:center;gap:24px;flex-wrap:wrap;position:relative;z-index:1}
+.ring-wrap{position:relative;width:130px;height:130px;flex-shrink:0}
+.ring-wrap svg{transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:var(--surface);stroke-width:9}
+.ring-fg{fill:none;stroke:var(--lime);stroke-width:9;stroke-linecap:round;
+  transition:stroke-dashoffset .8s ease;filter:drop-shadow(0 0 6px rgba(198,255,77,.5))}
+.ring-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-label .num{font-size:1.7rem;font-weight:700;font-family:'JetBrains Mono',monospace;line-height:1}
+.ring-label .cap{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:3px}
+.progress-info{flex:1;min-width:200px}
+.progress-info h3{margin-bottom:6px}
+.progress-info .sub{color:var(--muted);font-size:.9rem;margin-bottom:14px}
+.metrics{display:flex;gap:20px;flex-wrap:wrap}
+.metric .v{font-size:1.35rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--lime)}
+.metric .l{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+.section-head{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px;
+}
+.habit-list{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.habit-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px;transition:border-color .2s,transform .2s;
+}
+.habit-card:hover{border-color:var(--line-strong)}
+.habit-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+.habit-title{display:flex;align-items:center;gap:10px}
+.habit-emoji{font-size:1.3rem}
+.habit-card h3{font-size:1.05rem}
+.habit-goal{font-size:.8rem;color:var(--muted);margin-top:2px}
+.habit-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.badge{
+  font-size:.72rem;padding:4px 10px;border-radius:100px;
+  background:var(--surface);border:1px solid var(--line);color:var(--muted);font-weight:500;
+}
+.badge.lime{background:rgba(198,255,77,.1);border-color:rgba(198,255,77,.3);color:var(--lime)}
+.badge.violet{background:rgba(141,124,255,.1);border-color:rgba(141,124,255,.3);color:var(--violet)}
+.habit-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+.empty{
+  text-align:center;padding:44px 20px;border:1px dashed var(--line-strong);
+  border-radius:var(--radius);color:var(--muted);
+}
+.empty .ic{font-size:2rem;margin-bottom:10px;opacity:.5}
+.empty h3{color:var(--text);margin-bottom:6px}
+.empty p{font-size:.9rem;max-width:340px;margin:0 auto 18px}
+
+.craving-btn{
+  position:fixed;bottom:calc(84px + env(safe-area-inset-bottom));right:20px;z-index:40;
+  background:var(--lime);color:#090A0C;border-radius:100px;
+  padding:14px 20px;font-weight:700;font-size:.9rem;
+  display:flex;align-items:center;gap:8px;
+  box-shadow:0 8px 30px rgba(198,255,77,.3);
+  transition:transform .18s,box-shadow .18s;
+}
+.craving-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(198,255,77,.45)}
+.craving-btn svg{width:18px;height:18px}
+
+/* HISTORY */
+.filter-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:20px;scrollbar-width:none}
+.filter-row::-webkit-scrollbar{display:none}
+.history-list{display:flex;flex-direction:column;gap:10px}
+.history-item{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:16px;display:flex;gap:14px;align-items:flex-start;
+  cursor:pointer;transition:border-color .18s;
+}
+.history-item:hover{border-color:var(--line-strong)}
+.history-date{
+  width:48px;flex-shrink:0;text-align:center;
+  font-family:'JetBrains Mono',monospace;
+}
+.history-date .d{font-size:1.15rem;font-weight:700;line-height:1}
+.history-date .m{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.history-body{flex:1;min-width:0}
+.history-body .t{font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.history-body .s{font-size:.85rem;color:var(--muted)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--lime);flex-shrink:0}
+.dot.violet{background:var(--violet)}
+.dot.gray{background:var(--muted)}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:24px}
+.stat-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:18px}
+.stat-card .v{font-size:1.7rem;font-weight:700;font-family:'JetBrains Mono',monospace;line-height:1;margin-bottom:6px}
+.stat-card .v.lime{color:var(--lime)}
+.stat-card .v.violet{color:var(--violet)}
+.stat-card .l{font-size:.78rem;color:var(--muted)}
+.chart-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.chart-card h3{margin-bottom:4px}
+.chart-card .sub{font-size:.82rem;color:var(--muted);margin-bottom:20px}
+.bars{display:flex;align-items:flex-end;gap:8px;height:130px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end}
+.bar{
+  width:100%;max-width:36px;border-radius:6px 6px 2px 2px;
+  background:linear-gradient(180deg,var(--lime),rgba(198,255,77,.35));
+  min-height:4px;transition:height .6s ease;
+}
+.bar.alt{background:linear-gradient(180deg,var(--violet),rgba(141,124,255,.3))}
+.bar-day{font-size:.68rem;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.triggers{display:flex;flex-direction:column;gap:12px}
+.trigger-row{display:flex;align-items:center;gap:12px}
+.trigger-row .lbl{width:100px;font-size:.85rem;flex-shrink:0}
+.trigger-track{flex:1;height:7px;background:var(--surface);border-radius:100px;overflow:hidden}
+.trigger-fill{height:100%;background:var(--violet);border-radius:100px;transition:width .6s ease}
+.trigger-row .cnt{font-size:.8rem;color:var(--muted);font-family:'JetBrains Mono',monospace;width:30px;text-align:right}
+
+/* PLAN */
+.plan-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:14px}
+.plan-card h3{margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.plan-item{padding:14px 0;border-top:1px solid var(--line)}
+.plan-item:first-of-type{border-top:none;padding-top:0}
+.plan-item .lbl{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.plan-item .val{font-size:.95rem}
+.plan-item .val.placeholder{color:var(--muted);font-style:italic}
+
+/* SETTINGS */
+.setting-row{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:16px 0;border-bottom:1px solid var(--line);
+}
+.setting-row:last-child{border-bottom:none}
+.setting-row .info{flex:1;min-width:0}
+.setting-row .info .t{font-weight:500;margin-bottom:3px}
+.setting-row .info .s{font-size:.82rem;color:var(--muted)}
+.switch{
+  width:48px;height:28px;border-radius:100px;background:var(--surface);
+  border:1px solid var(--line);position:relative;flex-shrink:0;transition:background .2s;
+}
+.switch::after{
+  content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;
+  border-radius:50%;background:var(--muted);transition:transform .2s,background .2s;
+}
+.switch.on{background:rgba(198,255,77,.2);border-color:var(--lime)}
+.switch.on::after{transform:translateX(20px);background:var(--lime)}
+.danger-zone{border:1px solid rgba(255,90,90,.25);background:rgba(255,90,90,.04)}
+.danger-zone .setting-row{border-color:rgba(255,90,90,.15)}
+.btn-danger{background:rgba(255,90,90,.12);color:#FF6B6B;border:1px solid rgba(255,90,90,.3)}
+.btn-danger:hover{background:rgba(255,90,90,.2)}
+
+/* MODALS */
+.overlay{
+  position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);
+  backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center;
+  padding:0;
+}
+.overlay.open{display:flex;animation:fade .2s}
+@media(min-width:640px){.overlay{align-items:center;padding:20px}}
+.modal{
+  background:var(--card);border:1px solid var(--line-strong);
+  border-radius:24px 24px 0 0;width:100%;max-width:520px;
+  max-height:88vh;overflow-y:auto;padding:24px;
+  animation:slideUp .3s ease;
+}
+@media(min-width:640px){.modal{border-radius:24px}}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:12px}
+.modal-head h2{font-size:1.3rem}
+.close-btn{width:36px;height:36px;border-radius:10px;background:var(--surface);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .18s}
+.close-btn:hover{background:#22262c}
+.close-btn svg{width:18px;height:18px}
+.modal-actions{display:flex;gap:10px;margin-top:22px}
+.modal-actions .btn{flex:1}
+
+.toast{
+  position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:100px;
+  padding:12px 22px;font-size:.88rem;z-index:200;opacity:0;
+  transition:opacity .3s,transform .3s;pointer-events:none;max-width:90vw;text-align:center;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast .lime{color:var(--lime)}
+
+/* DESKTOP */
+@media(min-width:900px){
+  .sidebar{display:flex}
+  .bottom-nav{display:none}
+  .main{padding-bottom:40px}
+  .content{padding:40px 32px}
+  .craving-btn{bottom:32px;right:32px}
+  .welcome{min-height:auto;padding-top:12vh}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- SIDEBAR (desktop) -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-logo"><span class="brand-dot"></span>НЕ СЕГОДНЯ</div>
+      <div class="brand-slogan">Замечай. Выбирай. Меняй.</div>
+    </div>
+    <nav class="nav">
+      <button class="nav-item active" data-nav="today">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        Сегодня
+      </button>
+      <button class="nav-item" data-nav="history">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg>
+        История
+      </button>
+      <button class="nav-item" data-nav="stats">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+        Статистика
+      </button>
+      <button class="nav-item" data-nav="plan">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        План
+      </button>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="nav-item" data-nav="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Настройки
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- WELCOME -->
+    <section class="screen active" id="screen-welcome">
+      <div class="welcome">
+        <div class="welcome-glow"></div>
+        <span class="eyebrow" style="margin-bottom:20px">НЕ СЕГОДНЯ</span>
+        <h1>Не обязательно менять всё сразу.</h1>
+        <p class="lead">Отслеживай привычки, замечай триггеры и выбирай следующий шаг — без осуждения.</p>
+        <div class="welcome-actions">
+          <button class="btn btn-primary btn-block" onclick="startOnboarding()">Начать</button>
+          <button class="btn btn-ghost btn-block" onclick="showHowItWorks()">Как это работает</button>
+        </div>
+        <p class="welcome-note">Твои записи личные. Ты сам решаешь, что отслеживать.<br>Данные хранятся локально в браузере.</p>
+      </div>
+    </section>
+
+    <!-- ONBOARDING -->
+    <section class="screen" id="screen-onboard">
+      <div class="onboard">
+        <div class="steps" id="onboardSteps">
+          <div class="step-bar current"><span></span></div>
+          <div class="step-bar"><span></span></div>
+          <div class="step-bar"><span></span></div>
+        </div>
+
+        <!-- Шаг 1 -->
+        <div class="onboard-step" data-step="1">
+          <h2>Что хочешь изменить?</h2>
+          <p class="sub">Выбери одно или несколько. Можно пропустить и настроить позже.</p>
+          <div class="goal-grid" id="goalGrid">
+            <button class="goal-card" data-goal="scroll"><span class="ic">📱</span><span class="t">Меньше скроллить</span></button>
+            <button class="goal-card" data-goal="smoke"><span class="ic">🚬</span><span class="t">Реже курить или парить</span></button>
+            <button class="goal-card" data-goal="procrast"><span class="ic">⏳</span><span class="t">Меньше откладывать дела</span></button>
+            <button class="goal-card" data-goal="spend"><span class="ic">💳</span><span class="t">Контролировать импульсивные покупки</span></button>
+            <button class="goal-card" data-goal="sleep"><span class="ic">🌙</span><span class="t">Наладить режим сна</span></button>
+            <button class="goal-card" data-goal="energy"><span class="ic">⚡</span><span class="t">Сократить энергетики или сладкое</span></button>
+            <button class="goal-card" data-goal="custom"><span class="ic">＋</span><span class="t">Добавить своё</span></button>
+          </div>
+          <div class="onboard-nav">
+            <button class="btn btn-ghost" onclick="skipOnboarding()">Пропустить</button>
+            <button class="btn btn-primary" style="flex:1" onclick="nextOnboard(2)">Далее</button>
+          </div>
+        </div>
+
+        <!-- Шаг 2 -->
+        <div class="onboard-step" data-step="2" style="display:none">
+          <h2>Какой подход ближе?</h2>
+          <p class="sub">Это не жёсткое правило. Цель можно изменить в любой момент.</p>
+          <div class="goal-grid" id="approachGrid">
+            <button class="goal-card" data-approach="reduce"><span class="ic">📉</span><span class="t">Сократить частоту</span></button>
+            <button class="goal-card" data-approach="break"><span class="ic">⏱</span><span class="t">Увеличить перерыв</span></button>
+            <button class="goal-card" data-approach="avoid"><span class="ic">🚧</span><span class="t">Избегать конкретных ситуаций</span></button>
+            <button class="goal-card" data-approach="replace"><span class="ic">🔄</span><span class="t">Заменить привычку другим действием</span></button>
+            <button class="goal-card" data-approach="observe"><span class="ic">👁</span><span class="t">Пока просто наблюдать</span></button>
+          </div>
+          <div class="onboard-nav">
+            <button class="btn btn-ghost" onclick="prevOnboard(1)">Назад</button>
+            <button class="btn btn-primary" style="flex:1" onclick="nextOnboard(3)">Далее</button>
+          </div>
+        </div>
+
+        <!-- Шаг 3 -->
+        <div class="onboard-step" data-step="3" style="display:none">
+          <h2>Напоминания</h2>
+          <p class="sub">По умолчанию выключены. Ты сам решаешь, нужны ли они. Настроить можно позже в разделе «Настройки».</p>
+          <div class="card" style="margin-bottom:24px">
+            <div class="setting-row">
+              <div class="info">
+                <div class="t">Мягкое напоминание</div>
+                <div class="s">Например, вечером отметить день</div>
+              </div>
+              <button class="switch" onclick="this.classList.toggle('on')"></button>
+            </div>
+            <div class="setting-row">
+              <div class="info">
+                <div class="t">Поддержка в сложный момент</div>
+                <div class="s">Редкое сообщение без давления</div>
+              </div>
+              <button class="switch" onclick="this.classList.toggle('on')"></button>
+            </div>
+          </div>
+          <div class="onboard-nav">
+            <button class="btn btn-ghost" onclick="prevOnboard(2)">Назад</button>
+            <button class="btn btn-primary" style="flex:1" onclick="finishOnboarding()">Перейти к своему плану</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TODAY -->
+    <section class="screen" id="screen-today">
+      <div class="content">
+        <div class="top-bar">
+          <div>
+            <div class="greeting" id="greeting">Доброе утро</div>
+            <div class="date-display" id="dateDisplay">—</div>
+          </div>
+          <button class="icon-btn" onclick="go('settings')" aria-label="Настройки">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </button>
+        </div>
+
+        <h2 class="hero-q">Как ты <span class="accent">сегодня</span>?</h2>
+
+        <div class="progress-card">
+          <div class="progress-inner">
+            <div class="ring-wrap">
+              <svg width="130" height="130" viewBox="0 0 130 130">
+                <circle class="ring-bg" cx="65" cy="65" r="56"/>
+                <circle class="ring-fg" id="progressRing" cx="65" cy="65" r="56"
+                  stroke-dasharray="351.86" stroke-dashoffset="351.86"/>
+              </svg>
+              <div class="ring-label">
+                <span class="num" id="progressPct">0%</span>
+                <span class="cap">день</span>
+              </div>
+            </div>
+            <div class="progress-info">
+              <h3>Сегодня — это один шаг</h3>
+              <p class="sub" id="progressSub">Отметь привычки, чтобы видеть динамику.</p>
+              <div class="metrics">
+                <div class="metric">
+                  <div class="v" id="metricNotes">0</div>
+                  <div class="l">отметок</div>
+                </div>
+                <div class="metric">
+                  <div class="v" id="metricAlts">0</div>
+                  <div class="l">альтернатив</div>
+                </div>
+                <div class="metric">
+                  <div class="v" id="metricWeek">0</div>
+                  <div class="l">за неделю</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <h2>Мои привычки</h2>
+          <button class="btn btn-ghost btn-sm" onclick="openHabitForm()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M12 5v14M5 12h14"/></svg>
+            Добавить
+          </button>
+        </div>
+        <div class="habit-list" id="habitList"></div>
+      </div>
+
+      <button class="craving-btn" onclick="openCraving()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 3 2 5 3 7h8c1-2 3-4 3-7a7 7 0 0 0-7-7z"/><path d="M9 22h6"/></svg>
+        Меня тянет
+      </button>
+    </section>
+
+    <!-- HISTORY -->
+    <section class="screen" id="screen-history">
+      <div class="content">
+        <div class="top-bar">
+          <div>
+            <span class="eyebrow">Дневник</span>
+            <h2 style="margin-top:6px">История</h2>
+          </div>
+          <button class="icon-btn" onclick="openNoteForPast()" aria-label="Добавить за прошлый день">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+        </div>
+        <div class="filter-row" id="historyFilters"></div>
+        <div class="history-list" id="historyList"></div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="screen" id="screen-stats">
+      <div class="content">
+        <div class="top-bar">
+          <div>
+            <span class="eyebrow">Обзор</span>
+            <h2 style="margin-top:6px">Статистика</h2>
+          </div>
+        </div>
+        <div id="statsContent"></div>
+      </div>
+    </section>
+
+    <!-- PLAN -->
+    <section class="screen" id="screen-plan">
+      <div class="content">
+        <div class="top-bar">
+          <div>
+            <span class="eyebrow">Личный подход</span>
+            <h2 style="margin-top:6px">Мой план</h2>
+          </div>
+        </div>
+        <p class="muted" style="margin-bottom:24px;font-size:.92rem">Все поля необязательные. Заполни то, что откликается. Можно изменить в любой момент.</p>
+        <div id="planContent"></div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="screen" id="screen-settings">
+      <div class="content">
+        <div class="top-bar">
+          <div>
+            <span class="eyebrow">Приложение</span>
+            <h2 style="margin-top:6px">Настройки</h2>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px">
+          <h3 style="margin-bottom:4px">Напоминания</h3>
+          <p class="muted small" style="margin-bottom:12px">Выключены по умолчанию. Можно настроить позже.</p>
+          <div class="setting-row">
+            <div class="info"><div class="t">Вечерняя отметка</div><div class="s">Мягкое напоминание в 21:00</div></div>
+            <button class="switch" id="swReminder" onclick="toggleSwitch(this)"></button>
+          </div>
+          <div class="setting-row">
+            <div class="info"><div class="t">Поддержка в сложный момент</div><div class="s">Редкое сообщение без давления</div></div>
+            <button class="switch" id="swSupport" onclick="toggleSwitch(this)"></button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px">
+          <h3 style="margin-bottom:4px">Отображение</h3>
+          <div class="setting-row">
+            <div class="info"><div class="t">Уменьшить анимацию</div><div class="s">Меньше движения в интерфейсе</div></div>
+            <button class="switch" id="swAnim" onclick="toggleAnim(this)"></button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px">
+          <h3 style="margin-bottom:4px">Приватность</h3>
+          <p class="muted small" style="margin-bottom:12px">Все записи хранятся локально в твоём браузере. Мы не отправляем их на сервер и не используем для рекламы.</p>
+          <div class="setting-row">
+            <div class="info"><div class="t">Выгрузить данные</div><div class="s">Файл JSON со всеми записями</div></div>
+            <button class="btn btn-ghost btn-sm" onclick="exportData()">Скачать</button>
+          </div>
+          <div class="setting-row">
+            <div class="info"><div class="t">Блокировка PIN</div><div class="s">Дополнительная защита на устройстве</div></div>
+            <button class="switch" id="swPin" onclick="togglePin(this)"></button>
+          </div>
+        </div>
+
+        <div class="card danger-zone">
+          <h3 style="margin-bottom:4px;color:#FF6B6B">Опасная зона</h3>
+          <p class="muted small" style="margin-bottom:12px">Эти действия нельзя отменить.</p>
+          <div class="setting-row">
+            <div class="info"><div class="t">Удалить все данные</div><div class="s">Привычки, отметки, план и настройки</div></div>
+            <button class="btn btn-danger btn-sm" onclick="confirmDeleteAll()">Удалить</button>
+          </div>
+        </div>
+
+        <p class="muted small" style="margin-top:24px;text-align:center">НЕ СЕГОДНЯ · версия 1.0 · сделано с уважением к твоему темпу</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- BOTTOM NAV (mobile) -->
+<nav class="bottom-nav">
+  <button class="nav-item active" data-nav="today">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+    Сегодня
+  </button>
+  <button class="nav-item" data-nav="history">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg>
+    История
+  </button>
+  <button class="nav-item" data-nav="stats">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+    Статистика
+  </button>
+  <button class="nav-item" data-nav="plan">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    План
+  </button>
+</nav>
+
+<!-- MODAL: CRAVING -->
+<div class="overlay" id="cravingOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Что происходит прямо сейчас?</h2>
+      <button class="close-btn" onclick="closeModal('cravingOverlay')" aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div id="cravingStep1">
+      <p class="muted small" style="margin-bottom:16px">Без осуждения. Просто заметить — уже шаг.</p>
+      <div class="chip-row" id="triggerChips">
+        <button class="chip" data-trigger="Стресс">Стресс</button>
+        <button class="chip" data-trigger="Скука">Скука</button>
+        <button class="chip" data-trigger="Усталость">Усталость</button>
+        <button class="chip" data-trigger="Тревога">Тревога</button>
+        <button class="chip" data-trigger="Компания или окружение">Компания или окружение</button>
+        <button class="chip" data-trigger="Привычный автоматизм">Привычный автоматизм</button>
+        <button class="chip" data-trigger="Другое">Другое</button>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary btn-block" onclick="cravingNext()">Дальше</button>
+      </div>
+    </div>
+    <div id="cravingStep2" style="display:none">
+      <p class="muted small" style="margin-bottom:16px">Что попробуешь? Это не гарантия, а просто вариант. Можно ничего не делать.</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn btn-ghost btn-block" onclick="cravingAction('Отложить на 5 минут')">Отложить на 5 минут</button>
+        <button class="btn btn-ghost btn-block" onclick="cravingAction('Выбрать замену')">Выбрать замену</button>
+        <button class="btn btn-ghost btn-block" onclick="cravingAction('Просто записать желание')">Просто записать желание</button>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-text" onclick="closeModal('cravingOverlay')">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: MARK HABIT -->
+<div class="overlay" id="markOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="markTitle">Отметить</h2>
+      <button class="close-btn" onclick="closeModal('markOverlay')" aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div id="markStep1">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn btn-ghost btn-block" onclick="markChoice('plan')">Сегодня удалось придерживаться плана</button>
+        <button class="btn btn-ghost btn-block" onclick="markChoice('happened')">Привычка случилась</button>
+        <button class="btn btn-ghost btn-block" onclick="markChoice('count')">Хочу отметить количество</button>
+        <button class="btn btn-ghost btn-block" onclick="markChoice('skip')">Пропустить сегодня</button>
+      </div>
+    </div>
+    <div id="markStep2" style="display:none">
+      <p class="muted small" style="margin-bottom:12px">Что повлияло на ситуацию? Это поможет замечать закономерности.</p>
+      <div class="chip-row" id="markTriggers" style="margin-bottom:16px">
+        <button class="chip" data-mt="Стресс">Стресс</button>
+        <button class="chip" data-mt="Скука">Скука</button>
+        <button class="chip" data-mt="Усталость">Усталость</button>
+        <button class="chip" data-mt="Тревога">Тревога</button>
+        <button class="chip" data-mt="Компания">Компания</button>
+        <button class="chip" data-mt="Автоматизм">Автоматизм</button>
+        <button class="chip" data-mt="Другое">Другое</button>
+      </div>
+      <div class="field">
+        <label>Что попробуешь в следующий раз? (необязательно)</label>
+        <textarea class="textarea" id="markNext" placeholder="Например, выйти на прогулку или написать другу"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary btn-block" onclick="saveMark()">Сохранить</button>
+      </div>
+    </div>
+    <div id="markStep3" style="display:none">
+      <div class="field">
+        <label>Количество</label>
+        <input type="number" class="input" id="markCount" min="0" step="1" placeholder="0">
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary btn-block" onclick="saveMark()">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: HABIT FORM -->
+<div class="overlay" id="habitOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="habitFormTitle">Новая привычка</h2>
+      <button class="close-btn" onclick="closeModal('habitOverlay')" aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="field">
+      <label>Название привычки</label>
+      <input type="text" class="input" id="hfName" placeholder="Например, бесконечный скроллинг">
+    </div>
+    <div class="field">
+      <label>Цель изменения</label>
+      <select class="select" id="hfGoal">
+        <option value="reduce">Сократить частоту</option>
+        <option value="break">Увеличить перерыв</option>
+        <option value="avoid">Избегать конкретных ситуаций</option>
+        <option value="replace">Заменить привычку другим действием</option>
+        <option value="observe">Пока просто наблюдать</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Единица отслеживания</label>
+      <select class="select" id="hfUnit">
+        <option value="разы">Разы</option>
+        <option value="минуты">Минуты</option>
+        <option value="дни">Дни</option>
+        <option value="сумма">Сумма</option>
+        <option value="своя">Своя единица</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Исходный уровень (необязательно)</label>
+      <input type="text" class="input" id="hfBaseline" placeholder="Например, 3 раза в день">
+    </div>
+    <div class="field">
+      <label>Целевой показатель (необязательно)</label>
+      <input type="text" class="input" id="hfTarget" placeholder="Например, 1 раз в день">
+    </div>
+    <div class="field">
+      <label>Личный триггер или ситуация (необязательно)</label>
+      <input type="text" class="input" id="hfTrigger" placeholder="Например, перед сном">
+    </div>
+    <div class="field">
+      <label>Желаемое действие-замена (необязательно)</label>
+      <input type="text" class="input" id="hfReplace" placeholder="Например, почитать 10 минут">
+    </div>
+    <div class="setting-row" style="padding:12px 0">
+      <div class="info"><div class="t">Напоминание</div><div class="s">По умолчанию выключено</div></div>
+      <button class="switch" id="hfReminder" onclick="this.classList.toggle('on')"></button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('habitOverlay')">Отмена</button>
+      <button class="btn btn-primary" onclick="saveHabit()">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: HOW IT WORKS -->
+<div class="overlay" id="howOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Как это работает</h2>
+      <button class="close-btn" onclick="closeModal('howOverlay')" aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div><h3 style="margin-bottom:4px">1. Замечай</h3><p class="muted small">Добавляй привычки и отмечай, что происходит. Без оценок и давления.</p></div>
+      <div><h3 style="margin-bottom:4px">2. Выбирай</h3><p class="muted small">Смотри на закономерности, триггеры и то, что уже работает. Выбирай следующий шаг.</p></div>
+      <div><h3 style="margin-bottom:4px">3. Меняй</h3><p class="muted small">Прогресс важнее идеальной серии. Один эпизод не отменяет предыдущие шаги.</p></div>
+      <div class="card" style="background:var(--surface)">
+        <p class="small muted">Это не медицинский сервис и не замена специалисту. Если привычка сильно влияет на твою жизнь или безопасность, можно обратиться за поддержкой к специалисту или человеку, которому ты доверяешь.</p>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-primary btn-block" onclick="closeModal('howOverlay')">Понятно</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CONFIRM -->
+<div class="overlay" id="confirmOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="confirmTitle">Подтверди</h2>
+    </div>
+    <p class="muted" id="confirmText" style="margin-bottom:20px"></p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('confirmOverlay')">Отмена</button>
+      <button class="btn btn-danger" id="confirmBtn">Удалить</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   СОСТОЯНИЕ
+============================================================ */
+const STORAGE_KEY = 'ne_segodnya_v1';
+
+const defaultState = {
+  onboarded: false,
+  habits: [],
+  entries: [],
+  settings: {
+    reminder: false,
+    support: false,
+    reduceAnim: false,
+    pin: false
+  },
+  plan: {},
+  selectedGoals: [],
+  selectedApproach: null
+};
+
+let state = loadState();
+let currentScreen = 'welcome';
+let editingHabitId = null;
+let markingHabitId = null;
+let markMode = null;
+let markSelectedTriggers = [];
+let cravingTrigger = null;
+
+/* ============================================================
+   ХРАНИЛИЩЕ
+============================================================ */
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return structuredClone(defaultState);
+    const parsed = JSON.parse(raw);
+    return {...structuredClone(defaultState), ...parsed, settings:{...defaultState.settings, ...(parsed.settings||{})}};
+  }catch(e){ return structuredClone(defaultState); }
+}
+function saveState(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch(e){ toast('Не удалось сохранить данные'); }
+}
+
+/* ============================================================
+   УТИЛИТЫ
+============================================================ */
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function todayISO(){ return new Date().toISOString().slice(0,10); }
+function fmtDate(iso){
+  const d = new Date(iso + 'T00:00:00');
+  return d.toLocaleDateString('ru-RU',{day:'numeric',month:'long'});
+}
+function fmtDateShort(iso){
+  const d = new Date(iso + 'T00:00:00');
+  return {d: d.getDate(), m: d.toLocaleDateString('ru-RU',{month:'short'}).replace('.','')};
+}
+function greeting(){
+  const h = new Date().getHours();
+  if(h < 6) return 'Доброй ночи';
+  if(h < 12) return 'Доброе утро';
+  if(h < 18) return 'Добрый день';
+  return 'Добрый вечер';
+}
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.innerHTML = msg;
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(()=>t.classList.remove('show'), 2600);
+}
+
+/* ============================================================
+   НАВИГАЦИЯ
+============================================================ */
+function go(screen){
+  currentScreen = screen;
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el = document.getElementById('screen-'+screen);
+  if(el) el.classList.add('active');
+
+  document.querySelectorAll('.nav-item[data-nav]').forEach(n=>{
+    n.classList.toggle('active', n.dataset.nav === screen);
+  });
+
+  if(screen === 'today') renderToday();
+  if(screen === 'history') renderHistory();
+  if(screen === 'stats') renderStats();
+  if(screen === 'plan') renderPlan();
+  if(screen === 'settings') renderSettings();
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.querySelectorAll('.nav-item[data-nav]').forEach(btn=>{
+  btn.addEventListener('click', ()=> go(btn.dataset.nav));
+});
+
+/* ============================================================
+   WELCOME / ONBOARDING
+============================================================ */
+function startOnboarding(){
+  state.selectedGoals = [];
+  state.selectedApproach = null;
+  document.querySelectorAll('#goalGrid .goal-card').forEach(c=>c.classList.remove('selected'));
+  document.querySelectorAll('#approachGrid .goal-card').forEach(c=>c.classList.remove('selected'));
+  nextOnboard(1);
+  go('onboard');
+}
+function showHowItWorks(){ openModal('howOverlay'); }
+
+function updateOnboardSteps(current){
+  const bars = document.querySelectorAll('#onboardSteps .step-bar');
+  bars.forEach((b,i)=>{
+    b.classList.remove('current','done');
+    if(i+1 < current) b.classList.add('done');
+    else if(i+1 === current) b.classList.add('current');
+  });
+  document.querySelectorAll('.onboard-step').forEach(s=>{
+    s.style.display = s.dataset.step == current ? 'block' : 'none';
+  });
+}
+function nextOnboard(step){ updateOnboardSteps(step); }
+function prevOnboard(step){ updateOnboardSteps(step); }
+
+document.querySelectorAll('#goalGrid .goal-card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    card.classList.toggle('selected');
+    const goal = card.dataset.goal;
+    if(card.classList.contains('selected')){
+      if(!state.selectedGoals.includes(goal)) state.selectedGoals.push(goal);
+    } else {
+      state.selectedGoals = state.selectedGoals.filter(g=>g!==goal);
+    }
+  });
+});
+document.querySelectorAll('#approachGrid .goal-card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    document.querySelectorAll('#approachGrid .goal-card').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected');
+    state.selectedApproach = card.dataset.approach;
+  });
+});
+
+function skipOnboarding(){
+  state.onboarded = true;
+  saveState();
+  addStarterHabits();
+  go('today');
+}
+function finishOnboarding(){
+  state.onboarded = true;
+  saveState();
+  addStarterHabits();
+  toast('<span class="lime">Готово.</span> Можно изменить цель в любой момент.');
+  go('today');
+}
+
+function addStarterHabits(){
+  if(state.habits.length > 0) return;
+  const goalLabels = {
+    scroll:'Меньше скроллить', smoke:'Реже курить или парить',
+    procrast:'Меньше откладывать дела', spend:'Контролировать импульсивные покупки',
+    sleep:'Наладить режим сна', energy:'Сократить энергетики или сладкое'
+  };
+  const map = {
+    scroll:{emoji:'📱',unit:'минуты',trigger:'перед сном'},
+    smoke:{emoji:'🚬',unit:'разы',trigger:'в компании'},
+    procrast:{emoji:'⏳',unit:'разы',trigger:'утром за компьютером'},
+    spend:{emoji:'💳',unit:'сумма',trigger:'вечером в телефоне'},
+    sleep:{emoji:'🌙',unit:'дни',trigger:'после 23:00'},
+    energy:{emoji:'⚡',unit:'разы',trigger:'днём на работе'}
+  };
+  const approach = state.selectedApproach || 'observe';
+  state.selectedGoals.forEach(g=>{
+    if(g==='custom') return;
+    const m = map[g] || {emoji:'✨',unit:'разы',trigger:'—'};
+    state.habits.push({
+      id: uid(),
+      name: goalLabels[g] || 'Привычка',
+      emoji: m.emoji,
+      goal: approach,
+      unit: m.unit,
+      baseline: '',
+      target: '',
+      trigger: m.trigger,
+      replace: '',
+      reminder: false,
+      createdAt: todayISO()
+    });
+  });
+  saveState();
+}
+
+/* ============================================================
+   TODAY
+============================================================ */
+function renderToday(){
+  document.getElementById('greeting').textContent = greeting();
+  document.getElementById('dateDisplay').textContent = fmtDate(todayISO());
+
+  const today = todayISO();
+  const todayEntries = state.entries.filter(e=>e.date === today);
+
+  const total = state.habits.length;
+  const marked = new Set(todayEntries.map(e=>e.habitId)).size;
+  const pct = total ? Math.round((marked/total)*100) : 0;
+
+  const ring = document.getElementById('progressRing');
+  const circumference = 351.86;
+  ring.style.strokeDashoffset = circumference - (circumference * pct/100);
+  document.getElementById('progressPct').textContent = pct + '%';
+
+  document.getElementById('metricNotes').textContent = todayEntries.length;
+  document.getElementById('metricAlts').textContent = todayEntries.filter(e=>e.mode==='plan').length;
+  document.getElementById('metricWeek').textContent = state.entries.filter(e=>{
+    const d = new Date(e.date+'T00:00:00');
+    const diff = (new Date() - d) / 86400000;
+    return diff <= 7 && diff >= 0;
+  }).length;
+
+  const sub = document.getElementById('progressSub');
+  if(total === 0){
+    sub.textContent = 'Добавь первую привычку — и начнём.';
+  } else if(marked === total){
+    sub.textContent = 'Все привычки отмечены. Хорошая работа.';
+  } else {
+    sub.textContent = `Отмечено ${marked} из ${total}. Прогресс не обязан быть идеальным.`;
+  }
+
+  renderHabitList();
+}
+
+function renderHabitList(){
+  const list = document.getElementById('habitList');
+  if(state.habits.length === 0){
+    list.innerHTML = `
+      <div class="empty">
+        <div class="ic">✨</div>
+        <h3>Пока нет привычек</h3>
+        <p>Добавь первую — ту, которую хочется замечать. Без давления и обязательств.</p>
+        <button class="btn btn-primary" onclick="openHabitForm()">Добавить привычку</button>
+      </div>`;
+    return;
+  }
+
+  const today = todayISO();
+  const goalLabels = {
+    reduce:'Сократить частоту', break:'Увеличить перерыв',
+    avoid:'Избегать ситуаций', replace:'Заменить действием', observe:'Наблюдать'
+  };
+
+  list.innerHTML = state.habits.map(h=>{
+    const todayEntry = state.entries.find(e=>e.habitId===h.id && e.date===today);
+    let statusBadge = '';
+    if(!todayEntry){
+      statusBadge = `<span class="badge">ещё не отмечено</span>`;
+    } else if(todayEntry.mode === 'plan'){
+      statusBadge = `<span class="badge lime">идёт по плану</span>`;
+    } else if(todayEntry.mode === 'happened'){
+      statusBadge = `<span class="badge violet">эпизод записан</span>`;
+    } else if(todayEntry.mode === 'skip'){
+      statusBadge = `<span class="badge">пропущено</span>`;
+    } else if(todayEntry.mode === 'count'){
+      statusBadge = `<span class="badge">отмечено: ${todayEntry.count}</span>`;
+    }
+
+    const weekCount = state.entries.filter(e=>{
+      if(e.habitId!==h.id) return false;
+      const diff = (new Date() - new Date(e.date+'T00:00:00')) / 86400000;
+      return diff <= 7 && diff >= 0;
+    }).length;
+
+    return `
+      <div class="habit-card">
+        <div class="habit-head">
+          <div class="habit-title">
+            <span class="habit-emoji">${h.emoji || '✨'}</span>
+            <div>
+              <h3>${escapeHtml(h.name)}</h3>
+              <div class="habit-goal">${goalLabels[h.goal] || 'Наблюдать'}</div>
+            </div>
+          </div>
+        </div>
+        <div class="habit-meta">
+          ${statusBadge}
+          <span class="badge">${weekCount} записей за неделю</span>
+          ${h.trigger ? `<span class="badge">триггер: ${escapeHtml(h.trigger)}</span>` : ''}
+        </div>
+        <div class="habit-actions">
+          <button class="btn btn-primary btn-sm" onclick="openMark('${h.id}')">Отметить</button>
+          <button class="btn btn-ghost btn-sm" onclick="openHabitForm('${h.id}')">Подробнее</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function escapeHtml(s){
+  if(!s) return '';
+  return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ============================================================
+   CRAVING
+============================================================ */
+function openCraving(){
+  cravingTrigger = null;
+  document.querySelectorAll('#triggerChips .chip').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('cravingStep1').style.display = 'block';
+  document.getElementById('cravingStep2').style.display = 'none';
+  openModal('cravingOverlay');
+}
+document.querySelectorAll('#triggerChips .chip').forEach(c=>{
+  c.addEventListener('click', ()=>{
+    document.querySelectorAll('#triggerChips .chip').forEach(x=>x.classList.remove('selected'));
+    c.classList.add('selected');
+    cravingTrigger = c.dataset.trigger;
+  });
+});
+function cravingNext(){
+  if(!cravingTrigger){ toast('Выбери, что происходит'); return; }
+  document.getElementById('cravingStep1').style.display = 'none';
+  document.getElementById('cravingStep2').style.display = 'block';
+}
+function cravingAction(action){
+  const entry = {
+    id: uid(),
+    habitId: null,
+    date: todayISO(),
+    mode: 'craving',
+    trigger: cravingTrigger,
+    action: action,
+    createdAt: new Date().toISOString()
+  };
+  state.entries.push(entry);
+  saveState();
+  closeModal('cravingOverlay');
+  toast('Записано. <span class="lime">Спасибо, что заметил.</span>');
+}
+
+/* ============================================================
+   MARK HABIT
+============================================================ */
+function openMark(habitId){
+  markingHabitId = habitId;
+  markMode = null;
+  markSelectedTriggers = [];
+  const h = state.habits.find(x=>x.id===habitId);
+  document.getElementById('markTitle').textContent = h ? h.name : 'Отметить';
+  document.getElementById('markStep1').style.display = 'block';
+  document.getElementById('markStep2').style.display = 'none';
+  document.getElementById('markStep3').style.display = 'none';
+  document.querySelectorAll('#markTriggers .chip').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('markNext').value = '';
+  document.getElementById('markCount').value = '';
+  openModal('markOverlay');
+}
+function markChoice(mode){
+  markMode = mode;
+  if(mode === 'count'){
+    document.getElementById('markStep1').style.display = 'none';
+    document.getElementById('markStep3').style.display = 'block';
+    return;
+  }
+  if(mode === 'plan'){
+    saveMarkDirect('plan');
+    return;
+  }
+  if(mode === 'skip'){
+    saveMarkDirect('skip');
+    return;
+  }
+  if(mode === 'happened'){
+    document.getElementById('markStep1').style.display = 'none';
+    document.getElementById('markStep2').style.display = 'block';
+    return;
+  }
+}
+document.querySelectorAll('#markTriggers .chip').forEach(c=>{
+  c.addEventListener('click', ()=>{
+    c.classList.toggle('selected');
+    const t = c.dataset.mt;
+    if(c.classList.contains('selected')){
+      if(!markSelectedTriggers.includes(t)) markSelectedTriggers.push(t);
+    } else {
+      markSelectedTriggers = markSelectedTriggers.filter(x=>x!==t);
+    }
+  });
+});
+function saveMarkDirect(mode){
+  const entry = {
+    id: uid(),
+    habitId: markingHabitId,
+    date: todayISO(),
+    mode: mode,
+    createdAt: new Date().toISOString()
+  };
+  state.entries.push(entry);
+  saveState();
+  closeModal('markOverlay');
+  renderToday();
+  if(mode === 'plan') toast('Отметка сохранена. <span class="lime">Так держать.</span>');
+  else if(mode === 'skip') toast('Пропущено. Это тоже данные, а не провал.');
+}
+function saveMark(){
+  if(markMode === 'count'){
+    const count = parseInt(document.getElementById('markCount').value) || 0;
+    const entry = {
+      id: uid(), habitId: markingHabitId, date: todayISO(),
+      mode: 'count', count: count, createdAt: new Date().toISOString()
+    };
+    state.entries.push(entry);
+    saveState();
+    closeModal('markOverlay');
+    renderToday();
+    toast('Отметка сохранена. Один эпизод не отменяет предыдущие шаги.');
+    return;
+  }
+  const next = document.getElementById('markNext').value.trim();
+  const entry = {
+    id: uid(),
+    habitId: markingHabitId,
+    date: todayISO(),
+    mode: 'happened',
+    triggers: [...markSelectedTriggers],
+    next: next || null,
+    createdAt: new Date().toISOString()
+  };
+  state.entries.push(entry);
+  saveState();
+  closeModal('markOverlay');
+  renderToday();
+  toast('Запись сохранена. Теперь у тебя чуть больше информации.');
+}
+
+/* ============================================================
+   HABIT FORM
+============================================================ */
+function openHabitForm(id){
+  editingHabitId = id || null;
+  const h = id ? state.habits.find(x=>x.id===id) : null;
+  document.getElementById('habitFormTitle').textContent = h ? 'Редактировать привычку' : 'Новая привычка';
+  document.getElementById('hfName').value = h ? h.name : '';
+  document.getElementById('hfGoal').value = h ? h.goal : 'observe';
+  document.getElementById('hfUnit').value = h ? h.unit : 'разы';
+  document.getElementById('hfBaseline').value = h ? (h.baseline||'') : '';
+  document.getElementById('hfTarget').value = h ? (h.target||'') : '';
+  document.getElementById('hfTrigger').value = h ? (h.trigger||'') : '';
+  document.getElementById('hfReplace').value = h ? (h.replace||'') : '';
+  const sw = document.getElementById('hfReminder');
+  sw.classList.toggle('on', !!(h && h.reminder));
+  openModal('habitOverlay');
+}
+function saveHabit(){
+  const name = document.getElementById('hfName').value.trim();
+  if(!name){ toast('Добавь название'); return; }
+  const data = {
+    name,
+    goal: document.getElementById('hfGoal').value,
+    unit: document.getElementById('hfUnit').value,
+    baseline: document.getElementById('hfBaseline').value.trim(),
+    target: document.getElementById('hfTarget').value.trim(),
+    trigger: document.getElementById('hfTrigger').value.trim(),
+    replace: document.getElementById('hfReplace').value.trim(),
+    reminder: document.getElementById('hfReminder').classList.contains('on')
+  };
+  if(editingHabitId){
+    const h = state.habits.find(x=>x.id===editingHabitId);
+    if(h) Object.assign(h, data);
+    toast('Изменения сохранены.');
+  } else {
+    state.habits.push({
+      id: uid(),
+      emoji: '✨',
+      createdAt: todayISO(),
+      ...data
+    });
+    toast('Привычка добавлена. Можно изменить цель в любой момент.');
+  }
+  saveState();
+  closeModal('habitOverlay');
+  renderToday();
+}
+function deleteHabit(id){
+  showConfirm('Удалить привычку?', 'Все связанные записи останутся в истории, но привычка исчезнет из списка.', ()=>{
+    state.habits = state.habits.filter(h=>h.id!==id);
+    saveState();
+    closeModal('habitOverlay');
+    renderToday();
+    toast('Привычка удалена.');
+  });
+}
+
+/* ============================================================
+   HISTORY
+============================================================ */
+function renderHistory(){
+  const filters = document.getElementById('historyFilters');
+  filters.innerHTML = `<button class="chip selected" data-hf="all">Все</button>` +
+    state.habits.map(h=>`<button class="chip" data-hf="${h.id}">${escapeHtml(h.emoji||'✨')} ${escapeHtml(h.name)}</button>`).join('');
+
+  filters.querySelectorAll('.chip').forEach(c=>{
+    c.addEventListener('click', ()=>{
+      filters.querySelectorAll('.chip').forEach(x=>x.classList.remove('selected'));
+      c.classList.add('selected');
+      renderHistoryList(c.dataset.hf);
+    });
+  });
+  renderHistoryList('all');
+}
+
+function renderHistoryList(filter){
+  const list = document.getElementById('historyList');
+  let entries = [...state.entries].sort((a,b)=> b.date.localeCompare(a.date) || b.createdAt.localeCompare(a.createdAt));
+  if(filter !== 'all') entries = entries.filter(e=>e.habitId === filter);
+
+  if(entries.length === 0){
+    list.innerHTML = `<div class="empty"><div class="ic">📖</div><h3>Пока нет записей</h3><p>Отметь первую привычку или добавь заметку за прошлый день.</p></div>`;
+    return;
+  }
+
+  list.innerHTML = entries.map(e=>{
+    const h = state.habits.find(x=>x.id===e.habitId);
+    const {d,m} = fmtDateShort(e.date);
+    let title = h ? `${h.emoji||'✨'} ${escapeHtml(h.name)}` : 'Быстрая отметка';
+    let sub = '';
+    let dotClass = 'gray';
+    if(e.mode === 'plan'){ sub = 'Придерживался плана'; dotClass = 'lime'; }
+    else if(e.mode === 'happened'){ sub = 'Привычка случилась' + (e.triggers?.length ? ' · ' + e.triggers.join(', ') : ''); dotClass = 'violet'; }
+    else if(e.mode === 'count'){ sub = `Количество: ${e.count}`; dotClass = 'lime'; }
+    else if(e.mode === 'skip'){ sub = 'Пропущено'; }
+    else if(e.mode === 'craving'){ title = 'Меня тянуло'; sub = `${e.trigger||''} · ${e.action||''}`; dotClass = 'violet'; }
+
+    return `
+      <div class="history-item" onclick="openEntry('${e.id}')">
+        <div class="history-date"><div class="d">${d}</div><div class="m">${m}</div></div>
+        <div class="history-body">
+          <div class="t"><span class="dot ${dotClass}"></span>${title}</div>
+          <div class="s">${escapeHtml(sub)}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function openEntry(id){
+  const e = state.entries.find(x=>x.id===id);
+  if(!e) return;
+  const h = state.habits.find(x=>x.id===e.habitId);
+  showConfirm(
+    h ? h.name : 'Запись',
+    `Дата: ${fmtDate(e.date)}. Режим: ${e.mode}. ${e.next ? 'Заметка: ' + e.next : ''}`,
+    ()=>{},
+    'Удалить запись',
+    ()=>{
+      state.entries = state.entries.filter(x=>x.id!==id);
+      saveState();
+      closeModal('confirmOverlay');
+      renderHistory();
+      renderToday();
+      toast('Запись удалена.');
+    }
+  );
+}
+
+function openNoteForPast(){
+  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0,10);
+  if(state.habits.length === 0){ toast('Сначала добавь привычку'); return; }
+  const habitNames = state.habits.map((h,i)=>`${i+1}. ${h.name}`).join('\n');
+  const choice = prompt(`За какую привычку добавить заметку?\n${habitNames}\n\nВведи номер:`);
+  const idx = parseInt(choice) - 1;
+  if(isNaN(idx) || !state.habits[idx]) return;
+  const note = prompt('Заметка за прошлый день:');
+  if(!note) return;
+  state.entries.push({
+    id: uid(),
+    habitId: state.habits[idx].id,
+    date: yesterday,
+    mode: 'note',
+    next: note,
+    createdAt: new Date().toISOString()
+  });
+  saveState();
+  renderHistory();
+  toast('Заметка добавлена.');
+}
+
+/* ============================================================
+   STATS
+============================================================ */
+function renderStats(){
+  const el = document.getElementById('statsContent');
+  if(state.entries.length === 0){
+    el.innerHTML = `<div class="empty"><div class="ic">📊</div><h3>Пока недостаточно записей для вывода</h3><p>Отмечай привычки несколько дней — и здесь появятся закономерности.</p></div>`;
+    return;
+  }
+
+  const today = todayISO();
+  const days7 = [...Array(7)].map((_,i)=>{
+    const d = new Date(); d.setDate(d.getDate() - (6-i));
+    return d.toISOString().slice(0,10);
+  });
+
+  const counts = days7.map(d=> state.entries.filter(e=>e.date===d && e.mode!=='craving').length);
+  const maxCount = Math.max(...counts, 1);
+
+  const weekEntries = state.entries.filter(e=> days7.includes(e.date));
+  const prevWeek = [...Array(7)].map((_,i)=>{
+    const d = new Date(); d.setDate(d.getDate() - (13-i));
+    return d.toISOString().slice(0,10);
+  });
+  const prevWeekEntries = state.entries.filter(e=> prevWeek.includes(e.date));
+  const diff = weekEntries.length - prevWeekEntries.length;
+  const diffText = diff > 0 ? `+${diff}` : `${diff}`;
+  const diffLabel = diff > 0 ? 'больше, чем на прошлой неделе' : diff < 0 ? 'меньше, чем на прошлой неделе' : 'столько же, как на прошлой неделе';
+
+  const triggerCounts = {};
+  state.entries.forEach(e=>{
+    (e.triggers||[]).forEach(t=>{ triggerCounts[t] = (triggerCounts[t]||0)+1; });
+    if(e.mode==='craving' && e.trigger){ triggerCounts[e.trigger] = (triggerCounts[e.trigger]||0)+1; }
+  });
+  const topTriggers = Object.entries(triggerCounts).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const maxTrigger = topTriggers.length ? topTriggers[0][1] : 1;
+
+  const alts = state.entries.filter(e=>e.mode==='plan' || (e.mode==='craving' && e.action)).length;
+
+  el.innerHTML = `
+    <div class="stats-grid">
+      <div class="stat-card"><div class="v lime">${weekEntries.length}</div><div class="l">отметок за 7 дней</div></div>
+      <div class="stat-card"><div class="v ${diff>=0?'lime':'violet'}">${diffText}</div><div class="l">${diffLabel}</div></div>
+      <div class="stat-card"><div class="v">${alts}</div><div class="l">выбрано альтернатив</div></div>
+      <div class="stat-card"><div class="v violet">${state.entries.length}</div><div class="l">всего записей</div></div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Динамика за неделю</h3>
+      <p class="sub">Количество отметок по дням. Без оценки «хорошо» или «плохо».</p>
+      <div class="bars">
+        ${days7.map((d,i)=>{
+          const h = Math.round((counts[i]/maxCount)*100);
+          const dayName = new Date(d+'T00:00:00').toLocaleDateString('ru-RU',{weekday:'short'});
+          return `<div class="bar-col">
+            <div class="bar" style="height:${Math.max(h,4)}%"></div>
+            <div class="bar-day">${dayName}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    ${topTriggers.length ? `
+    <div class="chart-card">
+      <h3>Частые триггеры</h3>
+      <p class="sub">Ситуации, в которых привычка проявляется чаще. Это наблюдение, а не диагноз.</p>
+      <div class="triggers">
+        ${topTriggers.map(([t,c])=>`
+          <div class="trigger-row">
+            <div class="lbl">${escapeHtml(t)}</div>
+            <div class="trigger-track"><div class="trigger-fill" style="width:${(c/maxTrigger)*100}%"></div></div>
+            <div class="cnt">${c}</div>
+          </div>`).join('')}
+      </div>
+    </div>` : ''}
+
+    <div class="chart-card">
+      <h3>Прогресс относительно цели</h3>
+      <p class="sub">Сравнение с твоим собственным ориентиром. Цель можно менять в любой момент.</p>
+      ${state.habits.length ? state.habits.map(h=>{
+        const entries = state.entries.filter(e=>e.habitId===h.id && e.mode!=='note');
+        const planCount = entries.filter(e=>e.mode==='plan').length;
+        const total = entries.length || 1;
+        const pct = Math.round((planCount/total)*100);
+        return `
+          <div style="margin-bottom:14px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:.88rem">
+              <span>${escapeHtml(h.emoji||'✨')} ${escapeHtml(h.name)}</span>
+              <span class="mono muted">${pct}%</span>
+            </div>
+            <div class="trigger-track"><div class="trigger-fill" style="width:${pct}%;background:var(--lime)"></div></div>
+          </div>`;
+      }).join('') : '<p class="muted small">Добавь привычки, чтобы видеть прогресс.</p>'}
+    </div>
+  `;
+}
+
+/* ============================================================
+   PLAN
+============================================================ */
+function renderPlan(){
+  const el = document.getElementById('planContent');
+  if(state.habits.length === 0){
+    el.innerHTML = `<div class="empty"><div class="ic">🗺</div><h3>Пока нет привычек</h3><p>Добавь привычку — и здесь появится место для личного плана.</p><button class="btn btn-primary" onclick="openHabitForm()">Добавить привычку</button></div>`;
+    return;
+  }
+
+  el.innerHTML = state.habits.map(h=>{
+    const p = state.plan[h.id] || {};
+    return `
+      <div class="plan-card">
+        <h3>${escapeHtml(h.emoji||'✨')} ${escapeHtml(h.name)}</h3>
+        <div class="plan-item">
+          <div class="lbl">Моя цель</div>
+          <div class="val ${p.goal?'':'placeholder'}" data-plan="${h.id}:goal">${escapeHtml(p.goal) || 'Не указана — можно добавить'}</div>
+        </div>
+        <div class="plan-item">
+          <div class="lbl">Ситуации, в которых это обычно происходит</div>
+          <div class="val ${p.situations?'':'placeholder'}" data-plan="${h.id}:situations">${escapeHtml(p.situations) || (h.trigger ? 'Из карточки: ' + escapeHtml(h.trigger) : 'Не указано')}</div>
+        </div>
+        <div class="plan-item">
+          <div class="lbl">Что я могу попробовать вместо этого</div>
+          <div class="val ${p.replace?'':'placeholder'}" data-plan="${h.id}:replace">${escapeHtml(p.replace) || (h.replace ? escapeHtml(h.replace) : 'Не указано')}</div>
+        </div>
+        <div class="plan-item">
+          <div class="lbl">Кому могу написать, если нужна поддержка</div>
+          <div class="val ${p.support?'':'placeholder'}" data-plan="${h.id}:support">${escapeHtml(p.support) || 'Не указано'}</div>
+        </div>
+        <div class="plan-item">
+          <div class="lbl">Следующий шаг</div>
+          <div class="val ${p.next?'':'placeholder'}" data-plan="${h.id}:next">${escapeHtml(p.next) || 'Не указан'}</div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+          <button class="btn btn-ghost btn-sm" onclick="editPlan('${h.id}')">Заполнить</button>
+          <button class="btn btn-text btn-sm" onclick="openHabitForm('${h.id}')">Редактировать привычку</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function editPlan(habitId){
+  const h = state.habits.find(x=>x.id===habitId);
+  if(!h) return;
+  const p = state.plan[habitId] || {};
+  const fields = [
+    ['goal','Моя цель'],
+    ['situations','Ситуации, в которых это обычно происходит'],
+    ['replace','Что я могу попробовать вместо этого'],
+    ['support','Кому могу написать, если нужна поддержка'],
+    ['next','Следующий шаг']
+  ];
+  let result = {...p};
+  for(const [key,label] of fields){
+    const val = prompt(label + ':', result[key] || '');
+    if(val !== null) result[key] = val.trim();
+  }
+  state.plan[habitId] = result;
+  saveState();
+  renderPlan();
+  toast('План обновлён.');
+}
+
+/* ============================================================
+   SETTINGS
+============================================================ */
+function renderSettings(){
+  const s = state.settings;
+  document.getElementById('swReminder').classList.toggle('on', !!s.reminder);
+  document.getElementById('swSupport').classList.toggle('on', !!s.support);
+  document.getElementById('swAnim').classList.toggle('on', !!s.reduceAnim);
+  document.getElementById('swPin').classList.toggle('on', !!s.pin);
+  document.body.classList.toggle('reduce-anim', !!s.reduceAnim);
+}
+function toggleSwitch(el){
+  el.classList.toggle('on');
+  const on = el.classList.contains('on');
+  if(el.id==='swReminder') state.settings.reminder = on;
+  if(el.id==='swSupport') state.settings.support = on;
+  saveState();
+  toast(on ? 'Напоминание включено.' : 'Напоминание выключено.');
+}
+function toggleAnim(el){
+  el.classList.toggle('on');
+  state.settings.reduceAnim = el.classList.contains('on');
+  document.body.classList.toggle('reduce-anim', state.settings.reduceAnim);
+  saveState();
+  toast(state.settings.reduceAnim ? 'Анимация уменьшена.' : 'Анимация включена.');
+}
+function togglePin(el){
+  el.classList.toggle('on');
+  state.settings.pin = el.classList.contains('on');
+  saveState();
+  toast(state.settings.pin ? 'PIN-блокировка включена (демо).' : 'PIN-блокировка выключена.');
+}
+function exportData(){
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'ne-segodnya-data.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('Файл с данными скачан.');
+}
+function confirmDeleteAll(){
+  showConfirm('Удалить все данные?', 'Это действие нельзя отменить. Привычки, отметки, план и настройки будут удалены.', ()=>{
+    localStorage.removeItem(STORAGE_KEY);
+    state = structuredClone(defaultState);
+    closeModal('confirmOverlay');
+    go('welcome');
+    toast('Все данные удалены.');
+  });
+}
+
+/* ============================================================
+   MODALS
+============================================================ */
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.overlay').forEach(o=>{
+  o.addEventListener('click', (e)=>{ if(e.target===o) closeModal(o.id); });
+});
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape') document.querySelectorAll('.overlay.open').forEach(o=>closeModal(o.id));
+});
+
+function showConfirm(title, text, onConfirm, confirmLabel, customAction){
+  document.getElementById('confirmTitle').textContent = title;
+  document.getElementById('confirmText').textContent = text;
+  const btn = document.getElementById('confirmBtn');
+  btn.textContent = confirmLabel || 'Удалить';
+  btn.onclick = customAction || onConfirm;
+  openModal('confirmOverlay');
+}
+
+/* ============================================================
+   ДЕМО-ДАННЫЕ (только по кнопке)
+============================================================ */
+function loadDemoData(){
+  const today = todayISO();
+  const d = (offset)=>{
+    const dt = new Date(); dt.setDate(dt.getDate() - offset);
+    return dt.toISOString().slice(0,10);
+  };
+  state.habits = [
+    {id:'demo1', name:'Бесконечный скроллинг', emoji:'📱', goal:'reduce', unit:'минуты', baseline:'2 часа', target:'30 минут', trigger:'перед сном', replace:'почитать', reminder:false, createdAt: d(14)},
+    {id:'demo2', name:'Энергетики', emoji:'⚡', goal:'reduce', unit:'разы', baseline:'1 в день', target:'2 в неделю', trigger:'днём на учёбе', replace:'чай', reminder:false, createdAt: d(14)},
+    {id:'demo3', name:'Поздний отход ко сну', emoji:'🌙', goal:'break', unit:'дни', baseline:'после 1:00', target:'до 23:30', trigger:'сериалы', replace:'аудиокнига', reminder:false, createdAt: d(14)}
+  ];
+  state.entries = [];
+  for(let i=0;i<14;i++){
+    state.habits.forEach(h=>{
+      if(Math.random() > 0.35){
+        const modes = ['plan','happened','count','plan','plan'];
+        const mode = modes[Math.floor(Math.random()*modes.length)];
+        const e = {
+          id: uid(), habitId: h.id, date: d(i), mode: mode,
+          createdAt: new Date(Date.now() - i*86400000).toISOString()
+        };
+        if(mode==='happened'){
+          const triggers = ['Стресс','Скука','Усталость','Компания','Автоматизм'];
+          e.triggers = [triggers[Math.floor(Math.random()*triggers.length)]];
+        }
+        if(mode==='count') e.count = Math.floor(Math.random()*5)+1;
+        state.entries.push(e);
+      }
+    });
+  }
+  state.entries.push({id:uid(), habitId:null, date:today, mode:'craving', trigger:'Стресс', action:'Отложить на 5 минут', createdAt:new Date().toISOString()});
+  state.onboarded = true;
+  saveState();
+}
+
+/* ============================================================
+   СТАРТ
+============================================================ */
+function init(){
+  if(state.settings.reduceAnim) document.body.classList.add('reduce-anim');
+
+  if(state.onboarded && state.habits.length >= 0){
+    go('today');
+  } else {
+    go('welcome');
+  }
+}
+
+// Кнопка демо-данных в настройках (скрытая, для предпросмотра)
+window.loadDemoData = loadDemoData;
+
+init();
+</script>
+</body>
+</html>
