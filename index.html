@@ -9,547 +9,207 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#09090D;
-  --surface:#14141C;
-  --surface-2:#1B1B25;
-  --surface-3:#22222E;
-  --text:#F6F6FA;
-  --muted:#A6A6B3;
-  --pink:#FF4FA3;
-  --blue:#45E6FF;
-  --line:rgba(255,255,255,.08);
-  --line-strong:rgba(255,255,255,.14);
-  --radius:20px;
-  --radius-sm:14px;
+  --bg:#09090D;--surface:#14141C;--surface-2:#1B1B25;--surface-3:#22222E;
+  --text:#F6F6FA;--muted:#A6A6B3;--pink:#FF4FA3;--blue:#45E6FF;
+  --line:rgba(255,255,255,.08);--line-strong:rgba(255,255,255,.14);
+  --radius:20px;--radius-sm:14px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Inter',system-ui,sans-serif;
-  font-size:16px;line-height:1.5;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input,textarea{font-family:inherit;font-size:1rem;color:var(--text)}
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--pink);color:#fff}
 :focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
-
 h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.15}
 h1{font-size:clamp(2rem,6.5vw,3.6rem);font-weight:700;letter-spacing:-.035em}
 h2{font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:600}
 h3{font-size:1.15rem;font-weight:600}
 h4{font-size:1rem;font-weight:600}
-
 .muted{color:var(--muted)}
-.eyebrow{
-  font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--muted);
-}
-.grad-text{
-  background:linear-gradient(120deg,var(--pink) 0%,var(--blue) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.grad-text{background:linear-gradient(120deg,var(--pink) 0%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .container{max-width:1200px;margin:0 auto;padding:0 20px}
-
-/* НАВИГАЦИЯ */
-.topnav{
-  position:sticky;top:0;z-index:50;
-  background:rgba(9,9,13,.8);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--line);
-}
-.topnav-inner{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 20px;max-width:1200px;margin:0 auto;
-}
-.logo{
-  display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;
-  font-weight:700;font-size:1.1rem;letter-spacing:-.02em;cursor:pointer;
-}
-.logo-mark{
-  width:26px;height:26px;border-radius:8px;
-  background:linear-gradient(135deg,var(--pink),var(--blue));
-  position:relative;flex-shrink:0;
-  box-shadow:0 0 20px rgba(255,79,163,.35);
-}
-.logo-mark::after{
-  content:'';position:absolute;inset:5px;border-radius:4px;
-  background:#09090D;
-}
-.logo-mark::before{
-  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:0;height:0;border-left:6px solid var(--text);
-  border-top:4px solid transparent;border-bottom:4px solid transparent;
-  z-index:1;
-}
+.topnav{position:sticky;top:0;z-index:50;background:rgba(9,9,13,.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.topnav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1200px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:-.02em;cursor:pointer}
+.logo-mark{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--pink),var(--blue));position:relative;flex-shrink:0;box-shadow:0 0 20px rgba(255,79,163,.35)}
+.logo-mark::after{content:'';position:absolute;inset:5px;border-radius:4px;background:#09090D}
+.logo-mark::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:0;height:0;border-left:6px solid var(--text);border-top:4px solid transparent;border-bottom:4px solid transparent;z-index:1}
 .nav-links{display:none;gap:28px;align-items:center}
 @media(min-width:760px){.nav-links{display:flex}}
 .nav-links a{color:var(--muted);font-size:.92rem;font-weight:500;transition:color .2s;cursor:pointer}
 .nav-links a:hover{color:var(--text)}
-
-/* КНОПКИ */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:12px 22px;border-radius:100px;
-  font-weight:600;font-size:.95rem;
-  transition:transform .18s,box-shadow .18s,background .18s,border-color .18s;
-  white-space:nowrap;
-}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:100px;font-weight:600;font-size:.95rem;transition:transform .18s,box-shadow .18s,background .18s,border-color .18s;white-space:nowrap}
 .btn:active{transform:scale(.97)}
-.btn-primary{
-  background:linear-gradient(120deg,var(--pink),#B84FFF);
-  color:#fff;
-  box-shadow:0 8px 24px -8px rgba(255,79,163,.5);
-}
-.btn-primary:hover{
-  box-shadow:0 12px 32px -8px rgba(255,79,163,.7);
-  transform:translateY(-2px);
-}
-.btn-ghost{
-  background:var(--surface);color:var(--text);border:1px solid var(--line);
-}
+.btn-primary{background:linear-gradient(120deg,var(--pink),#B84FFF);color:#fff;box-shadow:0 8px 24px -8px rgba(255,79,163,.5)}
+.btn-primary:hover{box-shadow:0 12px 32px -8px rgba(255,79,163,.7);transform:translateY(-2px)}
+.btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--line)}
 .btn-ghost:hover{border-color:var(--line-strong);background:var(--surface-2)}
-.btn-blue{
-  background:linear-gradient(120deg,var(--blue),#3BB0FF);
-  color:#07131A;
-  box-shadow:0 8px 24px -8px rgba(69,230,255,.5);
-}
+.btn-blue{background:linear-gradient(120deg,var(--blue),#3BB0FF);color:#07131A;box-shadow:0 8px 24px -8px rgba(69,230,255,.5)}
 .btn-blue:hover{box-shadow:0 12px 32px -8px rgba(69,230,255,.7);transform:translateY(-2px)}
 .btn-sm{padding:8px 16px;font-size:.85rem}
 .btn-block{width:100%}
-.btn-icon{
-  width:40px;height:40px;border-radius:12px;
-  display:inline-flex;align-items:center;justify-content:center;
-  background:var(--surface);border:1px solid var(--line);
-  transition:all .18s;flex-shrink:0;
-}
+.btn-icon{width:40px;height:40px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--line);transition:all .18s;flex-shrink:0}
 .btn-icon:hover{border-color:var(--line-strong);background:var(--surface-2)}
 .btn-icon svg{width:18px;height:18px}
 .btn svg{width:18px;height:18px}
-
-/* ЭКРАНЫ */
 .screen{display:none}
 .screen.active{display:block}
-
-/* LANDING */
-.hero{
-  position:relative;padding:60px 0 80px;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;top:-100px;left:-100px;
-  width:500px;height:500px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,79,163,.18),transparent 60%);
-  filter:blur(60px);pointer-events:none;
-}
-.hero::after{
-  content:'';position:absolute;bottom:-200px;right:-150px;
-  width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,rgba(69,230,255,.15),transparent 60%);
-  filter:blur(60px);pointer-events:none;
-}
-.hero-grid{
-  display:grid;grid-template-columns:1fr;gap:48px;
-  align-items:center;position:relative;z-index:1;
-}
-@media(min-width:900px){
-  .hero-grid{grid-template-columns:1.15fr 1fr;gap:64px}
-  .hero{padding:80px 0 120px}
-}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--surface);border:1px solid var(--line);
-  padding:7px 14px;border-radius:100px;
-  font-size:.8rem;color:var(--muted);margin-bottom:22px;
-  font-weight:500;
-}
-.hero-badge .dot{
-  width:7px;height:7px;border-radius:50%;background:var(--pink);
-  box-shadow:0 0 10px var(--pink);
-  animation:pulse 2s ease-in-out infinite;
-}
+.hero{position:relative;padding:60px 0 80px;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,79,163,.18),transparent 60%);filter:blur(60px);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-200px;right:-150px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(69,230,255,.15),transparent 60%);filter:blur(60px);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;position:relative;z-index:1}
+@media(min-width:900px){.hero-grid{grid-template-columns:1.15fr 1fr;gap:64px}.hero{padding:80px 0 120px}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);padding:7px 14px;border-radius:100px;font-size:.8rem;color:var(--muted);margin-bottom:22px;font-weight:500}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px var(--pink);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .hero h1{margin-bottom:22px}
-.hero p.lead{
-  font-size:1.1rem;color:var(--muted);margin-bottom:34px;
-  max-width:520px;line-height:1.6;
-}
+.hero p.lead{font-size:1.1rem;color:var(--muted);margin-bottom:34px;max-width:520px;line-height:1.6}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
-.hero-meta{
-  display:flex;gap:22px;flex-wrap:wrap;font-size:.85rem;color:var(--muted);
-}
+.hero-meta{display:flex;gap:22px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
 .hero-meta span{display:flex;align-items:center;gap:6px}
 .hero-meta svg{width:16px;height:16px;color:var(--blue)}
-
-.orb-stage{
-  position:relative;aspect-ratio:1;max-width:520px;margin:0 auto;width:100%;
-}
-.orb-glow{
-  position:absolute;inset:0;border-radius:50%;
-  background:radial-gradient(circle at 40% 40%,rgba(255,79,163,.4),transparent 55%),
-             radial-gradient(circle at 65% 65%,rgba(69,230,255,.4),transparent 55%);
-  filter:blur(50px);
-  animation:breathe 8s ease-in-out infinite;
-}
-@keyframes breathe{
-  0%,100%{transform:scale(1);opacity:.9}
-  50%{transform:scale(1.08);opacity:1}
-}
-.orb-core{
-  position:absolute;inset:15%;border-radius:50%;
-  background:
-    radial-gradient(circle at 30% 30%,rgba(255,255,255,.25),transparent 40%),
-    radial-gradient(circle at 65% 70%,var(--blue),transparent 50%),
-    radial-gradient(circle at 40% 60%,var(--pink),transparent 55%),
-    #14141C;
-  box-shadow:
-    inset -20px -30px 60px rgba(0,0,0,.6),
-    inset 20px 20px 60px rgba(255,255,255,.08),
-    0 0 80px rgba(255,79,163,.2);
-  animation:float 10s ease-in-out infinite;
-}
-@keyframes float{
-  0%,100%{transform:translateY(0) rotate(0)}
-  50%{transform:translateY(-14px) rotate(3deg)}
-}
-.orb-ring{
-  position:absolute;border-radius:50%;
-  border:1px solid rgba(255,255,255,.1);
-  animation:spin 30s linear infinite;
-}
+.orb-stage{position:relative;aspect-ratio:1;max-width:520px;margin:0 auto;width:100%}
+.orb-glow{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(255,79,163,.4),transparent 55%),radial-gradient(circle at 65% 65%,rgba(69,230,255,.4),transparent 55%);filter:blur(50px);animation:breathe 8s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.08);opacity:1}}
+.orb-core{position:absolute;inset:15%;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.25),transparent 40%),radial-gradient(circle at 65% 70%,var(--blue),transparent 50%),radial-gradient(circle at 40% 60%,var(--pink),transparent 55%),#14141C;box-shadow:inset -20px -30px 60px rgba(0,0,0,.6),inset 20px 20px 60px rgba(255,255,255,.08),0 0 80px rgba(255,79,163,.2);animation:float 10s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-14px) rotate(3deg)}}
+.orb-ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.1);animation:spin 30s linear infinite}
 .orb-ring.r1{inset:5%;border-top-color:var(--pink);border-right-color:transparent;border-bottom-color:transparent;border-left-color:transparent}
 .orb-ring.r2{inset:-5%;border-bottom-color:var(--blue);border-top-color:transparent;border-left-color:transparent;border-right-color:transparent;animation-duration:20s;animation-direction:reverse}
 @keyframes spin{to{transform:rotate(360deg)}}
-.orb-dot{
-  position:absolute;width:10px;height:10px;border-radius:50%;
-  background:var(--pink);box-shadow:0 0 14px var(--pink);
-  top:5%;left:50%;transform:translateX(-50%);
-}
-.orb-dot.d2{
-  background:var(--blue);box-shadow:0 0 14px var(--blue);
-  top:auto;bottom:5%;left:50%;
-}
-
+.orb-dot{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--pink);box-shadow:0 0 14px var(--pink);top:5%;left:50%;transform:translateX(-50%)}
+.orb-dot.d2{background:var(--blue);box-shadow:0 0 14px var(--blue);top:auto;bottom:5%;left:50%}
 .section{padding:72px 0;position:relative}
 .section-head{text-align:center;margin-bottom:52px}
 .section-head h2{margin-bottom:12px}
 .section-head p{color:var(--muted);max-width:560px;margin:0 auto}
-
 .steps{display:grid;grid-template-columns:1fr;gap:20px}
 @media(min-width:768px){.steps{grid-template-columns:repeat(3,1fr)}}
-.step{
-  background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--radius);padding:28px;
-  position:relative;overflow:hidden;
-  transition:border-color .25s,transform .25s;
-}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s}
 .step:hover{border-color:var(--line-strong);transform:translateY(-3px)}
-.step::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--pink),var(--blue));
-  opacity:.6;
-}
-.step-num{
-  font-family:'Space Grotesk',sans-serif;font-size:.8rem;font-weight:600;
-  letter-spacing:.14em;color:var(--muted);margin-bottom:16px;
-}
-.step-ic{
-  width:44px;height:44px;border-radius:12px;
-  background:var(--surface-2);border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:18px;color:var(--blue);
-}
+.step::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),var(--blue));opacity:.6}
+.step-num{font-family:'Space Grotesk',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.14em;color:var(--muted);margin-bottom:16px}
+.step-ic{width:44px;height:44px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:var(--blue)}
 .step-ic svg{width:22px;height:22px}
 .step h3{margin-bottom:10px}
 .step p{color:var(--muted);font-size:.92rem}
-
 .features{display:grid;grid-template-columns:1fr;gap:16px}
 @media(min-width:640px){.features{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1000px){.features{grid-template-columns:repeat(3,1fr)}}
-.feature{
-  background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--radius);padding:24px;
-  transition:border-color .25s,background .25s;
-}
+.feature{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:border-color .25s,background .25s}
 .feature:hover{border-color:var(--line-strong);background:var(--surface-2)}
-.feature-ic{
-  width:38px;height:38px;border-radius:10px;
-  background:linear-gradient(135deg,rgba(255,79,163,.15),rgba(69,230,255,.15));
-  border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:16px;color:var(--pink);
-}
+.feature-ic{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,rgba(255,79,163,.15),rgba(69,230,255,.15));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--pink)}
 .feature-ic svg{width:20px;height:20px}
 .feature h4{margin-bottom:8px;font-size:1.02rem}
 .feature p{color:var(--muted);font-size:.88rem;line-height:1.55}
-
-.sources{
-  background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--radius);overflow:hidden;
-}
-.source-row{
-  display:grid;grid-template-columns:1.2fr 1.6fr 1fr;
-  gap:16px;padding:18px 22px;
-  border-bottom:1px solid var(--line);
-  align-items:center;font-size:.88rem;
-}
+.sources{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.source-row{display:grid;grid-template-columns:1.2fr 1.6fr 1fr;gap:16px;padding:18px 22px;border-bottom:1px solid var(--line);align-items:center;font-size:.88rem}
 .source-row:last-child{border-bottom:none}
-.source-row.header{
-  background:var(--surface-2);font-size:.72rem;
-  text-transform:uppercase;letter-spacing:.1em;
-  color:var(--muted);font-weight:600;
-}
+.source-row.header{background:var(--surface-2);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600}
 .source-name{font-weight:600;font-size:.95rem}
-.source-status{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:.78rem;font-weight:500;
-}
-.source-status .d{
-  width:6px;height:6px;border-radius:50%;flex-shrink:0;
-}
+.source-status{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:500}
+.source-status .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .source-status.ok .d{background:#4ADE80;box-shadow:0 0 8px #4ADE80}
 .source-status.part .d{background:#FBBF24;box-shadow:0 0 8px #FBBF24}
 .source-status.lim .d{background:var(--muted)}
 .source-note{color:var(--muted);font-size:.82rem}
-
 .faq{display:flex;flex-direction:column;gap:10px;max-width:760px;margin:0 auto}
-.faq-item{
-  background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--radius-sm);overflow:hidden;
-}
-.faq-q{
-  width:100%;display:flex;justify-content:space-between;align-items:center;
-  padding:18px 20px;font-weight:500;font-size:.98rem;text-align:left;
-  transition:background .2s;gap:16px;
-}
+.faq-item{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 20px;font-weight:500;font-size:.98rem;text-align:left;transition:background .2s;gap:16px}
 .faq-q:hover{background:var(--surface-2)}
 .faq-q svg{width:18px;height:18px;color:var(--muted);transition:transform .25s;flex-shrink:0}
 .faq-item.open .faq-q svg{transform:rotate(180deg)}
-.faq-a{
-  max-height:0;overflow:hidden;
-  transition:max-height .3s ease;
-  padding:0 20px;color:var(--muted);font-size:.9rem;line-height:1.6;
-}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 20px;color:var(--muted);font-size:.9rem;line-height:1.6}
 .faq-item.open .faq-a{max-height:400px;padding:0 20px 20px}
-
-footer{
-  border-top:1px solid var(--line);padding:36px 0;
-  text-align:center;color:var(--muted);font-size:.85rem;
-}
-footer .f-links{
-  display:flex;justify-content:center;gap:24px;margin-bottom:16px;flex-wrap:wrap;
-}
+footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:.85rem}
+footer .f-links{display:flex;justify-content:center;gap:24px;margin-bottom:16px;flex-wrap:wrap}
 footer .f-links a{color:var(--muted);transition:color .2s;cursor:pointer}
 footer .f-links a:hover{color:var(--text)}
-
-/* CREATE ROOM */
 .form-page{max-width:560px;margin:0 auto;padding:60px 20px}
-.form-card{
-  background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--radius);padding:32px;
-}
+.form-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:32px}
 .form-card h2{margin-bottom:8px}
 .form-card > p{color:var(--muted);margin-bottom:28px;font-size:.92rem}
 .field{margin-bottom:18px}
-.field label{
-  display:block;font-size:.82rem;color:var(--muted);
-  margin-bottom:7px;font-weight:500;
-}
+.field label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:7px;font-weight:500}
 .field label .opt{color:var(--muted);opacity:.6;font-weight:400}
-.input{
-  width:100%;background:var(--surface-2);
-  border:1px solid var(--line);border-radius:var(--radius-sm);
-  padding:13px 15px;transition:border-color .18s;
-}
+.input{width:100%;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px 15px;transition:border-color .18s}
 .input:focus{outline:none;border-color:var(--pink)}
 .input::placeholder{color:var(--muted);opacity:.7}
-
-.setting-row{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:16px;padding:16px 0;border-bottom:1px solid var(--line);
-}
+.setting-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
 .setting-row:last-of-type{border-bottom:none}
 .setting-row .info{flex:1;min-width:0}
 .setting-row .info .t{font-weight:500;font-size:.95rem;margin-bottom:3px}
 .setting-row .info .s{font-size:.82rem;color:var(--muted)}
-.switch{
-  width:48px;height:28px;border-radius:100px;background:var(--surface-3);
-  border:1px solid var(--line);position:relative;flex-shrink:0;transition:all .2s;
-}
-.switch::after{
-  content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;
-  border-radius:50%;background:var(--muted);transition:all .2s;
-}
-.switch.on{
-  background:rgba(255,79,163,.2);border-color:var(--pink);
-}
+.switch{width:48px;height:28px;border-radius:100px;background:var(--surface-3);border:1px solid var(--line);position:relative;flex-shrink:0;transition:all .2s}
+.switch::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--muted);transition:all .2s}
+.switch.on{background:rgba(255,79,163,.2);border-color:var(--pink)}
 .switch.on::after{transform:translateX(20px);background:var(--pink)}
-
-/* ROOM */
-.room-wrap{
-  display:grid;grid-template-columns:1fr;gap:20px;
-  padding:20px;max-width:1400px;margin:0 auto;
-}
-@media(min-width:960px){
-  .room-wrap{grid-template-columns:minmax(0,1.6fr) 360px;gap:24px;padding:24px}
-}
+.room-wrap{display:grid;grid-template-columns:1fr;gap:20px;padding:20px;max-width:1400px;margin:0 auto}
+@media(min-width:960px){.room-wrap{grid-template-columns:minmax(0,1.6fr) 360px;gap:24px;padding:24px}}
 .room-main{min-width:0}
-.player-shell{
-  background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--radius);overflow:hidden;
-}
-.player-holder{
-  position:relative;background:#000;aspect-ratio:16/9;
-  width:100%;
-}
-.player-holder iframe,.player-holder > div{
-  position:absolute;inset:0;width:100%;height:100%;
-}
-.player-placeholder{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  color:var(--muted);gap:14px;padding:20px;text-align:center;
-}
+.player-shell{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.player-holder{position:relative;background:#000;aspect-ratio:16/9;width:100%}
+.player-holder iframe,.player-holder > div{position:absolute;inset:0;width:100%;height:100%}
+.player-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);gap:14px;padding:20px;text-align:center}
 .player-placeholder svg{width:52px;height:52px;opacity:.4}
 .player-placeholder p{font-size:.92rem;max-width:280px}
-
-.player-info{
-  padding:16px 20px;display:flex;justify-content:space-between;
-  align-items:center;gap:14px;flex-wrap:wrap;
-  border-bottom:1px solid var(--line);
-}
+.player-info{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
 .player-info .pi-left{min-width:0;flex:1}
-.player-title{
-  font-weight:600;font-size:.98rem;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  margin-bottom:3px;
-}
+.player-title{font-weight:600;font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
 .player-source{font-size:.8rem;color:var(--muted)}
-.sync-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:.78rem;font-weight:500;padding:6px 12px;border-radius:100px;
-  background:var(--surface-2);border:1px solid var(--line);
-  color:var(--muted);flex-shrink:0;
-}
+.sync-badge{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:500;padding:6px 12px;border-radius:100px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);flex-shrink:0}
 .sync-badge.ok{color:#4ADE80;border-color:rgba(74,222,128,.3);background:rgba(74,222,128,.08)}
 .sync-badge.retry{color:#FBBF24;border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.08)}
+.sync-badge.off{color:#FF6B6B;border-color:rgba(255,107,107,.3);background:rgba(255,107,107,.08)}
 .sync-badge .d{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 1.8s ease-in-out infinite}
-
-.add-video{
-  padding:16px 20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
-  border-bottom:1px solid var(--line);
-}
+.add-video{padding:16px 20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line)}
 .add-video .input{flex:1;min-width:200px;padding:11px 14px;font-size:.92rem}
 .add-video .btn{flex-shrink:0}
-
-.room-tabs{
-  display:flex;border-bottom:1px solid var(--line);
-  padding:0 20px;gap:4px;
-}
-.tab-btn{
-  padding:14px 14px;font-size:.9rem;font-weight:500;color:var(--muted);
-  border-bottom:2px solid transparent;margin-bottom:-1px;
-  transition:color .2s,border-color .2s;
-}
+.room-tabs{display:flex;border-bottom:1px solid var(--line);padding:0 20px;gap:4px}
+.tab-btn{padding:14px 14px;font-size:.9rem;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s}
 .tab-btn.active{color:var(--text);border-bottom-color:var(--pink)}
 .tab-btn:hover{color:var(--text)}
-
 .tab-pane{display:none;padding:20px}
 .tab-pane.active{display:block}
-
-.chat-messages{
-  height:320px;overflow-y:auto;
-  display:flex;flex-direction:column;gap:12px;
-  margin-bottom:14px;padding-right:6px;
-  scrollbar-width:thin;
-}
+.chat-messages{height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;margin-bottom:14px;padding-right:6px;scrollbar-width:thin}
 .chat-messages::-webkit-scrollbar{width:5px}
 .chat-messages::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:5px}
 .chat-msg{display:flex;gap:10px;animation:fade .25s}
 @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-.msg-av{
-  width:32px;height:32px;border-radius:50%;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:.75rem;font-weight:700;color:#09090D;
-}
+.msg-av{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#09090D}
 .msg-body{flex:1;min-width:0}
-.msg-head{
-  display:flex;gap:8px;align-items:baseline;margin-bottom:3px;
-}
+.msg-head{display:flex;gap:8px;align-items:baseline;margin-bottom:3px}
 .msg-name{font-weight:600;font-size:.85rem}
 .msg-time{font-size:.7rem;color:var(--muted)}
 .msg-text{font-size:.9rem;line-height:1.5;word-wrap:break-word;color:#DDDDE5}
 .msg-sys{font-size:.8rem;color:var(--muted);font-style:italic;text-align:center;padding:4px 0}
-
 .chat-input-wrap{display:flex;gap:8px;align-items:center}
 .chat-input-wrap .input{flex:1;padding:11px 14px;font-size:.9rem}
-
 .participants-list{display:flex;flex-direction:column;gap:8px}
-.participant{
-  display:flex;align-items:center;gap:12px;
-  padding:10px 12px;border-radius:var(--radius-sm);
-  background:var(--surface-2);border:1px solid var(--line);
-}
-.p-av{
-  width:36px;height:36px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-weight:700;font-size:.85rem;color:#09090D;flex-shrink:0;
-}
+.participant{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--radius-sm);background:var(--surface-2);border:1px solid var(--line)}
+.p-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#09090D;flex-shrink:0}
 .p-info{flex:1;min-width:0}
 .p-name{font-weight:500;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .p-role{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
 .p-role.host{color:var(--pink)}
-
-.invite-box{
-  padding:16px 20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
-  background:var(--surface-2);border-top:1px solid var(--line);
-}
-.invite-box .input{
-  flex:1;min-width:200px;font-size:.85rem;font-family:'JetBrains Mono',monospace;
-  background:var(--bg);padding:10px 14px;
-}
-
-@media(max-width:959px){
-  .room-wrap{padding:14px;gap:14px}
-  .chat-messages{height:240px}
-}
-
-.toast{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:var(--surface-2);border:1px solid var(--line-strong);
-  border-radius:100px;padding:12px 22px;font-size:.88rem;
-  z-index:200;opacity:0;transition:all .3s;pointer-events:none;
-  max-width:90vw;text-align:center;
-  box-shadow:0 12px 32px rgba(0,0,0,.4);
-}
+.invite-box{padding:16px 20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--surface-2);border-top:1px solid var(--line)}
+.invite-box .input{flex:1;min-width:200px;font-size:.85rem;font-family:'JetBrains Mono',monospace;background:var(--bg);padding:10px 14px}
+@media(max-width:959px){.room-wrap{padding:14px;gap:14px}.chat-messages{height:240px}}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--surface-2);border:1px solid var(--line-strong);border-radius:100px;padding:12px 22px;font-size:.88rem;z-index:200;opacity:0;transition:all .3s;pointer-events:none;max-width:90vw;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,.4)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast .hl{color:var(--pink);font-weight:600}
-
-.overlay{
-  position:fixed;inset:0;z-index:100;
-  background:rgba(0,0,0,.75);backdrop-filter:blur(6px);
-  display:none;align-items:center;justify-content:center;padding:20px;
-}
+.overlay{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}
 .overlay.open{display:flex;animation:fade .2s}
-.modal{
-  background:var(--surface);border:1px solid var(--line-strong);
-  border-radius:var(--radius);max-width:480px;width:100%;
-  max-height:88vh;overflow-y:auto;padding:26px;
-  animation:slideUp .3s;
-}
+.modal{background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--radius);max-width:480px;width:100%;max-height:88vh;overflow-y:auto;padding:26px;animation:slideUp .3s}
 @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
 .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:12px}
 .modal-head h2{font-size:1.25rem}
 .modal-actions{display:flex;gap:10px;margin-top:22px}
 .modal-actions .btn{flex:1}
-
-@media(max-width:520px){
-  .hero{padding:36px 0 60px}
-  .hero-meta{font-size:.8rem;gap:14px}
-  .section{padding:52px 0}
-  .form-card{padding:22px}
-}
+@media(max-width:520px){.hero{padding:36px 0 60px}.hero-meta{font-size:.8rem;gap:14px}.section{padding:52px 0}.form-card{padding:22px}}
 </style>
 </head>
 <body>
@@ -569,16 +229,13 @@ footer .f-links a:hover{color:var(--text)}
   </div>
 </nav>
 
-<!-- ====== LANDING ====== -->
+<!-- LANDING -->
 <section class="screen active" id="screen-landing">
   <div class="hero">
     <div class="container">
       <div class="hero-grid">
         <div>
-          <div class="hero-badge">
-            <span class="dot"></span>
-            Комнаты для совместного просмотра
-          </div>
+          <div class="hero-badge"><span class="dot"></span> Комнаты для совместного просмотра</div>
           <h1>Ближе, даже когда <span class="grad-text">далеко</span>.</h1>
           <p class="lead">Создайте комнату, отправьте ссылку друзьям и смотрите вместе синхронно. Пауза, запуск и перемотка передаются всем участникам автоматически.</p>
           <div class="hero-actions">
@@ -586,9 +243,7 @@ footer .f-links a:hover{color:var(--text)}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
               Создать комнату
             </button>
-            <button class="btn btn-ghost" onclick="scrollToId('how')">
-              Посмотреть, как это работает
-            </button>
+            <button class="btn btn-ghost" onclick="scrollToId('how')">Посмотреть, как это работает</button>
           </div>
           <div class="hero-meta">
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Без регистрации</span>
@@ -610,179 +265,41 @@ footer .f-links a:hover{color:var(--text)}
 
   <div class="section" id="how">
     <div class="container">
-      <div class="section-head">
-        <h2>Как это работает</h2>
-        <p>Три шага — и вы вместе. Ничего скачивать не нужно, видео играет у каждого своё.</p>
-      </div>
+      <div class="section-head"><h2>Как это работает</h2><p>Три шага — и вы вместе. Ничего скачивать не нужно, видео играет у каждого своё.</p></div>
       <div class="steps">
-        <div class="step">
-          <div class="step-num">ШАГ 01</div>
-          <div class="step-ic">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
-          </div>
-          <h3>Создайте комнату</h3>
-          <p>Дайте ей название, выберите публичную или приватную. Это займёт пару секунд.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">ШАГ 02</div>
-          <div class="step-ic">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7 0l4-4a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-4 4a5 5 0 0 0 7 7l1-1"/></svg>
-          </div>
-          <h3>Добавьте видео</h3>
-          <p>Вставьте ссылку на публичное видео, которое разрешено встраивать. Например, с YouTube.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">ШАГ 03</div>
-          <div class="step-ic">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <h3>Пригласите друзей</h3>
-          <p>Скопируйте ссылку и отправьте в чат. Друзья откроют её и сразу попадут в комнату.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" style="padding-top:20px">
-    <div class="container">
-      <div class="section-head">
-        <h2>Возможности</h2>
-        <p>Всё, что нужно для комфортного совместного просмотра — без лишнего.</p>
-      </div>
-      <div class="features">
-        <div class="feature">
-          <div class="feature-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-          <h4>Синхронное управление</h4>
-          <p>Ведущий ставит паузу, запускает или перематывает — у всех участников плеер меняется одновременно.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-          <h4>Чат в комнате</h4>
-          <p>Обсуждайте происходящее на экране, не переключаясь на мессенджеры.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
-          <h4>Список участников</h4>
-          <p>Видно, кто подключён к комнате прямо сейчас, и кто из них ведущий.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-          <h4>Приватные комнаты</h4>
-          <p>Можно закрыть комнату паролем. Ссылку увидит только тот, кому вы её отправили.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg></div>
-          <h4>Без регистрации</h4>
-          <p>Достаточно ввести имя. Никаких аккаунтов, email-ов и подтверждений.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-          <h4>Лёгкая синхронизация</h4>
-          <p>Видео не проходит через наш сервер — только управляющие события. Быстро и без задержек.</p>
-        </div>
+        <div class="step"><div class="step-num">ШАГ 01</div><div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div><h3>Создайте комнату</h3><p>Дайте ей название, выберите публичную или приватную. Это займёт пару секунд.</p></div>
+        <div class="step"><div class="step-num">ШАГ 02</div><div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7 0l4-4a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-4 4a5 5 0 0 0 7 7l1-1"/></svg></div><h3>Добавьте видео</h3><p>Вставьте ссылку на публичное видео, которое разрешено встраивать. Например, с YouTube.</p></div>
+        <div class="step"><div class="step-num">ШАГ 03</div><div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Пригласите друзей</h3><p>Скопируйте ссылку и отправьте в чат. Друзья откроют её и сразу попадут в комнату.</p></div>
       </div>
     </div>
   </div>
 
   <div class="section" id="sources" style="padding-top:20px">
     <div class="container">
-      <div class="section-head">
-        <h2>Поддерживаемые источники</h2>
-        <p>Мы указываем только те платформы, чьи правила встраивания и API мы действительно проверили.</p>
-      </div>
+      <div class="section-head"><h2>Поддерживаемые источники</h2><p>Мы указываем только те платформы, чьи правила встраивания и API мы действительно проверили.</p></div>
       <div class="sources">
-        <div class="source-row header">
-          <div>Платформа</div>
-          <div>Встраивание</div>
-          <div>Для синхронизации</div>
-        </div>
-        <div class="source-row">
-          <div class="source-name">YouTube</div>
-          <div class="source-note">Официальный плеер, если автор разрешил встраивание</div>
-          <div><span class="source-status ok"><span class="d"></span> Да</span></div>
-        </div>
-        <div class="source-row">
-          <div class="source-name">Vimeo</div>
-          <div class="source-note">Зависит от настроек владельца видео</div>
-          <div><span class="source-status part"><span class="d"></span> Обычно</span></div>
-        </div>
-        <div class="source-row">
-          <div class="source-name">Dailymotion</div>
-          <div class="source-note">Встроенный плеер при доступности API</div>
-          <div><span class="source-status part"><span class="d"></span> Зависит</span></div>
-        </div>
-        <div class="source-row">
-          <div class="source-name">Twitch</div>
-          <div class="source-note">Требует указания домена, ограничения по типу контента</div>
-          <div><span class="source-status part"><span class="d"></span> Частично</span></div>
-        </div>
-        <div class="source-row">
-          <div class="source-name">PeerTube</div>
-          <div class="source-note">Зависит от конкретного сервера и его правил</div>
-          <div><span class="source-status lim"><span class="d"></span> Зависит</span></div>
-        </div>
-        <div class="source-row">
-          <div class="source-name">Internet Archive</div>
-          <div class="source-note">Права на каждый материал нужно проверять отдельно</div>
-          <div><span class="source-status lim"><span class="d"></span> Иногда</span></div>
-        </div>
-        <div class="source-row">
-          <div class="source-name">Wikimedia Commons</div>
-          <div class="source-note">Лицензия указана для каждого файла отдельно</div>
-          <div><span class="source-status lim"><span class="d"></span> Ограниченно</span></div>
-        </div>
+        <div class="source-row header"><div>Платформа</div><div>Встраивание</div><div>Для синхронизации</div></div>
+        <div class="source-row"><div class="source-name">YouTube</div><div class="source-note">Официальный плеер, если автор разрешил встраивание</div><div><span class="source-status ok"><span class="d"></span> Да</span></div></div>
+        <div class="source-row"><div class="source-name">Vimeo</div><div class="source-note">Зависит от настроек владельца видео</div><div><span class="source-status part"><span class="d"></span> Обычно</span></div></div>
+        <div class="source-row"><div class="source-name">Dailymotion</div><div class="source-note">Встроенный плеер при доступности API</div><div><span class="source-status part"><span class="d"></span> Зависит</span></div></div>
+        <div class="source-row"><div class="source-name">Twitch</div><div class="source-note">Требует указания домена, ограничения по типу контента</div><div><span class="source-status part"><span class="d"></span> Частично</span></div></div>
+        <div class="source-row"><div class="source-name">PeerTube</div><div class="source-note">Зависит от конкретного сервера и его правил</div><div><span class="source-status lim"><span class="d"></span> Зависит</span></div></div>
+        <div class="source-row"><div class="source-name">Internet Archive</div><div class="source-note">Права на каждый материал нужно проверять отдельно</div><div><span class="source-status lim"><span class="d"></span> Иногда</span></div></div>
+        <div class="source-row"><div class="source-name">Wikimedia Commons</div><div class="source-note">Лицензия указана для каждого файла отдельно</div><div><span class="source-status lim"><span class="d"></span> Ограниченно</span></div></div>
       </div>
     </div>
   </div>
 
   <div class="section" style="padding-top:20px">
     <div class="container">
-      <div class="section-head">
-        <h2>Частые вопросы</h2>
-      </div>
+      <div class="section-head"><h2>Частые вопросы</h2></div>
       <div class="faq">
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            Какие ссылки можно вставлять?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">В первую очередь — публичные видео с YouTube, которые автор разрешил встраивать. Постепенно добавим другие платформы, но только после проверки их API и правил использования.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            Почему некоторые видео не открываются?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">Автор видео мог запретить встраивание. Также ограничение может быть связано с возрастным рейтингом, региональной доступностью или требованием входа в аккаунт исходной платформы.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            Вы храните чужие фильмы?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">Нет. SyncStream не загружает и не хранит видео. Каждый участник получает видео напрямую с исходной платформы, а мы передаём только управляющие события: play, pause, seek.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            Работает ли это с Netflix, Disney+ и похожими?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">Нет. Эти сервисы защищают видеопоток и не предоставляют сторонним сайтам обычный открытый плеер для управления. Мы не обходим защиту и не переносим такие видео через свой сервер. Для них возможен только вариант «комната-ссылка»: обсуждение в чате, но каждый открывает сервис у себя.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            Нужно ли регистрироваться?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">Нет. Достаточно ввести имя и получить ссылку на комнату. Аккаунты могут появиться позже — как отдельная опция, а не обязательное условие.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            Как сообщить о проблеме или нарушении?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-a">Напишите на почту support@syncstream.example с описанием ситуации. Мы проверяем каждое обращение. Если видео нарушает права правообладателя, мы по запросу ограничиваем его добавление в комнаты.</div>
-        </div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Какие ссылки можно вставлять?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">В первую очередь — публичные видео с YouTube, которые автор разрешил встраивать. Постепенно добавим другие платформы, но только после проверки их API и правил использования.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Почему некоторые видео не открываются?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Автор видео мог запретить встраивание. Также ограничение может быть связано с возрастным рейтингом, региональной доступностью или требованием входа в аккаунт исходной платформы.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Вы храните чужие фильмы?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Нет. SyncStream не загружает и не хранит видео. Каждый участник получает видео напрямую с исходной платформы, а мы передаём только управляющие события: play, pause, seek.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Работает ли это с Netflix, Disney+ и похожими?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Нет. Эти сервисы защищают видеопоток и не предоставляют сторонним сайтам обычный открытый плеер для управления. Мы не обходим защиту и не переносим такие видео через свой сервер. Для них возможен только вариант «комната-ссылка»: обсуждение в чате, но каждый открывает сервис у себя.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Нужно ли регистрироваться?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Нет. Достаточно ввести имя и получить ссылку на комнату. Аккаунты могут появиться позже — как отдельная опция, а не обязательное условие.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Как сообщить о проблеме или нарушении?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Напишите на почту support@syncstream.example с описанием ситуации. Мы проверяем каждое обращение. Если видео нарушает права правообладателя, мы по запросу ограничиваем его добавление в комнаты.</div></div>
       </div>
     </div>
   </div>
@@ -796,60 +313,33 @@ footer .f-links a:hover{color:var(--text)}
         <a onclick="navigate('create');location.hash='#/create'">Создать комнату</a>
       </div>
       <p>© 2025 SyncStream · Замечай. Выбирай. Смотри вместе.</p>
-      <p style="margin-top:8px;font-size:.78rem;opacity:.6">Это демонстрационный прототип. Данные хранятся локально в браузере.</p>
+      <p style="margin-top:8px;font-size:.78rem;opacity:.6">Демонстрационный прототип. Синхронизация через публичный MQTT-брокер.</p>
     </div>
   </footer>
 </section>
 
-<!-- ====== CREATE ====== -->
+<!-- CREATE -->
 <section class="screen" id="screen-create">
   <div class="form-page">
     <button class="btn btn-ghost btn-sm" style="margin-bottom:20px" onclick="navigate('landing');location.hash=''">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      На главную
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> На главную
     </button>
     <div class="form-card">
       <span class="eyebrow">Новая комната</span>
       <h2 style="margin-top:8px">Создайте комнату</h2>
       <p>Заполните пару полей — и получите ссылку для друзей.</p>
-
-      <div class="field">
-        <label>Название комнаты</label>
-        <input type="text" class="input" id="crName" placeholder="Например, «Пятничный вечер»">
-      </div>
-      <div class="field">
-        <label>Ваше имя</label>
-        <input type="text" class="input" id="crHost" placeholder="Как к вам обращаться">
-      </div>
-      <div class="field">
-        <label>Пароль комнаты <span class="opt">(необязательно)</span></label>
-        <input type="text" class="input" id="crPass" placeholder="Оставьте пустым, если не нужно">
-      </div>
-
-      <div class="setting-row">
-        <div class="info">
-          <div class="t">Приватная комната</div>
-          <div class="s">Не будет отображаться в списке публичных</div>
-        </div>
-        <button class="switch on" id="crPrivate" onclick="this.classList.toggle('on')"></button>
-      </div>
-      <div class="setting-row">
-        <div class="info">
-          <div class="t">Только ведущий управляет видео</div>
-          <div class="s">Участники не смогут менять плеер</div>
-        </div>
-        <button class="switch on" id="crHostOnly" onclick="this.classList.toggle('on')"></button>
-      </div>
-
+      <div class="field"><label>Название комнаты</label><input type="text" class="input" id="crName" placeholder="Например, «Пятничный вечер»"></div>
+      <div class="field"><label>Ваше имя</label><input type="text" class="input" id="crHost" placeholder="Как к вам обращаться"></div>
+      <div class="field"><label>Пароль комнаты <span class="opt">(необязательно)</span></label><input type="text" class="input" id="crPass" placeholder="Оставьте пустым, если не нужно"></div>
+      <div class="setting-row"><div class="info"><div class="t">Только ведущий управляет видео</div><div class="s">Участники не смогут менять плеер</div></div><button class="switch on" id="crHostOnly" onclick="this.classList.toggle('on')"></button></div>
       <button class="btn btn-primary btn-block" style="margin-top:24px" onclick="createRoom()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-        Создать комнату
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Создать комнату
       </button>
     </div>
   </div>
 </section>
 
-<!-- ====== ROOM ====== -->
+<!-- ROOM -->
 <section class="screen" id="screen-room">
   <div class="room-wrap">
     <div class="room-main">
@@ -861,36 +351,23 @@ footer .f-links a:hover{color:var(--text)}
           </div>
           <div id="ytPlayer" style="display:none"></div>
         </div>
-
         <div class="player-info">
           <div class="pi-left">
             <div class="player-title" id="piTitle">Комната</div>
             <div class="player-source" id="piSource">Ожидание видео</div>
           </div>
-          <div class="sync-badge" id="syncBadge">
-            <span class="d"></span>
-            <span id="syncText">Синхронизировано</span>
-          </div>
+          <div class="sync-badge" id="syncBadge"><span class="d"></span><span id="syncText">Подключение…</span></div>
         </div>
-
         <div class="add-video">
           <input type="text" class="input" id="videoUrl" placeholder="Ссылка на YouTube-видео">
-          <button class="btn btn-blue btn-sm" onclick="addVideo()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-            Добавить
-          </button>
+          <button class="btn btn-blue btn-sm" onclick="addVideo()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Добавить</button>
         </div>
-
         <div class="invite-box">
           <input type="text" class="input" id="inviteUrl" readonly>
-          <button class="btn btn-ghost btn-sm" onclick="copyInvite()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            Скопировать
-          </button>
+          <button class="btn btn-ghost btn-sm" onclick="copyInvite()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Скопировать</button>
         </div>
       </div>
     </div>
-
     <div class="room-side">
       <div class="player-shell">
         <div class="room-tabs">
@@ -900,76 +377,42 @@ footer .f-links a:hover{color:var(--text)}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;display:block"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
           </button>
         </div>
-
         <div class="tab-pane active" data-pane="chat">
           <div class="chat-messages" id="chatMessages"></div>
           <div class="chat-input-wrap">
             <input type="text" class="input" id="chatInput" placeholder="Сообщение..." onkeydown="if(event.key==='Enter')sendChat()">
-            <button class="btn-icon" onclick="sendChat()" aria-label="Отправить">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            </button>
+            <button class="btn-icon" onclick="sendChat()" aria-label="Отправить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
           </div>
         </div>
-
-        <div class="tab-pane" data-pane="people">
-          <div class="participants-list" id="participantsList"></div>
-        </div>
+        <div class="tab-pane" data-pane="people"><div class="participants-list" id="participantsList"></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ====== HELP ====== -->
+<!-- HELP -->
 <section class="screen" id="screen-help">
   <div class="form-page">
     <button class="btn btn-ghost btn-sm" style="margin-bottom:20px" onclick="navigate('landing');location.hash=''">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      На главную
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> На главную
     </button>
     <span class="eyebrow">Помощь</span>
     <h1 style="font-size:clamp(1.8rem,5vw,2.6rem);margin:8px 0 20px">Справочная страница</h1>
-    <div class="form-card" style="margin-bottom:16px">
-      <h3 style="margin-bottom:12px">Какие ссылки поддерживаются</h3>
-      <p class="muted" style="font-size:.92rem;margin-bottom:12px">Сейчас мы принимаем ссылки на публичные видео YouTube, которые автор разрешил встраивать. Позже планируем добавить Vimeo и другие платформы — после проверки их правил и API.</p>
-      <p class="muted" style="font-size:.92rem">Если ссылка не открывается — возможно, автор запретил встраивание, видео имеет возрастное ограничение или недоступно в вашем регионе.</p>
-    </div>
-    <div class="form-card" style="margin-bottom:16px">
-      <h3 style="margin-bottom:12px">Почему некоторые видео не открываются</h3>
-      <ul style="color:var(--muted);font-size:.92rem;padding-left:20px;line-height:1.7">
-        <li>Автор запретил встраивание на сторонних сайтах</li>
-        <li>Видео имеет возрастной рейтинг</li>
-        <li>Видео недоступно в вашем регионе</li>
-        <li>Для просмотра требуется вход в аккаунт исходной платформы</li>
-      </ul>
-    </div>
-    <div class="form-card" style="margin-bottom:16px">
-      <h3 style="margin-bottom:12px">Приватность и данные</h3>
-      <p class="muted" style="font-size:.92rem">SyncStream не загружает и не хранит чужие фильмы. Видео играет у каждого участника напрямую с исходной платформы. Через наш сервер передаются только события управления плеером: play, pause, seek.</p>
-    </div>
-    <div class="form-card">
-      <h3 style="margin-bottom:12px">Сообщить о проблеме</h3>
-      <p class="muted" style="font-size:.92rem">Напишите на почту <span class="grad-text" style="font-weight:600">support@syncstream.example</span> с описанием ситуации. Мы проверяем каждое обращение.</p>
-    </div>
+    <div class="form-card" style="margin-bottom:16px"><h3 style="margin-bottom:12px">Какие ссылки поддерживаются</h3><p class="muted" style="font-size:.92rem;margin-bottom:12px">Сейчас мы принимаем ссылки на публичные видео YouTube, которые автор разрешил встраивать. Позже планируем добавить Vimeo и другие платформы — после проверки их правил и API.</p><p class="muted" style="font-size:.92rem">Если ссылка не открывается — возможно, автор запретил встраивание, видео имеет возрастное ограничение или недоступно в вашем регионе.</p></div>
+    <div class="form-card" style="margin-bottom:16px"><h3 style="margin-bottom:12px">Почему некоторые видео не открываются</h3><ul style="color:var(--muted);font-size:.92rem;padding-left:20px;line-height:1.7"><li>Автор запретил встраивание на сторонних сайтах</li><li>Видео имеет возрастной рейтинг</li><li>Видео недоступно в вашем регионе</li><li>Для просмотра требуется вход в аккаунт исходной платформы</li></ul></div>
+    <div class="form-card" style="margin-bottom:16px"><h3 style="margin-bottom:12px">Приватность и данные</h3><p class="muted" style="font-size:.92rem">SyncStream не загружает и не хранит чужие фильмы. Видео играет у каждого участника напрямую с исходной платформы. События управления передаются через публичный MQTT-брокер HiveMQ. Не отправляйте в комнатах личную информацию.</p></div>
+    <div class="form-card"><h3 style="margin-bottom:12px">Сообщить о проблеме</h3><p class="muted" style="font-size:.92rem">Напишите на почту <span class="grad-text" style="font-weight:600">support@syncstream.example</span> с описанием ситуации.</p></div>
   </div>
 </section>
 
 <div class="toast" id="toast"></div>
 
-<!-- Модалка входа в комнату -->
 <div class="overlay" id="joinOverlay">
   <div class="modal">
-    <div class="modal-head">
-      <h2>Войти в комнату</h2>
-    </div>
+    <div class="modal-head"><h2>Войти в комнату</h2></div>
     <p class="muted" style="margin-bottom:18px;font-size:.92rem">Введите имя, чтобы участники видели, кто вы.</p>
-    <div class="field">
-      <label>Ваше имя</label>
-      <input type="text" class="input" id="joinName" placeholder="Например, Аня" onkeydown="if(event.key==='Enter')confirmJoin()">
-    </div>
-    <div class="field" id="joinPassField" style="display:none">
-      <label>Пароль комнаты</label>
-      <input type="text" class="input" id="joinPass" placeholder="Введите пароль">
-    </div>
+    <div class="field"><label>Ваше имя</label><input type="text" class="input" id="joinName" placeholder="Например, Аня" onkeydown="if(event.key==='Enter')confirmJoin()"></div>
+    <div class="field" id="joinPassField" style="display:none"><label>Пароль комнаты</label><input type="text" class="input" id="joinPass" placeholder="Введите пароль"></div>
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closeJoin()">Отмена</button>
       <button class="btn btn-primary" onclick="confirmJoin()">Войти</button>
@@ -977,11 +420,13 @@ footer .f-links a:hover{color:var(--text)}
   </div>
 </div>
 
+<script src="https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
 /* ============================================================
    СОСТОЯНИЕ
 ============================================================ */
-const STORAGE_KEY = 'syncstream_v1';
+const STORAGE_KEY = 'syncstream_v2';
 let state = {
   rooms: {},
   myName: '',
@@ -990,12 +435,17 @@ let state = {
   hostRooms: {}
 };
 let sessionId = Math.random().toString(36).slice(2,10);
-let channel = null;
+let mqttClient = null;
 let ytPlayer = null;
 let ytReady = false;
 let applyingRemote = false;
 let participants = {};
 let heartbeatTimer = null;
+let reconnectTimer = null;
+
+const MQTT_URL = 'wss://broker.hivemq.com:8884/mqtt';
+const TOPIC_PREFIX = 'syncstream/v2/room/';
+const PUB_PREFIX = 'syncstream/v2/people/';
 
 function loadState(){
   try{
@@ -1022,10 +472,10 @@ function saveState(){
    УТИЛИТЫ
 ============================================================ */
 function uid(len=8){
-  const chars = 'abcdefghijkmnpqrstuvwxyz23456789';
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let r = '';
   for(let i=0;i<len;i++) r += chars[Math.floor(Math.random()*chars.length)];
-  return r.toUpperCase();
+  return r;
 }
 function escapeHtml(s){
   if(!s) return '';
@@ -1068,172 +518,88 @@ function scrollToId(id){
   const el = document.getElementById(id);
   if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
 }
-function toggleFaq(btn){
-  btn.parentElement.classList.toggle('open');
-}
+function toggleFaq(btn){ btn.parentElement.classList.toggle('open'); }
 
 /* ============================================================
-   ГАРАНТИЯ СУЩЕСТВОВАНИЯ КОМНАТЫ
-   Если комнаты нет в localStorage — создаём заглушку
+   MQTT-СИНХРОНИЗАЦИЯ
 ============================================================ */
-function ensureRoom(roomId){
-  if(state.rooms[roomId]) return state.rooms[roomId];
-  const stub = {
-    id: roomId,
-    name: 'Комната ' + roomId,
-    host: 'Ведущий',
-    pass: null,
-    isPrivate: false,
-    hostOnly: false,
-    videoId: null,
-    videoTitle: null,
-    currentTime: 0,
-    isPlaying: false,
-    createdAt: Date.now(),
-    chat: [],
-    _stub: true
-  };
-  state.rooms[roomId] = stub;
-  saveState();
-  return stub;
+function connectMQTT(roomId){
+  if(mqttClient){ try{ mqttClient.end(true); }catch(e){} mqttClient = null; }
+  if(typeof mqtt === 'undefined'){ toast('Ошибка загрузки MQTT'); return; }
+
+  const clientId = 'ss_' + sessionId + '_' + Math.random().toString(16).slice(2,8);
+  setSyncStatus('retry','Подключение…');
+
+  try{
+    mqttClient = mqtt.connect(MQTT_URL, {
+      clientId: clientId,
+      clean: true,
+      reconnectPeriod: 3000,
+      connectTimeout: 15000,
+      keepalive: 30
+    });
+  }catch(e){
+    setSyncStatus('off','Ошибка подключения');
+    return;
+  }
+
+  mqttClient.on('connect', ()=>{
+    mqttClient.subscribe(TOPIC_PREFIX + roomId, {qos: 0});
+    mqttClient.subscribe(PUB_PREFIX + roomId, {qos: 0});
+    setSyncStatus('ok','Синхронизировано');
+    // Объявляем себя
+    publish({ type: 'join', from: sessionId, participant: currentParticipant() });
+    // Хост сразу рассылает метаданные комнаты
+    if(state.isHost) sendRoomState();
+  });
+
+  mqttClient.on('message', (topic, payload)=>{
+    try{
+      const msg = JSON.parse(payload.toString());
+      onSyncMessage(msg);
+    }catch(e){}
+  });
+
+  mqttClient.on('reconnect', ()=> setSyncStatus('retry','Переподключение…'));
+  mqttClient.on('close', ()=> setSyncStatus('off','Связь потеряна'));
+  mqttClient.on('error', ()=>{});
 }
 
-/* ============================================================
-   СОЗДАНИЕ КОМНАТЫ
-============================================================ */
-function createRoom(){
-  const name = document.getElementById('crName').value.trim();
-  const host = document.getElementById('crHost').value.trim();
-  const pass = document.getElementById('crPass').value.trim();
-  const isPrivate = document.getElementById('crPrivate').classList.contains('on');
-  const hostOnly = document.getElementById('crHostOnly').classList.contains('on');
-
-  if(!host){ toast('Введите ваше имя'); return; }
-
-  const id = uid(8);
-  state.rooms[id] = {
-    id,
-    name: name || 'Комната ' + id,
-    host,
-    pass: pass || null,
-    isPrivate,
-    hostOnly,
-    videoId: null,
-    videoTitle: null,
-    currentTime: 0,
-    isPlaying: false,
-    createdAt: Date.now(),
-    chat: []
-  };
-  state.myName = host;
-  state.currentRoomId = id;
-  state.isHost = true;
-  state.hostRooms = state.hostRooms || {};
-  state.hostRooms[id] = true;
-  saveState();
-  enterRoom(id, true, host);
+function publish(msg){
+  if(mqttClient && mqttClient.connected){
+    try{
+      mqttClient.publish(TOPIC_PREFIX + state.currentRoomId, JSON.stringify(msg));
+    }catch(e){}
+  }
 }
 
-/* ============================================================
-   ВХОД В КОМНАТУ
-============================================================ */
-function enterRoom(roomId, isHost, providedName){
-  const room = ensureRoom(roomId);
-
-  state.currentRoomId = roomId;
-  state.isHost = !!isHost;
-  if(providedName) state.myName = providedName;
-
-  if(channel){ try{ channel.close(); }catch(e){} }
-  channel = new BroadcastChannel('syncstream-' + roomId);
-  channel.onmessage = onChannelMessage;
-
-  participants = {};
-  const me = {
+function currentParticipant(){
+  return {
     id: sessionId,
     name: state.myName,
     isHost: state.isHost,
-    joinedAt: Date.now(),
-    lastSeen: Date.now()
+    joinedAt: participants[sessionId] ? participants[sessionId].joinedAt : Date.now()
   };
-  participants[sessionId] = me;
-
-  document.getElementById('piTitle').textContent = room.name;
-  document.getElementById('piSource').textContent = room.videoId ? 'YouTube · ' + room.videoId : 'Ожидание видео';
-  const invite = location.origin + location.pathname + '#/room/' + roomId + (room.pass ? '?p=' + encodeURIComponent(room.pass) : '');
-  document.getElementById('inviteUrl').value = invite;
-
-  if(room.videoId){
-    setTimeout(()=>{
-      loadYouTube(room.videoId, room.videoTitle, true);
-    }, 500);
-  } else {
-    document.getElementById('playerPlaceholder').style.display = 'flex';
-    document.getElementById('ytPlayer').style.display = 'none';
-  }
-
-  setTimeout(()=>{
-    channel.postMessage({ type: 'join', from: sessionId, participant: me });
-  }, 100);
-
-  if(heartbeatTimer) clearInterval(heartbeatTimer);
-  heartbeatTimer = setInterval(()=>{
-    if(channel){
-      channel.postMessage({ type: 'ping', from: sessionId, participant: me });
-    }
-    pruneParticipants();
-    renderParticipants();
-  }, 4000);
-
-  renderParticipants();
-  renderChat();
-  history.replaceState(null, '', '#/room/' + roomId);
-  navigate('room');
-  switchTab('chat');
 }
 
-function leaveRoom(){
-  if(channel){
-    try{ channel.postMessage({ type: 'leave', from: sessionId }); }catch(e){}
-    try{ channel.close(); }catch(e){}
-    channel = null;
-  }
-  if(heartbeatTimer){ clearInterval(heartbeatTimer); heartbeatTimer = null; }
-  participants = {};
-  state.currentRoomId = null;
-  state.isHost = false;
-  history.replaceState(null, '', location.pathname);
-  navigate('landing');
-  toast('Вы вышли из комнаты');
-}
-
-function copyInvite(){
-  const inp = document.getElementById('inviteUrl');
-  inp.select();
-  inp.setSelectionRange(0, 99999);
-  try{
-    navigator.clipboard.writeText(inp.value);
-    toast('Ссылка <span class="hl">скопирована</span>');
-  }catch(e){
-    document.execCommand('copy');
-    toast('Ссылка <span class="hl">скопирована</span>');
-  }
-}
-
-function switchTab(tab){
-  document.querySelectorAll('.tab-btn[data-tab]').forEach(b=>{
-    b.classList.toggle('active', b.dataset.tab === tab);
-  });
-  document.querySelectorAll('.tab-pane').forEach(p=>{
-    p.classList.toggle('active', p.dataset.pane === tab);
+function sendRoomState(){
+  const room = state.rooms[state.currentRoomId];
+  if(!room) return;
+  publish({
+    type: 'state',
+    from: sessionId,
+    roomName: room.name,
+    roomHost: room.host,
+    hostOnly: room.hostOnly,
+    pass: room.pass,
+    videoId: room.videoId,
+    videoTitle: room.videoTitle,
+    currentTime: (ytPlayer && ytReady) ? ytPlayer.getCurrentTime() : (room.currentTime || 0),
+    isPlaying: room.isPlaying
   });
 }
 
-/* ============================================================
-   BROADCAST CHANNEL
-============================================================ */
-function onChannelMessage(e){
-  const msg = e.data;
+function onSyncMessage(msg){
   if(!msg || msg.from === sessionId) return;
 
   switch(msg.type){
@@ -1241,20 +607,10 @@ function onChannelMessage(e){
       participants[msg.from] = msg.participant;
       participants[msg.from].lastSeen = Date.now();
       renderParticipants();
-      channel.postMessage({ type: 'hello', from: sessionId, participant: participants[sessionId] });
-      if(state.isHost){
-        const room = state.rooms[state.currentRoomId];
-        if(room && room.videoId){
-          channel.postMessage({
-            type: 'state',
-            from: sessionId,
-            videoId: room.videoId,
-            videoTitle: room.videoTitle,
-            currentTime: ytPlayer && ytReady ? ytPlayer.getCurrentTime() : room.currentTime,
-            isPlaying: room.isPlaying
-          });
-        }
-      }
+      // Отвечаем новичку
+      publish({ type: 'hello', from: sessionId, participant: currentParticipant() });
+      // Если мы хост — присылаем метаданные комнаты
+      if(state.isHost) sendRoomState();
       addSystemMessage(msg.participant.name + ' присоединился');
       break;
 
@@ -1302,7 +658,12 @@ function onChannelMessage(e){
       break;
 
     case 'state':
-      if(state.isHost) return;
+      // Обновляем метаданные комнаты от хоста
+      const room = state.rooms[state.currentRoomId];
+      if(room && msg.roomName) room.name = msg.roomName;
+      if(room && msg.roomHost) room.host = msg.roomHost;
+      if(room && typeof msg.hostOnly === 'boolean') room.hostOnly = msg.hostOnly;
+      document.getElementById('piTitle').textContent = msg.roomName || 'Комната';
       if(msg.videoId && (!ytReady || !ytPlayer || !ytPlayer.getVideoData || ytPlayer.getVideoData().video_id !== msg.videoId)){
         loadYouTube(msg.videoId, msg.videoTitle, true, msg.currentTime, msg.isPlaying);
       }
@@ -1315,12 +676,130 @@ function pruneParticipants(){
   let changed = false;
   Object.keys(participants).forEach(id=>{
     if(id === sessionId) return;
-    if(participants[id].lastSeen && now - participants[id].lastSeen > 15000){
+    if(participants[id].lastSeen && now - participants[id].lastSeen > 20000){
       delete participants[id];
       changed = true;
     }
   });
   if(changed) renderParticipants();
+}
+
+/* ============================================================
+   СОЗДАНИЕ / ВХОД
+============================================================ */
+function ensureRoom(roomId){
+  if(state.rooms[roomId]) return state.rooms[roomId];
+  const stub = {
+    id: roomId, name: 'Комната ' + roomId, host: 'Ведущий',
+    pass: null, hostOnly: false,
+    videoId: null, videoTitle: null,
+    currentTime: 0, isPlaying: false,
+    createdAt: Date.now(), chat: [], _stub: true
+  };
+  state.rooms[roomId] = stub;
+  saveState();
+  return stub;
+}
+
+function createRoom(){
+  const name = document.getElementById('crName').value.trim();
+  const host = document.getElementById('crHost').value.trim();
+  const pass = document.getElementById('crPass').value.trim();
+  const hostOnly = document.getElementById('crHostOnly').classList.contains('on');
+
+  if(!host){ toast('Введите ваше имя'); return; }
+
+  const id = uid(6);
+  state.rooms[id] = {
+    id, name: name || 'Комната ' + id, host,
+    pass: pass || null, hostOnly,
+    videoId: null, videoTitle: null,
+    currentTime: 0, isPlaying: false,
+    createdAt: Date.now(), chat: []
+  };
+  state.myName = host;
+  state.currentRoomId = id;
+  state.isHost = true;
+  state.hostRooms = state.hostRooms || {};
+  state.hostRooms[id] = true;
+  saveState();
+  enterRoom(id, true, host);
+}
+
+function enterRoom(roomId, isHost, providedName){
+  const room = ensureRoom(roomId);
+  state.currentRoomId = roomId;
+  state.isHost = !!isHost;
+  if(providedName) state.myName = providedName;
+
+  participants = {};
+  participants[sessionId] = {
+    id: sessionId, name: state.myName, isHost: state.isHost,
+    joinedAt: Date.now(), lastSeen: Date.now()
+  };
+
+  document.getElementById('piTitle').textContent = room.name;
+  document.getElementById('piSource').textContent = room.videoId ? 'YouTube · ' + room.videoId : 'Ожидание видео';
+  const invite = location.origin + location.pathname + '#/room/' + roomId + (room.pass ? '?p=' + encodeURIComponent(room.pass) : '');
+  document.getElementById('inviteUrl').value = invite;
+
+  connectMQTT(roomId);
+
+  if(room.videoId){
+    setTimeout(()=> loadYouTube(room.videoId, room.videoTitle, true), 600);
+  } else {
+    document.getElementById('playerPlaceholder').style.display = 'flex';
+    document.getElementById('ytPlayer').style.display = 'none';
+  }
+
+  if(heartbeatTimer) clearInterval(heartbeatTimer);
+  heartbeatTimer = setInterval(()=>{
+    publish({ type: 'ping', from: sessionId, participant: currentParticipant() });
+    pruneParticipants();
+    renderParticipants();
+  }, 5000);
+
+  renderParticipants();
+  renderChat();
+  history.replaceState(null, '', '#/room/' + roomId);
+  navigate('room');
+  switchTab('chat');
+}
+
+function leaveRoom(){
+  publish({ type: 'leave', from: sessionId });
+  if(mqttClient){
+    setTimeout(()=>{ try{ mqttClient.end(true); }catch(e){} mqttClient = null; }, 300);
+  }
+  if(heartbeatTimer){ clearInterval(heartbeatTimer); heartbeatTimer = null; }
+  participants = {};
+  state.currentRoomId = null;
+  state.isHost = false;
+  history.replaceState(null, '', location.pathname);
+  navigate('landing');
+  toast('Вы вышли из комнаты');
+}
+
+function copyInvite(){
+  const inp = document.getElementById('inviteUrl');
+  inp.select();
+  inp.setSelectionRange(0, 99999);
+  try{
+    navigator.clipboard.writeText(inp.value);
+    toast('Ссылка <span class="hl">скопирована</span>');
+  }catch(e){
+    document.execCommand('copy');
+    toast('Ссылка <span class="hl">скопирована</span>');
+  }
+}
+
+function switchTab(tab){
+  document.querySelectorAll('.tab-btn[data-tab]').forEach(b=>{
+    b.classList.toggle('active', b.dataset.tab === tab);
+  });
+  document.querySelectorAll('.tab-pane').forEach(p=>{
+    p.classList.toggle('active', p.dataset.pane === tab);
+  });
 }
 
 /* ============================================================
@@ -1367,30 +846,18 @@ function parseYouTubeId(url){
 
 function loadYouTube(videoId, title, fromRemote, startTime, autoplay){
   document.getElementById('playerPlaceholder').style.display = 'none';
-  const holder = document.getElementById('ytPlayer');
-  holder.style.display = 'block';
-
+  document.getElementById('ytPlayer').style.display = 'block';
   document.getElementById('piTitle').textContent = title || 'Видео';
   document.getElementById('piSource').textContent = 'YouTube · ' + videoId;
 
   if(!ytPlayer || !ytReady){
     ytPlayer = new YT.Player('ytPlayer', {
-      height: '100%',
-      width: '100%',
-      videoId: videoId,
-      playerVars: {
-        autoplay: 0,
-        controls: 1,
-        modestbranding: 1,
-        rel: 0,
-        fs: 1
-      },
+      height: '100%', width: '100%', videoId: videoId,
+      playerVars: { autoplay: 0, controls: 1, modestbranding: 1, rel: 0, fs: 1 },
       events: {
         onReady: ()=>{
           ytReady = true;
-          if(startTime && startTime > 0){
-            ytPlayer.seekTo(startTime, true);
-          }
+          if(startTime && startTime > 0) ytPlayer.seekTo(startTime, true);
           if(autoplay){
             applyingRemote = true;
             setTimeout(()=>{ ytPlayer.playVideo(); applyingRemote = false; }, 300);
@@ -1406,11 +873,7 @@ function loadYouTube(videoId, title, fromRemote, startTime, autoplay){
   }
 
   const room = state.rooms[state.currentRoomId];
-  if(room){
-    room.videoId = videoId;
-    room.videoTitle = title || 'Видео';
-    saveState();
-  }
+  if(room){ room.videoId = videoId; room.videoTitle = title || 'Видео'; saveState(); }
 }
 
 function onPlayerStateChange(event){
@@ -1418,23 +881,17 @@ function onPlayerStateChange(event){
   if(!state.isHost) return;
   const room = state.rooms[state.currentRoomId];
   if(!room) return;
-
   const t = ytPlayer.getCurrentTime();
   if(event.data === YT.PlayerState.PLAYING){
-    room.isPlaying = true;
-    room.currentTime = t;
-    saveState();
-    channel.postMessage({ type: 'play', from: sessionId, time: t });
+    room.isPlaying = true; room.currentTime = t; saveState();
+    publish({ type: 'play', from: sessionId, time: t });
     setSyncStatus('ok','Синхронизировано');
-  } else if(event.data === YT.PlayerState.PAUSED){
-    room.isPlaying = false;
-    room.currentTime = t;
-    saveState();
-    channel.postMessage({ type: 'pause', from: sessionId, time: t });
+  } else if(event.data === Y stateT.PlayerState.PAUSED){
+    room.isPlaying = false; room.currentTime = t; saveState();
+    publish({ type: 'pause', from: sessionId, time: t });
     setSyncStatus('ok','Пауза · у всех');
   } else if(event.data === YT.PlayerState.ENDED){
-    room.isPlaying = false;
-    saveState();
+    room.isPlaying = false; saveState();
   }
 }
 
@@ -1444,16 +901,11 @@ function applyPlay(time){
   setSyncStatus('retry','Синхронизация…');
   const cur = ytPlayer.getCurrentTime();
   const drift = Math.abs(cur - time);
-  if(drift > 1.5 && time > 0){
-    ytPlayer.seekTo(time, true);
-  }
+  if(drift > 1.5 && time > 0) ytPlayer.seekTo(time, true.my);
   setTimeout(()=>{
     ytPlayer.playVideo();
-    setTimeout(()=>{
-      applyingRemote = false;
-      setSyncStatus('ok','Синхронизировано');
-    }, 400);
-  }, drift > 1.5 ? 400 : 100);
+   Name setTimeout(()=>{ applyingRemote = false; setSync,Status('ok','Синхронизи textровано'); }, 400);
+  }, drift, > 1.5 ? 400 : 100);
 }
 
 function applyPause(time){
@@ -1461,15 +913,10 @@ function applyPause(time){
   applyingRemote = true;
   setSyncStatus('retry','Синхронизация…');
   const cur = ytPlayer.getCurrentTime();
-  if(time > 0 && Math.abs(cur - time) > 1.5){
-    ytPlayer.seekTo(time, true);
-  }
+  if(time > 0 && Math.abs(cur - time) > 1.5) ytPlayer.seekTo(time, true);
   setTimeout(()=>{
     ytPlayer.pauseVideo();
-    setTimeout(()=>{
-      applyingRemote = false;
-      setSyncStatus('ok','Пауза · у всех');
-    }, 300);
+    setTimeout(()=>{ applyingRemote = false; setSyncStatus('ok','Пауза · у всех'); }, 300);
   }, 100);
 }
 
@@ -1478,15 +925,12 @@ function applySeek(time){
   applyingRemote = true;
   setSyncStatus('retry','Перемотка…');
   ytPlayer.seekTo(time, true);
-  setTimeout(()=>{
-    applyingRemote = false;
-    setSyncStatus('ok','Синхронизировано');
-  }, 800);
+  setTimeout(()=>{ applyingRemote = false; setSyncStatus('ok','Синхронизировано'); }, 800);
 }
 
 function setSyncStatus(type, text){
   const badge = document.getElementById('syncBadge');
-  badge.className = 'sync-badge ' + (type === 'ok' ? 'ok' : type === 'retry' ? 'retry' : '');
+  badge.className = 'sync-badge ' + (type === 'ok' ? 'ok' : type === 'retry' ? 'retry' : type === 'off' ? 'off' : '');
   document.getElementById('syncText').textContent = text;
 }
 
@@ -1494,20 +938,12 @@ function addVideo(){
   const url = document.getElementById('videoUrl').value.trim();
   if(!url){ toast('Вставьте ссылку'); return; }
   const id = parseYouTubeId(url);
-  if(!id){
-    toast('Это видео нельзя встроить. Проверьте ссылку или выберите другой источник.');
-    return;
-  }
+  if(!id){ toast('Это видео нельзя встроить. Проверьте ссылку или выберите другой источник.'); return; }
   const room = state.rooms[state.currentRoomId];
-  if(!state.isHost && room && room.hostOnly){
-    toast('Только ведущий может менять видео');
-    return;
-  }
+  if(!state.isHost && room && room.hostOnly){ toast('Только ведущий может менять видео'); return; }
   document.getElementById('videoUrl').value = '';
   loadYouTube(id, 'YouTube видео', false);
-  if(channel){
-    channel.postMessage({ type: 'videoChange', from: sessionId, videoId: id, videoTitle: 'YouTube видео' });
-  }
+  publish({ type: 'videoChange', from: sessionId, videoId: id, videoTitle: 'YouTube видео' });
   setSyncStatus('ok','Видео загружено');
 }
 
@@ -1524,10 +960,7 @@ function renderChat(){
       <div class="chat-msg">
         <div class="msg-av" style="background:${avatarColor(m.name)}">${escapeHtml(initials(m.name))}</div>
         <div class="msg-body">
-          <div class="msg-head">
-            <span class="msg-name">${escapeHtml(m.name)}</span>
-            <span class="msg-time">${m.time}</span>
-          </div>
+          <div class="msg-head"><span class="msg-name">${escapeHtml(m.name)}</span><span class="msg-time">${m.time}</span></div>
           <div class="msg-text">${escapeHtml(m.text)}</div>
         </div>
       </div>`;
@@ -1562,9 +995,7 @@ function sendChat(){
   inp.value = '';
   const t = timeNow();
   addChatMessage(state.myName, text, t, true);
-  if(channel){
-    channel.postMessage({ type: 'chat', from: sessionId, name: state.myName, text, time: t });
-  }
+  publish({ type: 'chat', from: sessionId, name: time: t });
 }
 
 /* ============================================================
@@ -1601,7 +1032,6 @@ function handleHash(){
   if(roomMatch){
     const roomId = roomMatch[1].toUpperCase();
     const room = ensureRoom(roomId);
-
     if(state.currentRoomId === roomId) return;
 
     const urlParams = new URLSearchParams(hash.split('?')[1] || '');
@@ -1613,9 +1043,7 @@ function handleHash(){
       joinPassField.style.display = 'block';
     } else {
       joinPassField.style.display = 'none';
-      if(passFromUrl){
-        document.getElementById('joinPass').value = passFromUrl;
-      }
+      if(passFromUrl) document.getElementById('joinPass').value = passFromUrl;
     }
     document.getElementById('joinName').value = state.myName || '';
     document.getElementById('joinOverlay').classList.add('open');
@@ -1624,7 +1052,7 @@ function handleHash(){
   if(hash.startsWith('#/create')){ navigate('create'); return; }
   if(hash.startsWith('#/help')){ navigate('help'); return; }
   if(state.currentRoomId){
-    if(channel){ try{ channel.postMessage({type:'leave',from:sessionId}); channel.close(); }catch(e){} channel = null; }
+    if(mqttClient){ try{ publish({type:'leave',from:sessionId}); mqttClient.end(true); }catch(e){} mqttClient = null; }
     if(heartbeatTimer){ clearInterval(heartbeatTimer); heartbeatTimer = null; }
     state.currentRoomId = null;
     state.isHost = false;
@@ -1633,29 +1061,16 @@ function handleHash(){
 }
 
 window.addEventListener('hashchange', handleHash);
-
-window.onYouTubeIframeAPIReady = function(){
-  // Плеер создаётся при добавлении видео
-};
-
+window.onYouTubeIframeAPIReady = function(){};
 window.addEventListener('beforeunload', ()=>{
-  if(channel){
-    try{ channel.postMessage({ type: 'leave', from: sessionId }); }catch(e){}
+  if(mqttClient){
+    try{ publish({ type: 'leave', from: sessionId }); mqttClient.end(true); }catch(e){}
   }
 });
 
-/* ============================================================
-   СТАРТ
-============================================================ */
 loadState();
 handleHash();
-
-if(!('BroadcastChannel' in window)){
-  console.warn('BroadcastChannel не поддерживается');
-}
 </script>
-
-<script src="https://www.youtube.com/iframe_api"></script>
 
 </body>
 </html>
