@@ -8,49 +8,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#09090D;
-  --surface:#14141C;
-  --surface-2:#1B1B25;
-  --surface-3:#22222E;
-  --text:#F6F6FA;
-  --muted:#A6A6B3;
-  --pink:#FF4FA3;
-  --blue:#45E6FF;
-  --line:rgba(255,255,255,.08);
-  --line-strong:rgba(255,255,255,.14);
-  --radius:20px;
-  --radius-sm:14px;
-}
+:root{--bg:#09090D;--surface:#14141C;--surface-2:#1B1B25;--surface-3:#22222E;--text:#F6F6FA;--muted:#A6A6B3;--pink:#FF4FA3;--blue:#45E6FF;--line:rgba(255,255,255,.08);--line-strong:rgba(255,255,255,.14);--radius:20px;--radius-sm:14px}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Inter',system-ui,sans-serif;
-  font-size:16px;
-  line-height:1.5;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input,textarea{font-family:inherit;font-size:1rem;color:var(--text)}
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--pink);color:#fff}
 :focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
-
 h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.15}
 h1{font-size:clamp(2rem,6.5vw,3.6rem);font-weight:700;letter-spacing:-.035em}
 h2{font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:600}
 h3{font-size:1.15rem;font-weight:600}
 h4{font-size:1rem;font-weight:600}
-
 .muted{color:var(--muted)}
 .eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .grad-text{background:linear-gradient(120deg,var(--pink) 0%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .container{max-width:1200px;margin:0 auto;padding:0 20px}
-
-/* NAV */
 .topnav{position:sticky;top:0;z-index:50;background:rgba(9,9,13,.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
 .topnav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1200px;margin:0 auto}
 .logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;cursor:pointer}
@@ -61,8 +36,6 @@ h4{font-size:1rem;font-weight:600}
 @media(min-width:760px){.nav-links{display:flex}}
 .nav-links a{color:var(--muted);font-size:.92rem;font-weight:500;transition:color .2s;cursor:pointer}
 .nav-links a:hover{color:var(--text)}
-
-/* BTN */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:100px;font-weight:600;font-size:.95rem;transition:transform .18s,box-shadow .18s,background .18s,border-color .18s;white-space:nowrap}
 .btn:active{transform:scale(.97)}
 .btn-primary{background:linear-gradient(120deg,var(--pink),#B84FFF);color:#fff;box-shadow:0 8px 24px -8px rgba(255,79,163,.5)}
@@ -77,11 +50,8 @@ h4{font-size:1rem;font-weight:600}
 .btn-icon:hover{border-color:var(--line-strong);background:var(--surface-2)}
 .btn-icon svg{width:18px;height:18px}
 .btn svg{width:18px;height:18px}
-
 .screen{display:none}
 .screen.active{display:block}
-
-/* HERO */
 .hero{position:relative;padding:60px 0 80px;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-100px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,79,163,.18),transparent 60%);filter:blur(60px);pointer-events:none}
 .hero::after{content:'';position:absolute;bottom:-200px;right:-150px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(69,230,255,.15),transparent 60%);filter:blur(60px);pointer-events:none}
@@ -96,8 +66,6 @@ h4{font-size:1rem;font-weight:600}
 .hero-meta{display:flex;gap:22px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
 .hero-meta span{display:flex;align-items:center;gap:6px}
 .hero-meta svg{width:16px;height:16px;color:var(--blue)}
-
-/* ORB */
 .orb-stage{position:relative;aspect-ratio:1;max-width:520px;margin:0 auto;width:100%}
 .orb-glow{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(255,79,163,.4),transparent 55%),radial-gradient(circle at 65% 65%,rgba(69,230,255,.4),transparent 55%);filter:blur(50px);animation:breathe 8s ease-in-out infinite}
 @keyframes breathe{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.08);opacity:1}}
@@ -109,13 +77,10 @@ h4{font-size:1rem;font-weight:600}
 @keyframes spin{to{transform:rotate(360deg)}}
 .orb-dot{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--pink);box-shadow:0 0 14px var(--pink);top:5%;left:50%;transform:translateX(-50%)}
 .orb-dot.d2{background:var(--blue);box-shadow:0 0 14px var(--blue);top:auto;bottom:5%;left:50%}
-
-/* SECTIONS */
 .section{padding:72px 0;position:relative}
 .section-head{text-align:center;margin-bottom:52px}
 .section-head h2{margin-bottom:12px}
 .section-head p{color:var(--muted);max-width:560px;margin:0 auto}
-
 .steps{display:grid;grid-template-columns:1fr;gap:20px}
 @media(min-width:768px){.steps{grid-template-columns:repeat(3,1fr)}}
 .step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s}
@@ -126,7 +91,6 @@ h4{font-size:1rem;font-weight:600}
 .step-ic svg{width:22px;height:22px}
 .step h3{margin-bottom:10px}
 .step p{color:var(--muted);font-size:.92rem}
-
 .features{display:grid;grid-template-columns:1fr;gap:16px}
 @media(min-width:640px){.features{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1000px){.features{grid-template-columns:repeat(3,1fr)}}
@@ -136,7 +100,6 @@ h4{font-size:1rem;font-weight:600}
 .feature-ic svg{width:20px;height:20px}
 .feature h4{margin-bottom:8px;font-size:1.02rem}
 .feature p{color:var(--muted);font-size:.88rem;line-height:1.55}
-
 .sources{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
 .source-row{display:grid;grid-template-columns:1.2fr 1.6fr 1fr;gap:16px;padding:18px 22px;border-bottom:1px solid var(--line);align-items:center;font-size:.88rem}
 .source-row:last-child{border-bottom:none}
@@ -148,7 +111,6 @@ h4{font-size:1rem;font-weight:600}
 .source-status.part .d{background:#FBBF24;box-shadow:0 0 8px #FBBF24}
 .source-status.lim .d{background:var(--muted)}
 .source-note{color:var(--muted);font-size:.82rem}
-
 .faq{display:flex;flex-direction:column;gap:10px;max-width:760px;margin:0 auto}
 .faq-item{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden}
 .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 20px;font-weight:500;font-size:.98rem;text-align:left;transition:background .2s;gap:16px}
@@ -157,13 +119,10 @@ h4{font-size:1rem;font-weight:600}
 .faq-item.open .faq-q svg{transform:rotate(180deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 20px;color:var(--muted);font-size:.9rem;line-height:1.6}
 .faq-item.open .faq-a{max-height:400px;padding:0 20px 20px}
-
 footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:.85rem}
 footer .f-links{display:flex;justify-content:center;gap:24px;margin-bottom:16px;flex-wrap:wrap}
 footer .f-links a{color:var(--muted);transition:color .2s;cursor:pointer}
 footer .f-links a:hover{color:var(--text)}
-
-/* FORM */
 .form-page{max-width:560px;margin:0 auto;padding:60px 20px}
 .form-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:32px}
 .form-card h2{margin-bottom:8px}
@@ -183,8 +142,6 @@ footer .f-links a:hover{color:var(--text)}
 .switch::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--muted);transition:all .2s}
 .switch.on{background:rgba(255,79,163,.2);border-color:var(--pink)}
 .switch.on::after{transform:translateX(20px);background:var(--pink)}
-
-/* ROOM */
 .room-wrap{display:grid;grid-template-columns:1fr;gap:20px;padding:20px;max-width:1400px;margin:0 auto}
 @media(min-width:960px){.room-wrap{grid-template-columns:minmax(0,1.6fr) 360px;gap:24px;padding:24px}}
 .room-main{min-width:0}
@@ -236,13 +193,9 @@ footer .f-links a:hover{color:var(--text)}
 .invite-box{padding:16px 20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--surface-2);border-top:1px solid var(--line)}
 .invite-box .input{flex:1;min-width:200px;font-size:.85rem;font-family:'JetBrains Mono',monospace;background:var(--bg);padding:10px 14px}
 @media(max-width:959px){.room-wrap{padding:14px;gap:14px}.chat-messages{height:240px}}
-
-/* TOAST */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--surface-2);border:1px solid var(--line-strong);border-radius:100px;padding:12px 22px;font-size:.88rem;z-index:200;opacity:0;transition:all .3s;pointer-events:none;max-width:90vw;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,.4)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast .hl{color:var(--pink);font-weight:600}
-
-/* MODAL */
 .overlay{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}
 .overlay.open{display:flex}
 .modal{background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--radius);max-width:480px;width:100%;max-height:88vh;overflow-y:auto;padding:26px}
@@ -250,7 +203,6 @@ footer .f-links a:hover{color:var(--text)}
 .modal-head h2{font-size:1.25rem}
 .modal-actions{display:flex;gap:10px;margin-top:22px}
 .modal-actions .btn{flex:1}
-
 @media(max-width:520px){.hero{padding:36px 0 60px}.hero-meta{font-size:.8rem;gap:14px}.section{padding:52px 0}.form-card{padding:22px}}
 </style>
 </head>
@@ -271,7 +223,6 @@ footer .f-links a:hover{color:var(--text)}
   </div>
 </nav>
 
-<!-- LANDING -->
 <section class="screen active" id="screen-landing">
   <div class="hero">
     <div class="container">
@@ -290,7 +241,6 @@ footer .f-links a:hover{color:var(--text)}
           <div class="hero-meta">
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Без регистрации</span>
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg> Приватные комнаты</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Синхронизация в реальном времени</span>
           </div>
         </div>
         <div class="orb-stage">
@@ -307,48 +257,26 @@ footer .f-links a:hover{color:var(--text)}
 
   <div class="section" id="how">
     <div class="container">
-      <div class="section-head">
-        <h2>Как это работает</h2>
-        <p>Три шага — и вы вместе. Ничего скачивать не нужно, видео играет у каждого своё.</p>
-      </div>
+      <div class="section-head"><h2>Как это работает</h2><p>Три шага — и вы вместе. Ничего скачивать не нужно.</p></div>
       <div class="steps">
-        <div class="step">
-          <div class="step-num">ШАГ 01</div>
-          <div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
-          <h3>Создайте комнату</h3>
-          <p>Дайте ей название, выберите публичную или приватную. Это займёт пару секунд.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">ШАГ 02</div>
-          <div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7 0l4-4a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-4 4a5 5 0 0 0 7 7l1-1"/></svg></div>
-          <h3>Добавьте видео</h3>
-          <p>Вставьте ссылку на публичное видео, которое разрешено встраивать. Например, с YouTube.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">ШАГ 03</div>
-          <div class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h3>Пригласите друзей</h3>
-          <p>Скопируйте ссылку и отправьте в чат. Друзья откроют её и сразу попадут в комнату.</p>
-        </div>
+        <div class="step"><div class="step-num">ШАГ 01</div><h3>Создайте комнату</h3><p>Дайте название, выберите приватность. Пара секунд.</p></div>
+        <div class="step"><div class="step-num">ШАГ 02</div><h3>Добавьте видео</h3><p>Вставьте ссылку на публичное YouTube-видео.</p></div>
+        <div class="step"><div class="step-num">ШАГ 03</div><h3>Пригласите друзей</h3><p>Скопируйте ссылку и отправьте. Друзья сразу попадут в комнату.</p></div>
       </div>
     </div>
   </div>
 
   <div class="section" id="sources" style="padding-top:20px">
     <div class="container">
-      <div class="section-head">
-        <h2>Поддерживаемые источники</h2>
-        <p>Мы указываем только те платформы, чьи правила встраивания и API мы действительно проверили.</p>
-      </div>
+      <div class="section-head"><h2>Поддерживаемые источники</h2><p>Только те платформы, чьи правила встраивания мы проверили.</p></div>
       <div class="sources">
         <div class="source-row header"><div>Платформа</div><div>Встраивание</div><div>Для синхронизации</div></div>
         <div class="source-row"><div class="source-name">YouTube</div><div class="source-note">Официальный плеер, если автор разрешил встраивание</div><div><span class="source-status ok"><span class="d"></span> Да</span></div></div>
         <div class="source-row"><div class="source-name">Vimeo</div><div class="source-note">Зависит от настроек владельца видео</div><div><span class="source-status part"><span class="d"></span> Обычно</span></div></div>
         <div class="source-row"><div class="source-name">Dailymotion</div><div class="source-note">Встроенный плеер при доступности API</div><div><span class="source-status part"><span class="d"></span> Зависит</span></div></div>
         <div class="source-row"><div class="source-name">Twitch</div><div class="source-note">Требует указания домена, ограничения по типу контента</div><div><span class="source-status part"><span class="d"></span> Частично</span></div></div>
-        <div class="source-row"><div class="source-name">PeerTube</div><div class="source-note">Зависит от конкретного сервера и его правил</div><div><span class="source-status lim"><span class="d"></span> Зависит</span></div></div>
-        <div class="source-row"><div class="source-name">Internet Archive</div><div class="source-note">Права на каждый материал нужно проверять отдельно</div><div><span class="source-status lim"><span class="d"></span> Иногда</span></div></div>
-        <div class="source-row"><div class="source-name">Wikimedia Commons</div><div class="source-note">Лицензия указана для каждого файла отдельно</div><div><span class="source-status lim"><span class="d"></span> Ограниченно</span></div></div>
+        <div class="source-row"><div class="source-name">PeerTube</div><div class="source-note">Зависит от конкретного сервера</div><div><span class="source-status lim"><span class="d"></span> Зависит</span></div></div>
+        <div class="source-row"><div class="source-name">Internet Archive</div><div class="source-note">Права на каждый материал — индивидуально</div><div><span class="source-status lim"><span class="d"></span> Иногда</span></div></div>
       </div>
     </div>
   </div>
@@ -357,11 +285,10 @@ footer .f-links a:hover{color:var(--text)}
     <div class="container">
       <div class="section-head"><h2>Частые вопросы</h2></div>
       <div class="faq">
-        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Какие ссылки можно вставлять?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Публичные видео с YouTube, которые автор разрешил встраивать. Постепенно добавим другие платформы — после проверки их API и правил.</div></div>
-        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Почему некоторые видео не открываются?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Автор запретил встраивание, возрастной рейтинг, региональная доступность или требование входа в аккаунт исходной платформы.</div></div>
-        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Вы храните чужие фильмы?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Нет. SyncStream не загружает и не хранит видео. Каждый участник получает видео напрямую с исходной платформы, а мы передаём только управляющие события.</div></div>
-        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Работает ли это с Netflix, Disney+ и похожими?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Нет. Эти сервисы защищают видеопоток и не предоставляют сторонним сайтам открытый плеер для управления. Мы не обходим защиту.</div></div>
-        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Нужно ли регистрироваться?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Нет. Достаточно ввести имя и получить ссылку на комнату.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Какие ссылки можно вставлять?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Публичные видео с YouTube, которые автор разрешил встраивать.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Почему некоторые видео не открываются?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Автор запретил встраивание, возрастной рейтинг или региональные ограничения.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Вы храните чужие фильмы?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Нет. Видео играет у каждого напрямую с исходной платформы.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Нужно ли регистрироваться?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Нет. Достаточно ввести имя.</div></div>
       </div>
     </div>
   </div>
@@ -370,17 +297,14 @@ footer .f-links a:hover{color:var(--text)}
     <div class="container">
       <div class="f-links">
         <a onclick="scrollToId('how')">Как это работает</a>
-        <a onclick="scrollToId('sources')">Источники</a>
         <a onclick="navigate('help')">Помощь</a>
         <a onclick="navigate('create')">Создать комнату</a>
       </div>
       <p>© 2025 SyncStream · Замечай. Выбирай. Смотри вместе.</p>
-      <p style="margin-top:8px;font-size:.78rem;opacity:.6">Демонстрационный прототип. Синхронизация через публичный MQTT-брокер.</p>
     </div>
   </footer>
 </section>
 
-<!-- CREATE -->
 <section class="screen" id="screen-create">
   <div class="form-page">
     <button class="btn btn-ghost btn-sm" style="margin-bottom:20px" onclick="navigate('landing')">
@@ -393,7 +317,7 @@ footer .f-links a:hover{color:var(--text)}
       <p>Заполните пару полей — и получите ссылку для друзей.</p>
       <div class="field"><label>Название комнаты</label><input type="text" class="input" id="crName" placeholder="Например, «Пятничный вечер»"></div>
       <div class="field"><label>Ваше имя</label><input type="text" class="input" id="crHost" placeholder="Как к вам обращаться"></div>
-      <div class="field"><label>Пароль комнаты <span class="opt">(необязательно)</span></label><input type="text" class="input" id="crPass" placeholder="Оставьте пустым, если не нужно"></div>
+      <div class="field"><label>Пароль комнаты <span class="opt">(необязательно)</span></label><input type="text" class="input" id="crPass" placeholder="Оставьте пустым"></div>
       <div class="setting-row">
         <div class="info"><div class="t">Только ведущий управляет видео</div><div class="s">Участники не смогут менять плеер</div></div>
         <button class="switch on" id="crHostOnly" onclick="this.classList.toggle('on')"></button>
@@ -406,7 +330,6 @@ footer .f-links a:hover{color:var(--text)}
   </div>
 </section>
 
-<!-- ROOM -->
 <section class="screen" id="screen-room">
   <div class="room-wrap">
     <div class="room-main">
@@ -414,7 +337,7 @@ footer .f-links a:hover{color:var(--text)}
         <div class="player-holder" id="playerHolder">
           <div class="player-placeholder" id="playerPlaceholder">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            <p>Вставьте ссылку на видео ниже, чтобы начать просмотр</p>
+            <p>Вставьте ссылку на видео ниже</p>
           </div>
           <div id="ytPlayer" style="display:none"></div>
         </div>
@@ -434,10 +357,7 @@ footer .f-links a:hover{color:var(--text)}
         </div>
         <div class="invite-box">
           <input type="text" class="input" id="inviteUrl" readonly>
-          <button class="btn btn-ghost btn-sm" onclick="copyInvite()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            Скопировать
-          </button>
+          <button class="btn btn-ghost btn-sm" onclick="copyInvite()">Скопировать</button>
         </div>
       </div>
     </div>
@@ -446,17 +366,13 @@ footer .f-links a:hover{color:var(--text)}
         <div class="room-tabs">
           <button class="tab-btn active" data-tab="chat" onclick="switchTab('chat')">Чат</button>
           <button class="tab-btn" data-tab="people" onclick="switchTab('people')">Участники <span id="peopleCount" style="opacity:.6">(1)</span></button>
-          <button class="tab-btn" style="margin-left:auto" onclick="leaveRoom()" aria-label="Выйти">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;display:block"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-          </button>
+          <button class="tab-btn" style="margin-left:auto" onclick="leaveRoom()">Выйти</button>
         </div>
         <div class="tab-pane active" data-pane="chat">
           <div class="chat-messages" id="chatMessages"></div>
           <div class="chat-input-wrap">
             <input type="text" class="input" id="chatInput" placeholder="Сообщение..." onkeydown="if(event.key==='Enter')sendChat()">
-            <button class="btn-icon" onclick="sendChat()" aria-label="Отправить">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            </button>
+            <button class="btn-icon" onclick="sendChat()">→</button>
           </div>
         </div>
         <div class="tab-pane" data-pane="people"><div class="participants-list" id="participantsList"></div></div>
@@ -465,19 +381,14 @@ footer .f-links a:hover{color:var(--text)}
   </div>
 </section>
 
-<!-- HELP -->
 <section class="screen" id="screen-help">
   <div class="form-page">
-    <button class="btn btn-ghost btn-sm" style="margin-bottom:20px" onclick="navigate('landing')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      На главную
-    </button>
+    <button class="btn btn-ghost btn-sm" style="margin-bottom:20px" onclick="navigate('landing')">← На главную</button>
     <span class="eyebrow">Помощь</span>
     <h1 style="font-size:clamp(1.8rem,5vw,2.6rem);margin:8px 0 20px">Справочная страница</h1>
     <div class="form-card" style="margin-bottom:16px">
       <h3 style="margin-bottom:12px">Какие ссылки поддерживаются</h3>
-      <p class="muted" style="font-size:.92rem;margin-bottom:12px">Сейчас мы принимаем ссылки на публичные видео YouTube, которые автор разрешил встраивать. Позже планируем добавить Vimeo и другие платформы — после проверки их правил и API.</p>
-      <p class="muted" style="font-size:.92rem">Если ссылка не открывается — возможно, автор запретил встраивание, видео имеет возрастное ограничение или недоступно в вашем регионе.</p>
+      <p class="muted" style="font-size:.92rem">Публичные видео YouTube, которые автор разрешил встраивать. Позже добавим Vimeo и другие платформы — после проверки API и правил.</p>
     </div>
     <div class="form-card" style="margin-bottom:16px">
       <h3 style="margin-bottom:12px">Приватность и данные</h3>
@@ -485,7 +396,7 @@ footer .f-links a:hover{color:var(--text)}
     </div>
     <div class="form-card">
       <h3 style="margin-bottom:12px">Сообщить о проблеме</h3>
-      <p class="muted" style="font-size:.92rem">Напишите на почту <span class="grad-text" style="font-weight:600">support@syncstream.example</span> с описанием ситуации.</p>
+      <p class="muted" style="font-size:.92rem">support@syncstream.example</p>
     </div>
   </div>
 </section>
@@ -506,382 +417,263 @@ footer .f-links a:hover{color:var(--text)}
 </div>
 
 <script>
-/* ============================================================
-   СОСТОЯНИЕ
-============================================================ */
-var STORAGE_KEY = 'syncstream_v3';
-var state = {
-  rooms: {},
-  myName: '',
-  currentRoomId: null,
-  isHost: false,
-  hostRooms: {}
-};
-var sessionId = Math.random().toString(36).slice(2,10);
-var mqttClient = null;
-var mqttLibPromise = null;
-var ytPlayer = null;
-var ytReady = false;
-var applyingRemote = false;
-var participants = {};
-var heartbeatTimer = null;
-var pendingRoomId = null;
+var STORAGE_KEY='syncstream_v3';
+var state={rooms:{},myName:'',currentRoomId:null,isHost:false,hostRooms:{}};
+var sessionId=Math.random().toString(36).slice(2,10);
+var mqttClient=null;
+var mqttLibPromise=null;
+var ytPlayer=null;
+var ytReady=false;
+var applyingRemote=false;
+var participants={};
+var heartbeatTimer=null;
+var pendingRoomId=null;
+var MQTT_URL='wss://broker.hivemq.com:8884/mqtt';
+var TOPIC_PREFIX='syncstream/v3/room/';
 
-var MQTT_URL = 'wss://broker.hivemq.com:8884/mqtt';
-var TOPIC_PREFIX = 'syncstream/v3/room/';
-
-/* ============================================================
-   ЗАГРУЗКА MQTT ЛЕНИВО
-============================================================ */
 function loadMqttLib(){
   if(mqttLibPromise) return mqttLibPromise;
-  mqttLibPromise = new Promise(function(resolve, reject){
-    if(typeof mqtt !== 'undefined'){ resolve(mqtt); return; }
-    var s = document.createElement('script');
-    s.src = 'https://cdn.jsdelivr.net/npm/mqtt@5.10.1/dist/mqtt.min.js';
-    s.onload = function(){
-      if(typeof mqtt !== 'undefined') resolve(mqtt);
-      else reject(new Error('MQTT не загрузился'));
-    };
-    s.onerror = function(){ reject(new Error('Ошибка загрузки MQTT')); };
+  mqttLibPromise=new Promise(function(resolve,reject){
+    if(typeof mqtt!=='undefined'){resolve(mqtt);return;}
+    var s=document.createElement('script');
+    s.src='https://cdn.jsdelivr.net/npm/mqtt@5.10.1/dist/mqtt.min.js';
+    s.onload=function(){ if(typeof mqtt!=='undefined') resolve(mqtt); else reject(new Error('no mqtt')); };
+    s.onerror=function(){ reject(new Error('load error')); };
     document.head.appendChild(s);
   });
   return mqttLibPromise;
 }
 
-/* ============================================================
-   ХРАНИЛИЩЕ
-============================================================ */
 function loadState(){
   try{
-    var raw = localStorage.getItem(STORAGE_KEY);
+    var raw=localStorage.getItem(STORAGE_KEY);
     if(raw){
-      var parsed = JSON.parse(raw);
-      state.rooms = parsed.rooms || {};
-      state.myName = parsed.myName || '';
-      state.hostRooms = parsed.hostRooms || {};
+      var p=JSON.parse(raw);
+      state.rooms=p.rooms||{};
+      state.myName=p.myName||'';
+      state.hostRooms=p.hostRooms||{};
     }
   }catch(e){}
 }
 function saveState(){
   try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      rooms: state.rooms,
-      myName: state.myName,
-      hostRooms: state.hostRooms || {}
-    }));
+    localStorage.setItem(STORAGE_KEY,JSON.stringify({rooms:state.rooms,myName:state.myName,hostRooms:state.hostRooms||{}}));
   }catch(e){}
 }
-
-/* ============================================================
-   УТИЛИТЫ
-============================================================ */
 function uid(len){
-  len = len || 6;
-  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  var r = '';
-  for(var i=0;i<len;i++) r += chars[Math.floor(Math.random()*chars.length)];
+  len=len||6;
+  var c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  var r='';
+  for(var i=0;i<len;i++) r+=c[Math.floor(Math.random()*c.length)];
   return r;
 }
 function escapeHtml(s){
   if(!s) return '';
-  return String(s).replace(/[&<>"']/g, function(c){
-    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-  });
+  return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});
 }
 function avatarColor(name){
-  var colors = ['#FF4FA3','#45E6FF','#B84FFF','#FFD84F','#4ADE80','#FF8A4F'];
-  var h = 0;
-  name = name || '';
-  for(var i=0;i<name.length;i++) h = (h*31 + name.charCodeAt(i)) >>> 0;
-  return colors[h % colors.length];
+  var colors=['#FF4FA3','#45E6FF','#B84FFF','#FFD84F','#4ADE80','#FF8A4F'];
+  var h=0; name=name||'';
+  for(var i=0;i<name.length;i++) h=(h*31+name.charCodeAt(i))>>>0;
+  return colors[h%colors.length];
 }
 function initials(name){
   if(!name) return '?';
-  var parts = name.trim().split(/\s+/);
-  if(parts.length === 1) return parts[0].slice(0,2).toUpperCase();
-  return (parts[0][0] + parts[1][0]).toUpperCase();
+  var p=name.trim().split(/\s+/);
+  if(p.length===1) return p[0].slice(0,2).toUpperCase();
+  return (p[0][0]+p[1][0]).toUpperCase();
 }
 function timeNow(){
-  var d = new Date();
-  return ('0'+d.getHours()).slice(-2) + ':' + ('0'+d.getMinutes()).slice(-2);
+  var d=new Date();
+  return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
 }
 function toast(msg){
-  var t = document.getElementById('toast');
+  var t=document.getElementById('toast');
   if(!t) return;
-  t.innerHTML = msg;
+  t.innerHTML=msg;
   t.classList.add('show');
   clearTimeout(t._t);
-  t._t = setTimeout(function(){ t.classList.remove('show'); }, 2800);
+  t._t=setTimeout(function(){t.classList.remove('show');},2800);
 }
 
-/* ============================================================
-   НАВИГАЦИЯ
-============================================================ */
 function navigate(screen){
-  var screens = document.querySelectorAll('.screen');
-  for(var i=0;i<screens.length;i++) screens[i].classList.remove('active');
-  var el = document.getElementById('screen-'+screen);
+  var ss=document.querySelectorAll('.screen');
+  for(var i=0;i<ss.length;i++) ss[i].classList.remove('active');
+  var el=document.getElementById('screen-'+screen);
   if(el) el.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function scrollToId(id){
-  var el = document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  var el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
 }
 function toggleFaq(btn){
-  if(btn && btn.parentElement) btn.parentElement.classList.toggle('open');
+  if(btn&&btn.parentElement) btn.parentElement.classList.toggle('open');
 }
 
-/* ============================================================
-   MQTT
-============================================================ */
 function connectMQTT(roomId){
-  if(mqttClient){
-    try{ mqttClient.end(true); }catch(e){}
-    mqttClient = null;
-  }
+  if(mqttClient){ try{mqttClient.end(true);}catch(e){} mqttClient=null; }
   setSyncStatus('retry','Подключение…');
-
   loadMqttLib().then(function(){
-    var clientId = 'ss_' + sessionId + '_' + Math.random().toString(16).slice(2,8);
-    mqttClient = mqtt.connect(MQTT_URL, {
-      clientId: clientId,
-      clean: true,
-      reconnectPeriod: 3000,
-      connectTimeout: 15000,
-      keepalive: 30
-    });
-
-    mqttClient.on('connect', function(){
-      mqttClient.subscribe(TOPIC_PREFIX + roomId, {qos: 0});
+    var clientId='ss_'+sessionId+'_'+Math.random().toString(16).slice(2,8);
+    mqttClient=mqtt.connect(MQTT_URL,{clientId:clientId,clean:true,reconnectPeriod:3000,connectTimeout:15000,keepalive:30});
+    mqttClient.on('connect',function(){
+      mqttClient.subscribe(TOPIC_PREFIX+roomId,{qos:0});
       setSyncStatus('ok','Синхронизировано');
-      publish({ type: 'join', from: sessionId, participant: currentParticipant() });
+      publish({type:'join',from:sessionId,participant:currentParticipant()});
       if(state.isHost) sendRoomState();
     });
-
-    mqttClient.on('message', function(topic, payload){
-      try{
-        var msg = JSON.parse(payload.toString());
-        onSyncMessage(msg);
-      }catch(e){}
+    mqttClient.on('message',function(topic,payload){
+      try{ onSyncMessage(JSON.parse(payload.toString())); }catch(e){}
     });
-
-    mqttClient.on('reconnect', function(){ setSyncStatus('retry','Переподключение…'); });
-    mqttClient.on('close', function(){ setSyncStatus('off','Связь потеряна'); });
-    mqttClient.on('error', function(){});
-  }).catch(function(){
-    setSyncStatus('off','Ошибка синхронизации');
-  });
+    mqttClient.on('reconnect',function(){ setSyncStatus('retry','Переподключение…'); });
+    mqttClient.on('close',function(){ setSyncStatus('off','Связь потеряна'); });
+    mqttClient.on('error',function(){});
+  }).catch(function(){ setSyncStatus('off','Ошибка синхронизации'); });
 }
-
 function publish(msg){
-  if(mqttClient && mqttClient.connected && state.currentRoomId){
-    try{
-      mqttClient.publish(TOPIC_PREFIX + state.currentRoomId, JSON.stringify(msg));
-    }catch(e){}
+  if(mqttClient&&mqttClient.connected&&state.currentRoomId){
+    try{ mqttClient.publish(TOPIC_PREFIX+state.currentRoomId,JSON.stringify(msg)); }catch(e){}
   }
 }
-
 function currentParticipant(){
-  return {
-    id: sessionId,
-    name: state.myName,
-    isHost: state.isHost,
-    joinedAt: participants[sessionId] ? participants[sessionId].joinedAt : Date.now()
-  };
+  return {id:sessionId,name:state.myName,isHost:state.isHost,joinedAt:participants[sessionId]?participants[sessionId].joinedAt:Date.now()};
 }
-
 function sendRoomState(){
-  var room = state.rooms[state.currentRoomId];
+  var room=state.rooms[state.currentRoomId];
   if(!room) return;
-  publish({
-    type: 'state',
-    from: sessionId,
-    roomName: room.name,
-    roomHost: room.host,
-    hostOnly: room.hostOnly,
-    videoId: room.videoId,
-    videoTitle: room.videoTitle,
-    currentTime: (ytPlayer && ytReady) ? ytPlayer.getCurrentTime() : (room.currentTime || 0),
-    isPlaying: room.isPlaying
-  });
+  publish({type:'state',from:sessionId,roomName:room.name,roomHost:room.host,hostOnly:room.hostOnly,videoId:room.videoId,videoTitle:room.videoTitle,currentTime:(ytPlayer&&ytReady)?ytPlayer.getCurrentTime():(room.currentTime||0),isPlaying:room.isPlaying});
 }
-
 function onSyncMessage(msg){
-  if(!msg || msg.from === sessionId) return;
-
-  if(msg.type === 'join'){
-    participants[msg.from] = msg.participant;
-    participants[msg.from].lastSeen = Date.now();
+  if(!msg||msg.from===sessionId) return;
+  if(msg.type==='join'){
+    participants[msg.from]=msg.participant;
+    participants[msg.from].lastSeen=Date.now();
     renderParticipants();
-    publish({ type: 'hello', from: sessionId, participant: currentParticipant() });
+    publish({type:'hello',from:sessionId,participant:currentParticipant()});
     if(state.isHost) sendRoomState();
-    addSystemMessage(msg.participant.name + ' присоединился');
+    addSystemMessage(msg.participant.name+' присоединился');
     return;
   }
-  if(msg.type === 'hello' || msg.type === 'ping'){
-    participants[msg.from] = msg.participant;
-    participants[msg.from].lastSeen = Date.now();
+  if(msg.type==='hello'||msg.type==='ping'){
+    participants[msg.from]=msg.participant;
+    participants[msg.from].lastSeen=Date.now();
     renderParticipants();
     return;
   }
-  if(msg.type === 'leave'){
+  if(msg.type==='leave'){
     if(participants[msg.from]){
-      addSystemMessage(participants[msg.from].name + ' покинул комнату');
+      addSystemMessage(participants[msg.from].name+' покинул комнату');
       delete participants[msg.from];
     }
     renderParticipants();
     return;
   }
-  if(msg.type === 'play' && !state.isHost){ applyPlay(msg.time); return; }
-  if(msg.type === 'pause' && !state.isHost){ applyPause(msg.time); return; }
-  if(msg.type === 'seek' && !state.isHost){ applySeek(msg.time); return; }
-  if(msg.type === 'videoChange' && !state.isHost){ loadYouTube(msg.videoId, msg.videoTitle, true); return; }
-  if(msg.type === 'chat'){ addChatMessage(msg.name, msg.text, msg.time, false); return; }
-  if(msg.type === 'state'){
-    var room = state.rooms[state.currentRoomId];
-    if(room && msg.roomName) room.name = msg.roomName;
-    if(room && msg.roomHost) room.host = msg.roomHost;
-    if(room && typeof msg.hostOnly === 'boolean') room.hostOnly = msg.hostOnly;
-    var piTitle = document.getElementById('piTitle');
-    if(piTitle) piTitle.textContent = msg.roomName || 'Комната';
+  if(msg.type==='play'&&!state.isHost){ applyPlay(msg.time); return; }
+  if(msg.type==='pause'&&!state.isHost){ applyPause(msg.time); return; }
+  if(msg.type==='seek'&&!state.isHost){ applySeek(msg.time); return; }
+  if(msg.type==='videoChange'&&!state.isHost){ loadYouTube(msg.videoId,msg.videoTitle,true); return; }
+  if(msg.type==='chat'){ addChatMessage(msg.name,msg.text,msg.time,false); return; }
+  if(msg.type==='state'){
+    var room=state.rooms[state.currentRoomId];
+    if(room&&msg.roomName) room.name=msg.roomName;
+    if(room&&msg.roomHost) room.host=msg.roomHost;
+    if(room&&typeof msg.hostOnly==='boolean') room.hostOnly=msg.hostOnly;
+    var piTitle=document.getElementById('piTitle');
+    if(piTitle) piTitle.textContent=msg.roomName||'Комната';
     if(msg.videoId){
-      var curVid = (ytPlayer && ytReady && ytPlayer.getVideoData) ? ytPlayer.getVideoData().video_id : null;
-      if(curVid !== msg.videoId){
-        loadYouTube(msg.videoId, msg.videoTitle, true, msg.currentTime, msg.isPlaying);
-      }
+      var curVid=(ytPlayer&&ytReady&&ytPlayer.getVideoData)?ytPlayer.getVideoData().video_id:null;
+      if(curVid!==msg.videoId) loadYouTube(msg.videoId,msg.videoTitle,true,msg.currentTime,msg.isPlaying);
     }
     return;
   }
 }
-
 function pruneParticipants(){
-  var now = Date.now();
-  var changed = false;
+  var now=Date.now(); var changed=false;
   for(var id in participants){
-    if(id === sessionId) continue;
-    if(participants[id].lastSeen && now - participants[id].lastSeen > 20000){
-      delete participants[id];
-      changed = true;
-    }
+    if(id===sessionId) continue;
+    if(participants[id].lastSeen&&now-participants[id].lastSeen>20000){ delete participants[id]; changed=true; }
   }
   if(changed) renderParticipants();
 }
-
-/* ============================================================
-   КОМНАТЫ
-============================================================ */
 function ensureRoom(roomId){
   if(state.rooms[roomId]) return state.rooms[roomId];
-  var stub = {
-    id: roomId, name: 'Комната ' + roomId, host: 'Ведущий',
-    pass: null, hostOnly: false,
-    videoId: null, videoTitle: null,
-    currentTime: 0, isPlaying: false,
-    createdAt: Date.now(), chat: [], _stub: true
-  };
-  state.rooms[roomId] = stub;
+  var stub={id:roomId,name:'Комната '+roomId,host:'Ведущий',pass:null,hostOnly:false,videoId:null,videoTitle:null,currentTime:0,isPlaying:false,createdAt:Date.now(),chat:[],_stub:true};
+  state.rooms[roomId]=stub;
   saveState();
   return stub;
 }
-
 function createRoom(){
-  var nameEl = document.getElementById('crName');
-  var hostEl = document.getElementById('crHost');
-  var passEl = document.getElementById('crPass');
-  var hostOnlyEl = document.getElementById('crHostOnly');
-  if(!nameEl || !hostEl) return;
-
-  var name = nameEl.value.trim();
-  var host = hostEl.value.trim();
-  var pass = passEl ? passEl.value.trim() : '';
-  var hostOnly = hostOnlyEl ? hostOnlyEl.classList.contains('on') : false;
-
+  var nameEl=document.getElementById('crName');
+  var hostEl=document.getElementById('crHost');
+  var passEl=document.getElementById('crPass');
+  var hostOnlyEl=document.getElementById('crHostOnly');
+  if(!nameEl||!hostEl) return;
+  var name=nameEl.value.trim();
+  var host=hostEl.value.trim();
+  var pass=passEl?passEl.value.trim():'';
+  var hostOnly=hostOnlyEl?hostOnlyEl.classList.contains('on'):false;
   if(!host){ toast('Введите ваше имя'); return; }
-
-  var id = uid(6);
-  state.rooms[id] = {
-    id: id, name: name || 'Комната ' + id, host: host,
-    pass: pass || null, hostOnly: hostOnly,
-    videoId: null, videoTitle: null,
-    currentTime: 0, isPlaying: false,
-    createdAt: Date.now(), chat: []
-  };
-  state.myName = host;
-  state.currentRoomId = id;
-  state.isHost = true;
-  state.hostRooms = state.hostRooms || {};
-  state.hostRooms[id] = true;
+  var id=uid(6);
+  state.rooms[id]={id:id,name:name||'Комната '+id,host:host,pass:pass||null,hostOnly:hostOnly,videoId:null,videoTitle:null,currentTime:0,isPlaying:false,createdAt:Date.now(),chat:[]};
+  state.myName=host;
+  state.currentRoomId=id;
+  state.isHost=true;
+  state.hostRooms=state.hostRooms||{};
+  state.hostRooms[id]=true;
   saveState();
-  enterRoom(id, true, host);
+  enterRoom(id,true,host);
 }
-
-function enterRoom(roomId, isHost, providedName){
-  var room = ensureRoom(roomId);
-  state.currentRoomId = roomId;
-  state.isHost = !!isHost;
-  if(providedName) state.myName = providedName;
-
-  participants = {};
-  participants[sessionId] = {
-    id: sessionId, name: state.myName, isHost: state.isHost,
-    joinedAt: Date.now(), lastSeen: Date.now()
-  };
-
-  var piTitle = document.getElementById('piTitle');
-  if(piTitle) piTitle.textContent = room.name;
-  var piSource = document.getElementById('piSource');
-  if(piSource) piSource.textContent = room.videoId ? 'YouTube · ' + room.videoId : 'Ожидание видео';
-
-  var inviteUrl = location.origin + location.pathname + '#/room/' + roomId + (room.pass ? '?p=' + encodeURIComponent(room.pass) : '');
-  var inviteEl = document.getElementById('inviteUrl');
-  if(inviteEl) inviteEl.value = inviteUrl;
-
+function enterRoom(roomId,isHost,providedName){
+  var room=ensureRoom(roomId);
+  state.currentRoomId=roomId;
+  state.isHost=!!isHost;
+  if(providedName) state.myName=providedName;
+  participants={};
+  participants[sessionId]={id:sessionId,name:state.myName,isHost:state.isHost,joinedAt:Date.now(),lastSeen:Date.now()};
+  var piTitle=document.getElementById('piTitle');
+  if(piTitle) piTitle.textContent=room.name;
+  var piSource=document.getElementById('piSource');
+  if(piSource) piSource.textContent=room.videoId?'YouTube · '+room.videoId:'Ожидание видео';
+  var inviteUrl=location.origin+location.pathname+'#/room/'+roomId+(room.pass?'?p='+encodeURIComponent(room.pass):'');
+  var inviteEl=document.getElementById('inviteUrl');
+  if(inviteEl) inviteEl.value=inviteUrl;
   connectMQTT(roomId);
-
-  if(room.videoId){
-    setTimeout(function(){ loadYouTube(room.videoId, room.videoTitle, true); }, 600);
-  } else {
-    var ph = document.getElementById('playerPlaceholder');
-    var yt = document.getElementById('ytPlayer');
-    if(ph) ph.style.display = 'flex';
-    if(yt) yt.style.display = 'none';
+  if(room.videoId){ setTimeout(function(){loadYouTube(room.videoId,room.videoTitle,true);},600); }
+  else {
+    var ph=document.getElementById('playerPlaceholder');
+    var yt=document.getElementById('ytPlayer');
+    if(ph) ph.style.display='flex';
+    if(yt) yt.style.display='none';
   }
-
   if(heartbeatTimer) clearInterval(heartbeatTimer);
-  heartbeatTimer = setInterval(function(){
-    publish({ type: 'ping', from: sessionId, participant: currentParticipant() });
+  heartbeatTimer=setInterval(function(){
+    publish({type:'ping',from:sessionId,participant:currentParticipant()});
     pruneParticipants();
     renderParticipants();
-  }, 5000);
-
+  },5000);
   renderParticipants();
   renderChat();
-  try{ history.replaceState(null, '', '#/room/' + roomId); }catch(e){}
+  try{ history.replaceState(null,'','#/room/'+roomId); }catch(e){}
   navigate('room');
   switchTab('chat');
 }
-
 function leaveRoom(){
-  publish({ type: 'leave', from: sessionId });
-  if(mqttClient){
-    setTimeout(function(){ try{ mqttClient.end(true); }catch(e){} mqttClient = null; }, 300);
-  }
-  if(heartbeatTimer){ clearInterval(heartbeatTimer); heartbeatTimer = null; }
-  participants = {};
-  state.currentRoomId = null;
-  state.isHost = false;
-  try{ history.replaceState(null, '', location.pathname); }catch(e){}
+  publish({type:'leave',from:sessionId});
+  if(mqttClient){ setTimeout(function(){ try{mqttClient.end(true);}catch(e){} mqttClient=null; },300); }
+  if(heartbeatTimer){ clearInterval(heartbeatTimer); heartbeatTimer=null; }
+  participants={};
+  state.currentRoomId=null;
+  state.isHost=false;
+  try{ history.replaceState(null,'',location.pathname); }catch(e){}
   navigate('landing');
   toast('Вы вышли из комнаты');
 }
-
 function copyInvite(){
-  var inp = document.getElementById('inviteUrl');
+  var inp=document.getElementById('inviteUrl');
   if(!inp) return;
   inp.select();
-  inp.setSelectionRange(0, 99999);
+  inp.setSelectionRange(0,99999);
   try{
     navigator.clipboard.writeText(inp.value);
     toast('Ссылка <span class="hl">скопирована</span>');
@@ -890,175 +682,255 @@ function copyInvite(){
     toast('Ссылка <span class="hl">скопирована</span>');
   }
 }
-
 function switchTab(tab){
-  var tabs = document.querySelectorAll('.tab-btn[data-tab]');
-  for(var i=0;i<tabs.length;i++){
-    tabs[i].classList.toggle('active', tabs[i].getAttribute('data-tab') === tab);
-  }
-  var panes = document.querySelectorAll('.tab-pane');
-  for(var j=0;j<panes.length;j++){
-    panes[j].classList.toggle('active', panes[j].getAttribute('data-pane') === tab);
-  }
+  var tabs=document.querySelectorAll('.tab-btn[data-tab]');
+  for(var i=0;i<tabs.length;i++) tabs[i].classList.toggle('active',tabs[i].getAttribute('data-tab')===tab);
+  var panes=document.querySelectorAll('.tab-pane');
+  for(var j=0;j<panes.length;j++) panes[j].classList.toggle('active',panes[j].getAttribute('data-pane')===tab);
 }
-
-/* ============================================================
-   УЧАСТНИКИ
-============================================================ */
 function renderParticipants(){
-  var list = document.getElementById('participantsList');
+  var list=document.getElementById('participantsList');
   if(!list) return;
-  var arr = [];
+  var arr=[];
   for(var id in participants) arr.push(participants[id]);
   arr.sort(function(a,b){
-    if(a.isHost && !b.isHost) return -1;
-    if(b.isHost && !a.isHost) return 1;
-    return (a.joinedAt||0) - (b.joinedAt||0);
+    if(a.isHost&&!b.isHost) return -1;
+    if(b.isHost&&!a.isHost) return 1;
+    return (a.joinedAt||0)-(b.joinedAt||0);
   });
-  var counter = document.getElementById('peopleCount');
-  if(counter) counter.textContent = '(' + arr.length + ')';
-  var html = '';
+  var counter=document.getElementById('peopleCount');
+  if(counter) counter.textContent='('+arr.length+')';
+  var html='';
   for(var i=0;i<arr.length;i++){
-    var p = arr[i];
-    html += '<div class="participant">'
-      + '<div class="p-av" style="background:' + avatarColor(p.name) + '">' + escapeHtml(initials(p.name)) + '</div>'
-      + '<div class="p-info">'
-      + '<div class="p-name">' + escapeHtml(p.name) + (p.id===sessionId ? ' <span style="opacity:.5;font-size:.8rem">(вы)</span>' : '') + '</div>'
-      + '<div class="p-role ' + (p.isHost?'host':'') + '">' + (p.isHost ? 'Ведущий' : 'Участник') + '</div>'
-      + '</div></div>';
+    var p=arr[i];
+    html+='<div class="participant"><div class="p-av" style="background:'+avatarColor(p.name)+'">'+escapeHtml(initials(p.name))+'</div><div class="p-info"><div class="p-name">'+escapeHtml(p.name)+(p.id===sessionId?' <span style="opacity:.5;font-size:.8rem">(вы)</span>':'')+'</div><div class="p-role '+(p.isHost?'host':'')+'">'+(p.isHost?'Ведущий':'Участник')+'</div></div></div>';
   }
-  list.innerHTML = html;
+  list.innerHTML=html;
 }
-
-/* ============================================================
-   YOUTUBE
-============================================================ */
 function parseYouTubeId(url){
   if(!url) return null;
-  var trimmed = url.trim();
-  var patterns = [
+  var t=url.trim();
+  var ps=[
     /(?:youtube\.com\/watch\?v=|youtube\.com\/watch\?.*&v=)([a-zA-Z0-9_-]{11})/,
     /youtu\.be\/([a-zA-Z0-9_-]{11})/,
     /youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,
     /youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/,
     /^([a-zA-Z0-9_-]{11})$/
   ];
-  for(var i=0;i<patterns.length;i++){
-    var m = trimmed.match(patterns[i]);
-    if(m) return m[1];
-  }
+  for(var i=0;i<ps.length;i++){ var m=t.match(ps[i]); if(m) return m[1]; }
   return null;
 }
-
-function loadYouTube(videoId, title, fromRemote, startTime, autoplay){
-  var ph = document.getElementById('playerPlaceholder');
-  var yt = document.getElementById('ytPlayer');
-  if(ph) ph.style.display = 'none';
-  if(yt) yt.style.display = 'block';
-  var piTitle = document.getElementById('piTitle');
-  if(piTitle) piTitle.textContent = title || 'Видео';
-  var piSource = document.getElementById('piSource');
-  if(piSource) piSource.textContent = 'YouTube · ' + videoId;
-
-  if(typeof YT === 'undefined' || !YT.Player){
-    setTimeout(function(){ loadYouTube(videoId, title, fromRemote, startTime, autoplay); }, 300);
+function loadYouTube(videoId,title,fromRemote,startTime,autoplay){
+  var ph=document.getElementById('playerPlaceholder');
+  var yt=document.getElementById('ytPlayer');
+  if(ph) ph.style.display='none';
+  if(yt) yt.style.display='block';
+  var piTitle=document.getElementById('piTitle');
+  if(piTitle) piTitle.textContent=title||'Видео';
+  var piSource=document.getElementById('piSource');
+  if(piSource) piSource.textContent='YouTube · '+videoId;
+  if(typeof YT==='undefined'||!YT.Player){
+    setTimeout(function(){loadYouTube(videoId,title,fromRemote,startTime,autoplay);},300);
     return;
   }
-
-  if(!ytPlayer || !ytReady){
-    ytPlayer = new YT.Player('ytPlayer', {
-      height: '100%', width: '100%', videoId: videoId,
-      playerVars: { autoplay: 0, controls: 1, modestbranding: 1, rel: 0, fs: 1 },
-      events: {
-        onReady: function(){
-          ytReady = true;
-          if(startTime && startTime > 0) ytPlayer.seekTo(startTime, true);
-          if(autoplay){
-            applyingRemote = true;
-            setTimeout(function(){ ytPlayer.playVideo(); applyingRemote = false; }, 300);
-          }
+  if(!ytPlayer||!ytReady){
+    ytPlayer=new YT.Player('ytPlayer',{
+      height:'100%',width:'100%',videoId:videoId,
+      playerVars:{autoplay:0,controls:1,modestbranding:1,rel:0,fs:1},
+      events:{
+        onReady:function(){
+          ytReady=true;
+          if(startTime&&startTime>0) ytPlayer.seekTo(startTime,true);
+          if(autoplay){ applyingRemote=true; setTimeout(function(){ytPlayer.playVideo();applyingRemote=false;},300); }
         },
-        onStateChange: onPlayerStateChange
+        onStateChange:onPlayerStateChange
       }
     });
   } else {
-    applyingRemote = true;
-    ytPlayer.loadVideoById(videoId, startTime || 0);
-    setTimeout(function(){ applyingRemote = false; }, 800);
+    applyingRemote=true;
+    ytPlayer.loadVideoById(videoId,startTime||0);
+    setTimeout(function(){applyingRemote=false;},800);
   }
-
-  var room = state.rooms[state.currentRoomId];
-  if(room){
-    room.videoId = videoId;
-    room.videoTitle = title || 'Видео';
-    saveState();
-  }
+  var room=state.rooms[state.currentRoomId];
+  if(room){ room.videoId=videoId; room.videoTitle=title||'Видео'; saveState(); }
 }
-
 function onPlayerStateChange(event){
   if(applyingRemote) return;
   if(!state.isHost) return;
-  var room = state.rooms[state.currentRoomId];
+  var room=state.rooms[state.currentRoomId];
   if(!room) return;
-  var t = ytPlayer.getCurrentTime();
-  if(event.data === YT.PlayerState.PLAYING){
-    room.isPlaying = true; room.currentTime = t; saveState();
-    publish({ type: 'play', from: sessionId, time: t });
+  var t=ytPlayer.getCurrentTime();
+  if(event.data===YT.PlayerState.PLAYING){
+    room.isPlaying=true; room.currentTime=t; saveState();
+    publish({type:'play',from:sessionId,time:t});
     setSyncStatus('ok','Синхронизировано');
-  } else if(event.data === YT.PlayerState.PAUSED){
-    room.isPlaying = false; room.currentTime = t; saveState();
-    publish({ type: 'pause', from: sessionId, time: t });
+  } else if(event.data===YT.PlayerState.PAUSED){
+    room.isPlaying=false; room.currentTime=t; saveState();
+    publish({type:'pause',from:sessionId,time:t});
     setSyncStatus('ok','Пауза · у всех');
-  } else if(event.data === YT.PlayerState.ENDED){
-    room.isPlaying = false; saveState();
+  } else if(event.data===YT.PlayerState.ENDED){
+    room.isPlaying=false; saveState();
   }
 }
-
 function applyPlay(time){
-  if(!ytReady || !ytPlayer) return;
-  applyingRemote = true;
+  if(!ytReady||!ytPlayer) return;
+  applyingRemote=true;
   setSyncStatus('retry','Синхронизация…');
-  var cur = ytPlayer.getCurrentTime();
-  var drift = Math.abs(cur - time);
-  if(drift > 1.5 && time > 0) ytPlayer.seekTo(time, true);
+  var cur=ytPlayer.getCurrentTime();
+  var drift=Math.abs(cur-time);
+  if(drift>1.5&&time>0) ytPlayer.seekTo(time,true);
   setTimeout(function(){
     ytPlayer.playVideo();
-    setTimeout(function(){ applyingRemote = false; setSyncStatus('ok','Синхронизировано'); }, 400);
-  }, drift > 1.5 ? 400 : 100);
+    setTimeout(function(){applyingRemote=false;setSyncStatus('ok','Синхронизировано');},400);
+  },drift>1.5?400:100);
 }
-
 function applyPause(time){
-  if(!ytReady || !ytPlayer) return;
-  applyingRemote = true;
+  if(!ytReady||!ytPlayer) return;
+  applyingRemote=true;
   setSyncStatus('retry','Синхронизация…');
-  var cur = ytPlayer.getCurrentTime();
-  if(time > 0 && Math.abs(cur - time) > 1.5) ytPlayer.seekTo(time, true);
+  var cur=ytPlayer.getCurrentTime();
+  if(time>0&&Math.abs(cur-time)>1.5) ytPlayer.seekTo(time,true);
   setTimeout(function(){
     ytPlayer.pauseVideo();
-    setTimeout(function(){ applyingRemote = false; setSyncStatus('ok','Пауза · у всех'); }, 300);
-  }, 100);
+    setTimeout(function(){applyingRemote=false;setSyncStatus('ok','Пауза · у всех');},300);
+  },100);
 }
-
 function applySeek(time){
-  if(!ytReady || !ytPlayer) return;
-  applyingRemote = true;
+  if(!ytReady||!ytPlayer) return;
+  applyingRemote=true;
   setSyncStatus('retry','Перемотка…');
-  ytPlayer.seekTo(time, true);
-  setTimeout(function(){ applyingRemote = false; setSyncStatus('ok','Синхронизировано'); }, 800);
+  ytPlayer.seekTo(time,true);
+  setTimeout(function(){applyingRemote=false;setSyncStatus('ok','Синхронизировано');},800);
 }
-
-function setSyncStatus(type, text){
-  var badge = document.getElementById('syncBadge');
-  var txt = document.getElementById('syncText');
-  if(!badge || !txt) return;
-  badge.className = 'sync-badge ' + (type === 'ok' ? 'ok' : type === 'retry' ? 'retry' : type === 'off' ? 'off' : '');
-  txt.textContent = text;
+function setSyncStatus(type,text){
+  var b=document.getElementById('syncBadge');
+  var t=document.getElementById('syncText');
+  if(!b||!t) return;
+  b.className='sync-badge '+(type==='ok'?'ok':type==='retry'?'retry':type==='off'?'off':'');
+  t.textContent=text;
 }
-
 function addVideo(){
-  var urlEl = document.getElementById('videoUrl');
+  var urlEl=document.getElementById('videoUrl');
   if(!urlEl) return;
-  var url = urlEl.value.trim();
+  var url=urlEl.value.trim();
   if(!url){ toast('Вставьте ссылку'); return; }
-  var id = parseYouTubeId(url);
-  if(!id){ toast('Это видео нельзя встроить. Проверьте ссыл
+  var id=parseYouTubeId(url);
+  if(!id){ toast('Это видео нельзя встроить'); return; }
+  var room=state.rooms[state.currentRoomId];
+  if(!state.isHost&&room&&room.hostOnly){ toast('Только ведущий может менять видео'); return; }
+  urlEl.value='';
+  loadYouTube(id,'YouTube видео',false);
+  publish({type:'videoChange',from:sessionId,videoId:id,videoTitle:'YouTube видео'});
+  setSyncStatus('ok','Видео загружено');
+}
+function renderChat(){
+  var room=state.rooms[state.currentRoomId];
+  var el=document.getElementById('chatMessages');
+  if(!el) return;
+  var msgs=(room&&room.chat)||[];
+  var html='';
+  for(var i=0;i<msgs.length;i++){
+    var m=msgs[i];
+    if(m.sys){ html+='<div class="msg-sys">'+escapeHtml(m.text)+'</div>'; continue; }
+    html+='<div class="chat-msg"><div class="msg-av" style="background:'+avatarColor(m.name)+'">'+escapeHtml(initials(m.name))+'</div><div class="msg-body"><div class="msg-head"><span class="msg-name">'+escapeHtml(m.name)+'</span><span class="msg-time">'+m.time+'</span></div><div class="msg-text">'+escapeHtml(m.text)+'</div></div></div>';
+  }
+  el.innerHTML=html;
+  el.scrollTop=el.scrollHeight;
+}
+function addChatMessage(name,text,time,save){
+  var room=state.rooms[state.currentRoomId];
+  if(!room) return;
+  if(!room.chat) room.chat=[];
+  room.chat.push({name:name,text:text,time:time||timeNow()});
+  if(room.chat.length>200) room.chat=room.chat.slice(-200);
+  if(save!==false) saveState();
+  renderChat();
+}
+function addSystemMessage(text){
+  var room=state.rooms[state.currentRoomId];
+  if(!room) return;
+  if(!room.chat) room.chat=[];
+  room.chat.push({sys:true,text:text});
+  if(room.chat.length>200) room.chat=room.chat.slice(-200);
+  saveState();
+  renderChat();
+}
+function sendChat(){
+  var inp=document.getElementById('chatInput');
+  if(!inp) return;
+  var text=inp.value.trim();
+  if(!text) return;
+  inp.value='';
+  var t=timeNow();
+  addChatMessage(state.myName,text,t,true);
+  publish({type:'chat',from:sessionId,name:state.myName,text:text,time:t});
+}
+function closeJoin(){
+  var o=document.getElementById('joinOverlay');
+  if(o) o.classList.remove('open');
+  try{ history.replaceState(null,'',location.pathname); }catch(e){}
+  navigate('landing');
+}
+function confirmJoin(){
+  var nameEl=document.getElementById('joinName');
+  if(!nameEl) return;
+  var name=nameEl.value.trim();
+  if(!name){ toast('Введите имя'); return; }
+  var room=ensureRoom(pendingRoomId);
+  if(room.pass){
+    var passEl=document.getElementById('joinPass');
+    var pass=passEl?passEl.value.trim():'';
+    if(pass!==room.pass){ toast('Неверный пароль'); return; }
+  }
+  state.myName=name;
+  saveState();
+  var o=document.getElementById('joinOverlay');
+  if(o) o.classList.remove('open');
+  enterRoom(pendingRoomId,false,name);
+}
+function handleHash(){
+  var hash=location.hash||'#/';
+  var roomMatch=hash.match(/^#\/room\/([A-Za-z0-9]+)/);
+  if(roomMatch){
+    var roomId=roomMatch[1].toUpperCase();
+    var room=ensureRoom(roomId);
+    if(state.currentRoomId===roomId) return;
+    var urlParams=new URLSearchParams(hash.split('?')[1]||'');
+    var passFromUrl=urlParams.get('p');
+    pendingRoomId=roomId;
+    var joinPassField=document.getElementById('joinPassField');
+    if(room.pass&&!passFromUrl){
+      if(joinPassField) joinPassField.style.display='block';
+    } else {
+      if(joinPassField) joinPassField.style.display='none';
+      if(passFromUrl){ var jp=document.getElementById('joinPass'); if(jp) jp.value=passFromUrl; }
+    }
+    var jn=document.getElementById('joinName');
+    if(jn) jn.value=state.myName||'';
+    var o=document.getElementById('joinOverlay');
+    if(o) o.classList.add('open');
+    return;
+  }
+  if(hash.indexOf('#/create')===0){ navigate('create'); return; }
+  if(hash.indexOf('#/help')===0){ navigate('help'); return; }
+  if(state.currentRoomId){
+    if(mqttClient){ try{ publish({type:'leave',from:sessionId}); mqttClient.end(true); }catch(e){} mqttClient=null; }
+    if(heartbeatTimer){ clearInterval(heartbeatTimer); heartbeatTimer=null; }
+    state.currentRoomId=null;
+    state.isHost=false;
+  }
+  navigate('landing');
+}
+window.addEventListener('hashchange',handleHash);
+window.onYouTubeIframeAPIReady=function(){};
+window.addEventListener('beforeunload',function(){
+  if(mqttClient){ try{ publish({type:'leave',from:sessionId}); mqttClient.end(true); }catch(e){} }
+});
+loadState();
+handleHash();
+</script>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+</body>
+</html>
