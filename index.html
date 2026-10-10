@@ -1035,6 +1035,84 @@ handleHash();
     flex: 0 0 auto;
   }
 }
+<style>
+/* Мобильная раскладка при открытой клавиатуре */
+@media(max-width:959px){
+  body.kb-open .room-wrap{
+    display: flex;
+    flex-direction: column;
+    height: var(--vh, 100vh);
+    padding: 6px;
+    gap: 6px;
+    overflow: hidden;
+  }
+  body.kb-open .room-main{
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  /* Видео привязано к ширине экрана, а не к высоте окна */
+  body.kb-open .player-holder{
+    height: 45vw;
+    max-height: 210px;
+    aspect-ratio: auto;
+  }
+  /* Скрываем только инфо-строку и приглашение */
+  body.kb-open .player-info{ display: none !important; }
+  body.kb-open .invite-box{ display: none !important; }
+  /* Строку «Добавить видео» оставляем, но компактно */
+  body.kb-open .add-video{
+    padding: 8px 10px;
+    gap: 6px;
+  }
+  body.kb-open .add-video .input{
+    padding: 8px 10px;
+    font-size: .85rem;
+    min-width: 0;
+  }
+  body.kb-open .add-video .btn{
+    padding: 8px 12px;
+    font-size: .78rem;
+  }
+  /* Чат занимает остаток */
+  body.kb-open .room-side{
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+  }
+  body.kb-open .room-side .player-shell{
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  body.kb-open .room-tabs{ flex: 0 0 auto; }
+  body.kb-open .tab-btn{
+    padding: 8px 10px;
+    font-size: .82rem;
+  }
+  body.kb-open .tab-pane.active{
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+  }
+  body.kb-open .chat-messages{
+    flex: 1 1 auto;
+    height: auto !important;
+    min-height: 0;
+    margin-bottom: 6px;
+  }
+  body.kb-open .chat-input-wrap{
+    flex: 0 0 auto;
+  }
+  body.kb-open .chat-input-wrap .input{
+    padding: 9px 12px;
+    font-size: .88rem;
+  }
+}
 </style>
 
 <script>
