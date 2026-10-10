@@ -931,6 +931,69 @@ handleHash();
 </script>
 
 <script src="https://www.youtube.com/iframe_api"></script>
+<style>
+/* Мобильная фиксация видео при печати */
+@media(max-width:959px){
+  .room-main{
+    position: sticky;
+    top: 0;
+    z-index: 15;
+    background: var(--bg);
+    padding-bottom: 10px;
+  }
+  body.kb-open .room-main .player-info,
+  body.kb-open .room-main .add-video,
+  body.kb-open .room-main .invite-box{
+    display: none !important;
+  }
+  body.kb-open .room-main .player-holder{
+    max-height: 22vh;
+  }
+  body.kb-open .room-wrap{
+    padding: 8px;
+    gap: 8px;
+  }
+  body.kb-open .room-side{
+    padding-top: 4px;
+  }
+  body.kb-open .chat-messages{
+    height: 20vh;
+  }
+  body.kb-open .player-shell{
+    border-radius: 14px;
+  }
+}
+</style>
 
+<script>
+(function(){
+  var input = document.getElementById('chatInput');
+  if(input){
+    input.addEventListener('focus', function(){
+      if(window.innerWidth <= 959){
+        document.body.classList.add('kb-open');
+        setTimeout(function(){
+          var rm = document.querySelector('.room-main');
+          if(rm) rm.scrollIntoView({behavior:'smooth', block:'start'});
+        }, 250);
+      }
+    });
+    input.addEventListener('blur', function(){
+      document.body.classList.remove('kb-open');
+    });
+  }
+  if(window.visualViewport){
+    var baseH = window.innerHeight;
+    window.visualViewport.addEventListener('resize', function(){
+      var kb = baseH - window.visualViewport.height;
+      if(kb > 150 && window.innerWidth <= 959){
+        document.body.classList.add('kb-open');
+      } else {
+        document.body.classList.remove('kb-open');
+      }
+    });
+  }
+})();
+</script>
 </body>
 </html>
