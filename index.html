@@ -963,35 +963,117 @@ handleHash();
     border-radius: 14px;
   }
 }
+<style>
+/* Мобильная раскладка: видео сверху, чат заполняет остаток */
+@media(max-width:959px){
+  body.kb-open{
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+  body.kb-open .room-wrap{
+    display: flex;
+    flex-direction: column;
+    height: var(--vh, 100vh);
+    padding: 6px;
+    gap: 6px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  body.kb-open .room-main{
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  body.kb-open .room-main .player-info,
+  body.kb-open .room-main .add-video,
+  body.kb-open .room-main .invite-box{
+    display: none !important;
+  }
+  body.kb-open .room-main .player-shell{
+    border-radius: 12px;
+  }
+  body.kb-open .player-holder{
+    height: 26vh;
+    max-height: 200px;
+    aspect-ratio: auto;
+  }
+  body.kb-open .room-side{
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+  }
+  body.kb-open .room-side .player-shell{
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  body.kb-open .room-tabs{
+    flex: 0 0 auto;
+    padding: 0 12px;
+  }
+  body.kb-open .tab-btn{
+    padding: 10px 10px;
+    font-size: .85rem;
+  }
+  body.kb-open .tab-pane.active{
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  body.kb-open .chat-messages{
+    flex: 1 1 auto;
+    height: auto !important;
+    min-height: 0;
+    margin-bottom: 8px;
+  }
+  body.kb-open .chat-input-wrap{
+    flex: 0 0 auto;
+  }
+}
 </style>
 
 <script>
 (function(){
+  function setVh(){
+    if(window.visualViewport){
+      document.documentElement.style.setProperty('--vh', window.visualViewport.height + 'px');
+    } else {
+      document.documentElement.style.setProperty('--vh', window.innerHeight + 'px');
+    }
+  }
+  setVh();
+
   var input = document.getElementById('chatInput');
   if(input){
     input.addEventListener('focus', function(){
       if(window.innerWidth <= 959){
         document.body.classList.add('kb-open');
-        setTimeout(function(){
-          var rm = document.querySelector('.room-main');
-          if(rm) rm.scrollIntoView({behavior:'smooth', block:'start'});
-        }, 250);
+        setVh();
+        setTimeout(setVh, 100);
+        setTimeout(setVh, 300);
       }
     });
     input.addEventListener('blur', function(){
       document.body.classList.remove('kb-open');
+      setVh();
     });
   }
+
   if(window.visualViewport){
-    var baseH = window.innerHeight;
+    var baseH = window.visualViewport.height;
     window.visualViewport.addEventListener('resize', function(){
+      setVh();
       var kb = baseH - window.visualViewport.height;
       if(kb > 150 && window.innerWidth <= 959){
         document.body.classList.add('kb-open');
-      } else {
-        document.body.classList.remove('kb-open');
       }
     });
+    window.visualViewport.addEventListener('scroll', setVh);
   }
 })();
 </script>
